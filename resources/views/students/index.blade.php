@@ -152,11 +152,11 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label class="font-weight-bold">Email :</label>
-                    <input type="email" name="email" placeholder="Enter the parent email address" id="">
+                    <input type="email" name="email" placeholder="Enter the parent email address" class="form-control" id="">
                 </div>
                 <div class="col-md-6">
                     <label class="font-weight-bold">Id No :</label>
-                    <input type="number" name="id_no" placeholder="Enter the parent id number" id="">
+                    <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control" id="">
                 </div>
             </div>
             <div class="row mt-4">
