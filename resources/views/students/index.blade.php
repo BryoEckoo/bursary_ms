@@ -150,6 +150,16 @@ if(isset($_POST['continue'])){
                 </div>
             </div>
             <div class="row mt-4">
+                <div class="col-md-6">
+                    <label class="font-weight-bold">Email :</label>
+                    <input type="email" name="email" placeholder="Enter the parent email address" id="">
+                </div>
+                <div class="col-md-6">
+                    <label class="font-weight-bold">Id No :</label>
+                    <input type="number" name="id_no" placeholder="Enter the parent id number" id="">
+                </div>
+            </div>
+            <div class="row mt-4">
                 <div class="col-md-4">
                     <label class="font-weight-bold">County :</label>
                     <select name="county" class="form-control <?php echo ($errors->first('county')) ? 'border border-danger' : '';?>">
