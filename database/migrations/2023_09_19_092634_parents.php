@@ -16,7 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('parent_guardian_name');
             $table->string('student_fullname');
-            $table->bigInteger('phone');
+            $table->bigInteger('phone')->unique();
+            $table->string('parent_email')->unique();
+            $table->bigInteger('parent_id_no')->unique();
             $table->string('occupation');
             $table->timestamps();
         });

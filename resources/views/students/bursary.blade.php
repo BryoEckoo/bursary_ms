@@ -74,6 +74,8 @@
             <input type="hidden" name="family_status" class="form-control" placeholder="" id="" value="{{$data['family_status']}}">
             <input type="hidden" name="phone" class="form-control" placeholder="" id="" value="{{$data['phone']}}">
             <input type="hidden" name="occupation" class="form-control" placeholder="" id="" value="{{$data['occupation']}}">
+            <input type="hidden" name="email" class="form-control" placeholder="" id="" value="{{$data['email']}}">
+            <input type="hidden" name="id_no" class="form-control" placeholder="" id="" value="{{$data['id_no']}}">
             <input type="hidden" name="county" class="form-control" placeholder="" id="" value="{{$data['county']}}">
             <input type="hidden" name="ward" class="form-control" placeholder="" id="" value="{{$data['ward']}}">
             <input type="hidden" name="location" class="form-control" placeholder="" id="" value="{{$data['location']}}">

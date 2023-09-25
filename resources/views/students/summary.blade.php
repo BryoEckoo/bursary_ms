@@ -62,7 +62,11 @@
             <label>Parent/Guardian Full Name :</label>
             <input type="text" name="parent_guardian_name" class="form-control" value="{{$data['parent_guardian_name']}}">
             <label>Phone :</label>
-            <input type="text" name="phone" class="form-control" value="{{$data['phone']}}">
+            <input type="number" name="phone" class="form-control" value="{{$data['phone']}}">
+            <label>Parent email :</label>
+            <input type="email" name="email" class="form-control" value="{{$data['email']}}">
+            <label>Phone :</label>
+            <input type="number" name="id_no" class="form-control" value="{{$data['id_no']}}">
             <label>Occupation :</label>
             <input type="text" name="occupation" class="form-control" value="{{$data['occupation']}}">
             <label>County :</label>

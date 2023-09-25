@@ -292,6 +292,9 @@ class UsersController extends Controller
 
         session()->forget('data');
         // Session()->flush();
+        $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
+        Mail::to($request->email)->send(new mailSend($name));
+        // echo "Basic Email Sent. Check your inbox.";
         return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
             return redirect('/')->with('message','The student is already registered.Just request for a bursary here');

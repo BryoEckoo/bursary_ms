@@ -22,8 +22,10 @@ return new class extends Migration
             $table->string('gender');
             $table->string('family_status');
             $table->string('parent_guardian_name');
-            $table->bigInteger('phone');
-            $table->string('occupation')->unique();
+            $table->bigInteger('phone')->unique();
+            $table->string('parent_email')->unique();
+            $table->bigInteger('parent_id_no')->unique();
+            $table->string('occupation');
             $table->string('county');
             $table->string('ward');
             $table->string('location');
