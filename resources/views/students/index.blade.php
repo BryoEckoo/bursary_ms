@@ -33,10 +33,10 @@ if(isset($_POST['continue'])){
     <div class="row">
 		<div class="col-md-12 bg-light mt-5  py-2">
 		<ul class="progressbar">
-          <li class="active font-weight-bold" style="font-size: 15px;color:green">Student Details</li>
-          <li  class="font-weight-bold" style="font-size: 15px;color:green">School/Institution Information</li>
-          <li  class="font-weight-bold" style="font-size: 15px;color:green">Bursary details</li>
-          <li class="font-weight-bold" style="font-size: 15px;color:green">Summary/Confirm Details</li>
+          <li class="active font-weight-bold" style="color:green">Student Details</li>
+          <li  class="font-weight-bold" style="color:green">School/Institution Information</li>
+          <li  class="font-weight-bold" style="color:green">Bursary details</li>
+          <li class="font-weight-bold" style="color:green">Summary/Confirm Details</li>
         </ul>
 		</div>
 	</div>
