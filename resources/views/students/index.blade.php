@@ -153,10 +153,16 @@ if(isset($_POST['continue'])){
                 <div class="col-md-6">
                     <label class="font-weight-bold">Email :</label>
                     <input type="email" name="email" placeholder="Enter the parent email address" class="form-control" id="">
+                    @if($errors->has('email'))
+                    <span class="text-danger">{{$errors->first('email')}}</span>
+                    @endif
                 </div>
                 <div class="col-md-6">
                     <label class="font-weight-bold">Id No :</label>
                     <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control" id="">
+                    @if($errors->has('id_no'))
+                    <span class="text-danger">{{$errors->first('id_no')}}</span>
+                    @endif
                 </div>
             </div>
             <div class="row mt-4">

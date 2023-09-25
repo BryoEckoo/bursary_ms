@@ -29,6 +29,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>'required',
             "phone"=>'required|unique:parents,phone',
             "occupation"=>'required',
+            "email"=>'required',
+            "id_no"=>'required',
             "county"=>'required',
             "ward"=>'required',
             "location"=>'required'
@@ -44,6 +46,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location
@@ -75,6 +79,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -99,6 +105,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -128,6 +136,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -154,6 +164,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -182,6 +194,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -205,6 +219,8 @@ class UsersController extends Controller
             "parent_guardian_name"=>$request->parent_guardian_name,
             "phone"=>$request->phone,
             "occupation"=>$request->occupation,
+            "email"=>$request->email,
+            "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
@@ -227,7 +243,7 @@ class UsersController extends Controller
         //     "first_name.required"=>"Empty fields are not allowed",
         // ]);
         date_default_timezone_set('Africa/Nairobi');
-        $counts = Student::where('student_fullname',$request->fullname)->count();
+        $counts = Student::where('parent_email',$request->email)->count();
         if($counts <= 0){
         $app_ref ='BUR' .random_int(1000,9999);
         $students = new Student();
@@ -241,6 +257,8 @@ class UsersController extends Controller
         $students->phone = $request->phone;
         $students->family_status = $request->family_status;
         $students->occupation = $request->occupation;
+        $students->parent_email = $request->email;
+        $students->parent_id_no = $request->id_no;
         $students->county = $request->county;
         $students->ward = $request->ward;
         $students->location = $request->location;
@@ -254,6 +272,8 @@ class UsersController extends Controller
         $parents->parent_guardian_name = $request->parent_guardian_name;
         $parents->student_fullname = $request->fullname;
         $parents->phone = $request->phone;
+        $parents->parent_email = $request->email;
+        $parents->parent_id_no = $request->id_no;
         $parents->occupation = $request->occupation;
         $parents->save();
 
