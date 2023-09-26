@@ -303,7 +303,7 @@ class UsersController extends Controller
         $application->status = "Pending...";
         $application->save();
 
-        session()->forget('data');
+        
         // Session()->flush();
         $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
         Mail::to($request->email)->send(new mailSend($name));
@@ -321,11 +321,11 @@ class UsersController extends Controller
     $twilioToken = config('services.twilio.token');
     $twilioPhoneNumber = config('services.twilio.phone_number');
 
-    $client = new BaseClient(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+    $client = new Client( $twilioSid , $twilioToken);
 
     $client->messages->create($toPhoneNumber, ['from' => 'Bursary system', 'body' => $message]);
 
-
+    session()->forget('data');
         return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
             return redirect('/')->with('message','The student is already registered.Just request for a bursary here');
