@@ -317,13 +317,13 @@ class UsersController extends Controller
     $toPhoneNumber ='254'.$request->input('phone');
 
 
-    $twilioSid = config('services.twilio.sid');
-    $twilioToken = config('services.twilio.token');
-    $twilioPhoneNumber = config('services.twilio.phone_number');
+    // $twilioSid = config('services.twilio.sid');
+    // $twilioToken = config('services.twilio.token');
+    // $twilioPhoneNumber = config('services.twilio.phone_number');
 
-    $client = new Client( $twilioSid , $twilioToken);
+    // $client = new Client( $twilioSid , $twilioToken);
 
-    $client->messages->create($toPhoneNumber, ['from' => 'Bursary system', 'body' => $message]);
+    // $client->messages->create($toPhoneNumber, ['from' => 'Bursary system', 'body' => $message]);
 
     session()->forget('data');
         return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
