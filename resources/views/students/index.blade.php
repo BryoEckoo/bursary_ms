@@ -18,6 +18,7 @@ if(isset($_POST['continue'])){
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="text/css" href="{{asset('images/logo.png')}}">
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
     <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script>
     <link href="{{asset('css/text.css')}}" rel="stylesheet">
