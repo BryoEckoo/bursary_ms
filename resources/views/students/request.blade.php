@@ -25,10 +25,10 @@
                     @if(session()->has('message'))
                     <span class="text-danger font-weight-bold">{{session()->get('message')}}</span><br>
                     @endif
-                    <label for="" class="font-weight-bold">Parent Email :</label>
+                    <label for="" class="font-weight-bold">Parent Email or Phone :</label>
                     <form method="post" action="{{url('request')}}">
                         @csrf
-                    <input type="email" name="email" class="form-control <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" placeholder="Enter parent email here" id="">
+                    <input type="text" name="email" class="form-control <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" placeholder="Enter parent email or phone number here" id="">
                     @if($errors->has('email'))
                     <span class="text-danger">{{$errors->first('email')}}</span><br>
                     @endif

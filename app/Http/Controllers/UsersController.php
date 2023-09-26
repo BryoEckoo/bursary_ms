@@ -367,10 +367,74 @@ class UsersController extends Controller
         $request->validate([
             'email'=>'required',
         ]);
-        $data = DB::select("SELECT * FROM students WHERE parent_email= '".$request->email."'");
-        foreach($data as $l){
-            echo $l['parent_email'];
-        }
+        $data = Student::where('parent_email',$request->email)->orWhere('phone',$request->email)->count();
+        if($data >=1){
+            // $value = DB::select("SELECT * FROM students WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
+            // foreach($value as $item){
+            //     // echo $item->student_fullname;
+            //     $students = new Student();
+            //     // $students->app_ref = $app_ref;
+            //     $students->firstname = $item->firstname;
+            //     $students->secondname = $item->secondname;
+            //     $students->student_fullname = $item->student_fullname;
+            //     $students->age = $item->age;
+            //     $students->gender = $item->gender;
+            //     $students->parent_guardian_name = $item->parent_guardian_name;
+            //     $students->phone = $item->phone;
+            //     $students->family_status = $item->family_status;
+            //     $students->occupation = $item->occupation;
+            //     $students->parent_email = $item->parent_email;
+            //     $students->parent_id_no = $item->parent_id_no;
+            //     $students->county = $item->county;
+            //     $students->ward = $item->ward;
+            //     $students->location = $item->location;
+            //     $students->school_level = $item->school_level;
+            //     $students->adm_upi_reg_no = $item->adm_upi_reg_no;
+            //     $students->school_name = $item->school_name;
+            //     $students->save();
+            // }  
 
+            // $data = DB::select("SELECT * FROM parents WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
+            // foreach($data as $request){
+            //     //save parent details
+            //     $parents =new Parents();
+            //     $parents->parent_guardian_name = $request->parent_guardian_name;
+            //     $parents->student_fullname = $request->student_fullname;
+            //     $parents->phone = $request->phone;
+            //     $parents->parent_email = $request->parent_email;
+            //     $parents->parent_id_no = $request->parent_id_no;
+            //     $parents->occupation = $request->occupation;
+            //     $parents->save();
+            // }
+            $value = DB::select("SELECT * FROM students WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
+            foreach($value as $item){
+                $data = DB::select("SELECT * FROM parents WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
+            foreach($data as $req){
+            $dat = DB::select("SELECT * FROM applications WHERE student_fullname = '".$req->student_fullname."'");
+            foreach($dat as $request){
+                //save application
+                $app_ref ='BUR' .random_int(1000,9999);
+
+                $application = new Application();
+                $application->reference_number = $app_ref;
+                $application->student_fullname = $item->student_fullname;
+                $application->adm_upi_reg_no = $item->adm_upi_reg_no;
+                $application->school_type = $request->school_type;
+                $application->school_name = $request->school_name;
+                $application->bank_name = $request->bank_name;
+                $application->account_no = $request->account_no;
+                $application->location = $item->location;
+                $application->status = "Pending...";
+                $application->save();
+            }
+        }
+        $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
+    Mail::to($item->parent_email)->send(new mailSend($name));
+    }
+    
+            return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
+        }else{
+            return redirect('request_bursary')->with('message','The email address or phone number is not registered');
+        }
     }
 }
