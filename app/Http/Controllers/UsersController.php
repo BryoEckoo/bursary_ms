@@ -256,7 +256,7 @@ class UsersController extends Controller
         //     "first_name.required"=>"Empty fields are not allowed",
         // ]);
         date_default_timezone_set('Africa/Nairobi');
-        $counts = Student::where('parent_email',$request->email)->count();
+        $counts = Student::where('phone',$request->phone)->count();
         if($counts <= 0){
         $app_ref ='BUR' .random_int(1000,9999);
         $students = new Student();
@@ -312,14 +312,14 @@ class UsersController extends Controller
 
         //send sms
         
-    $message = "You have successfully applied for the bursary.
-    Use this ".$app_ref." reference number to track your application.";
-    $toPhoneNumber ='254'.$request->input('phone');
+    // $message = "You have successfully applied for the bursary.
+    // Use this ".$app_ref." reference number to track your application.";
+    // $toPhoneNumber ='254'.$request->input('phone');
 
 
-    // $twilioSid = config('services.twilio.sid');
-    // $twilioToken = config('services.twilio.token');
-    // $twilioPhoneNumber = config('services.twilio.phone_number');
+    // $twilioSid = env('TWILIO_SID');
+    // $twilioToken = env('TWILIO_AUTH_TOKEN');
+    // $twilioPhoneNumber = env('TWILIO_PHONE_NUMBER');
 
     // $client = new Client( $twilioSid , $twilioToken);
 
