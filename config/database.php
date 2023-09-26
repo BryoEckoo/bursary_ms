@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => 'mysql://root:yNJTDuLWNQqUWy8ExX0r@containers-us-west-36.railway.app:5677/railway',
-            'host' => 'containers-us-west-36.railway.app',
-            'port' => '5677',
+            'url' => 'mysql://root:PdgIUa54iLvOxqPbvEX1@containers-us-west-175.railway.app:7859/railway',
+            'host' => 'containers-us-west-175.railway.app',
+            'port' => '7859',
             'database' => 'railway',
-            'username' => 'railway',
-            'password' => 'yNJTDuLWNQqUWy8ExX0r',
+            'username' => 'root',
+            'password' => 'PdgIUa54iLvOxqPbvEX1',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

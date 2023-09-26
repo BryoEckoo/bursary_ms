@@ -29,14 +29,14 @@ if(isset($_POST['continue'])){
             <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
             <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
         </div>
-        <div class="container-fluid">
+        <div class="container">
     <div class="row">
 		<div class="col-md-12 bg-light mt-5  py-2">
 		<ul class="progressbar">
-          <li class="active font-weight-bold" style="color:green">Student Details</li>
-          <li  class="font-weight-bold" style="color:green">School/Institution Information</li>
-          <li  class="font-weight-bold" style="color:green">Bursary details</li>
-          <li class="font-weight-bold" style="color:green">Summary/Confirm Details</li>
+          <li class="active font-weight-bold" style="color:green">Stu-Details</li>
+          <li  class="font-weight-bold" style="color:green">School-Information</li>
+          <li  class="font-weight-bold" style="color:green">Bursary-details</li>
+          <li class="font-weight-bold" style="color:green">Summary-Details</li>
         </ul>
 		</div>
 	</div>
@@ -209,7 +209,8 @@ if(isset($_POST['continue'])){
         </form>
     </div>
 </div>
-    </div>
+</div>
+
 </body>
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('bootstrap/popper/popper.min.js')}}"></script>

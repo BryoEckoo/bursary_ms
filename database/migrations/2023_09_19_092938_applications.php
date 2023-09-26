@@ -16,11 +16,13 @@ return new class extends Migration
             $table->id();
             $table->string('reference_number');
             $table->string('student_fullname');
-            $table->string('adm/upi/reg_no');
+            $table->string('adm_upi_reg_no');
             $table->string('school_type');
             $table->string('school_name');
             $table->string('location');
             $table->string('status');
+            $table->string('bank_name');
+            $table->bigInteger('account_no');
             $table->timestamps();
         });
     }

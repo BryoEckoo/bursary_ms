@@ -41,3 +41,4 @@ Route::get('send',[UsersController::class, 'mail']);
 Route::get('track_process',[UsersController::class,'track'])->name('track_process');
 Route::post('track',[UsersController::class, 'check'])->name('track');
 Route::get('request_bursary',[UsersController::class, 'request']);
+Route::post('request',[UsersController::class, 'req_search']);

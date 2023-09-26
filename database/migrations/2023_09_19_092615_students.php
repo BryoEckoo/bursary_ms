@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('ward');
             $table->string('location');
             $table->string('school_level');
-            $table->string('adm/upi/reg_no');
+            $table->string('adm_upi_reg_no');
             $table->string('school_name');
             $table->timestamps();
         });

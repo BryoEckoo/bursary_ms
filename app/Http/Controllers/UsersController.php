@@ -9,8 +9,14 @@ use App\Models\Parents;
 use App\Models\Student;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Twilio\Base\BaseClient;
+use Twilio\Rest\Client;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+
+// use Spatie\FlareClient\Http\Client;
+
 
 class UsersController extends Controller
 {
@@ -121,6 +127,13 @@ class UsersController extends Controller
         return view('students.institution');
     }
     public function summary(Request $request){
+        $phoneNumber = preg_replace('/[^0-9]/', '', $request->phone);
+    
+    // Check if the phone number starts with "0" (indicating a Kenyan number)
+    if (substr($phoneNumber, 0, 1) === '0') {
+        // Remove the leading "0" to get the truncated number
+        $phoneNumber = substr($phoneNumber, 1);
+    }
         $request->validate([
             "bursary_name"=>'required',
             "bursary_type"=>'required',
@@ -134,7 +147,7 @@ class UsersController extends Controller
             "gender"=>$request->gender,
             "family_status"=>$request->family_status,
             "parent_guardian_name"=>$request->parent_guardian_name,
-            "phone"=>$request->phone,
+            "phone"=>$phoneNumber,
             "occupation"=>$request->occupation,
             "email"=>$request->email,
             "id_no"=>$request->id_no,
@@ -295,12 +308,30 @@ class UsersController extends Controller
         $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
         Mail::to($request->email)->send(new mailSend($name));
         // echo "Basic Email Sent. Check your inbox.";
+        
+
+        //send sms
+        
+    $message = "You have successfully applied for the bursary.
+    Use this ".$app_ref." reference number to track your application.";
+    $toPhoneNumber ='254'.$request->input('phone');
+
+
+    $twilioSid = config('services.twilio.sid');
+    $twilioToken = config('services.twilio.token');
+    $twilioPhoneNumber = config('services.twilio.phone_number');
+
+    $client = new BaseClient(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+
+    $client->messages->create($toPhoneNumber, ['from' => 'Bursary system', 'body' => $message]);
+
+
         return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
             return redirect('/')->with('message','The student is already registered.Just request for a bursary here');
         }
     }
-    public function mail(){
+    public function mail(){    
         // $data = array('name'=>"Dan Ndong");
    
         // Mail::send(['text'=>'sendMail'], $data, function($message) {
@@ -331,5 +362,15 @@ class UsersController extends Controller
     }
     public function request(){
         return view('students.request');
+    }
+    public function req_search(Request $request){
+        $request->validate([
+            'email'=>'required',
+        ]);
+        $data = DB::select("SELECT * FROM students WHERE parent_email= '".$request->email."'");
+        foreach($data as $l){
+            echo $l['parent_email'];
+        }
+
     }
 }
