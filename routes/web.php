@@ -1,5 +1,6 @@
 <?php
-
+namespace App\Http\Controllers;
+use App\Http\Controllers\Mpesa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 
@@ -42,3 +43,4 @@ Route::get('track_process',[UsersController::class,'track'])->name('track_proces
 Route::post('track',[UsersController::class, 'check'])->name('track');
 Route::get('request_bursary',[UsersController::class, 'request']);
 Route::post('request',[UsersController::class, 'req_search']);
+Route::get('/mpesa',[Mpesa::class, 'push']);

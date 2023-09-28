@@ -153,21 +153,21 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label class="font-weight-bold">Email :</label>
-                    <input type="email" name="email" placeholder="Enter the parent email address" class="form-control" id="">
+                    <input type="email" name="email" placeholder="Enter the parent email address" class="form-control <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" id="">
                     @if($errors->has('email'))
                     <span class="text-danger">{{$errors->first('email')}}</span>
                     @endif
                 </div>
                 <div class="col-md-6">
                     <label class="font-weight-bold">Id No :</label>
-                    <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control" id="">
+                    <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control <?php echo ($errors->first('id_no')) ? 'border border-danger' : '';?>" id="">
                     @if($errors->has('id_no'))
                     <span class="text-danger">{{$errors->first('id_no')}}</span>
                     @endif
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="font-weight-bold">County :</label>
                     <select name="county" class="form-control <?php echo ($errors->first('county')) ? 'border border-danger' : '';?>">
                         <option value="">-select county-</option>
@@ -177,7 +177,7 @@ if(isset($_POST['continue'])){
                     <span class="text-danger">{{$errors->first('county')}}</span>
                     @endif
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="font-weight-bold">Ward :</label>
                     <select name="ward" class="form-control <?php echo ($errors->first('ward')) ? 'border border-danger' : '';?>">
                         <option value="">-select ward-</option>
@@ -192,7 +192,7 @@ if(isset($_POST['continue'])){
                     <span class="text-danger">{{$errors->first('ward')}}</span>
                     @endif
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="font-weight-bold">Location :</label>
                     <select name="location" class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?>">
                         <option value="">-select location-</option>
@@ -200,9 +200,23 @@ if(isset($_POST['continue'])){
                         <option>Silas</option>
                         <option>Ilula</option>
                         <option>Block 10</option>
+                        <option>Marura</option>
                     </select>
                     @if($errors->has('location'))
                     <span class="text-danger">{{$errors->first('location')}}</span>
+                    @endif
+                </div>
+                <div class="col-md-3">
+                    <label class="font-weight-bold">Sub-Location :</label>
+                    <select name="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?>">
+                        <option value="">-select sub-location-</option>
+                        <option>Subaru</option>
+                        <option>Bondeni</option>
+                        <option>Kamkunji</option>
+                        <option>Airstrip</option>
+                    </select>
+                    @if($errors->has('sub_location'))
+                    <span class="text-danger">{{$errors->first('sub_location')}}</span>
                     @endif
                 </div>
             </div>

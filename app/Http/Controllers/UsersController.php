@@ -9,9 +9,9 @@ use App\Models\Parents;
 use App\Models\Student;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Safaricom\Mpesa\Facade\Mpesa;
 use Twilio\Base\BaseClient;
 use Twilio\Rest\Client;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,7 +39,8 @@ class UsersController extends Controller
             "id_no"=>'required',
             "county"=>'required',
             "ward"=>'required',
-            "location"=>'required'
+            "location"=>'required',
+            "sub-location"=>'required'
         ],);
 
         $data=[
@@ -56,7 +57,8 @@ class UsersController extends Controller
             "id_no"=>$request->id_no,
             "county"=>$request->county,
             "ward"=>$request->ward,
-            "location"=>$request->location
+            "location"=>$request->location,
+            "sub-location"=>$request->sub_location
         ];
         session()->put('data', $data);
         return view('students.institution',compact('data'));
@@ -90,6 +92,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -116,6 +119,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name
@@ -154,6 +158,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -182,6 +187,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -212,6 +218,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -237,6 +244,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
+            "sub-location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -275,6 +283,7 @@ class UsersController extends Controller
         $students->county = $request->county;
         $students->ward = $request->ward;
         $students->location = $request->location;
+        $students->sub_location = $request->sub_location;
         $students->school_level = $request->school_type;
         $students->adm_upi_reg_no = $request->reg_no;
         $students->school_name = $request->school_name;
@@ -435,6 +444,27 @@ class UsersController extends Controller
             return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
             return redirect('request_bursary')->with('message','The email address or phone number is not registered');
+        }
+    }
+    public function push(Request $request)
+    {
+        $mpesa = new Mpesa();
+
+        $phone = '254726585782'; // Replace with the customer's phone number
+        $amount = 1; // Replace with the amount to be paid
+        $accountReference = 'YourReference'; // Replace with your reference
+
+        // Generate a unique transaction ID
+        $transactionId = substr(md5(time()), 0, 10);
+
+        // Initiate STK push
+        $response = $mpesa::stkPush($amount, $phone, $accountReference, $transactionId);
+
+        // Handle the response (check for success or error)
+        if ($response['ResponseCode'] === '0') {
+            return 'STK Push initiated successfully.';
+        } else {
+            return 'Error: ' . $response['ResponseDescription'];
         }
     }
 }
