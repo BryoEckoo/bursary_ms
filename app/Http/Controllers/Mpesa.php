@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\FlareClient\Http\Client;
 use Twilio\Base\BaseClient;
-use Twilio\Rest\Client;
+// use Twilio\Http\Client;
+// use Twilio\Rest\Client;
 class Mpesa extends Controller
 {
     //
@@ -39,7 +41,7 @@ class Mpesa extends Controller
     $twilioToken = '5eab30adf5248aeab798433960ae2868';
     $twilioPhoneNumber = +17124300592;
 
-    $client = new Client( $twilioSid , $twilioToken);
+    $client = new BaseClient( $twilioSid , $twilioToken);
 
     $client->messages->create('254726585782', ['from' => 'Bursary system', 'body' => $message]);
 

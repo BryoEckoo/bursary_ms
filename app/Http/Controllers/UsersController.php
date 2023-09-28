@@ -40,7 +40,7 @@ class UsersController extends Controller
             "county"=>'required',
             "ward"=>'required',
             "location"=>'required',
-            "sub-location"=>'required'
+            "sub_location"=>'required'
         ],);
 
         $data=[
@@ -58,7 +58,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location
+            "sub_location"=>$request->sub_location
         ];
         session()->put('data', $data);
         return view('students.institution',compact('data'));
@@ -92,7 +92,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -119,7 +119,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name
@@ -158,7 +158,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -187,7 +187,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -218,7 +218,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,
@@ -244,7 +244,7 @@ class UsersController extends Controller
             "county"=>$request->county,
             "ward"=>$request->ward,
             "location"=>$request->location,
-            "sub-location"=>$request->sub_location,
+            "sub_location"=>$request->sub_location,
             "school_type"=>$request->school_type,
             "reg_no"=>$request->reg_no,
             "school_name"=>$request->school_name,

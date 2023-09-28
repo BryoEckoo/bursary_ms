@@ -76,6 +76,8 @@
             <input type="text" name="ward" class="form-control" value="{{$data['ward']}}">
             <label>Location :</label>
             <input type="text" name="location" class="form-control" value="{{$data['location']}}">
+            <label>Sub-Location :</label>
+            <input type="text" name="sub_location" class="form-control" value="{{$data['sub_location']}}">
             {{-- <a href="{{url('edit_student_detail')}}" class="btn btn-warning mt-4">EDIT</a> --}}
         </div>
         </div>

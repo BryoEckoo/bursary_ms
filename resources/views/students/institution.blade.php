@@ -94,6 +94,8 @@
             <input type="hidden" name="county" class="form-control" placeholder="" id="" value="{{$data['county']}}">
             <input type="hidden" name="ward" class="form-control" placeholder="" id="" value="{{$data['ward']}}">
             <input type="hidden" name="location" class="form-control" placeholder="" id="" value="{{$data['location']}}">
+            <input type="hidden" name="sub_location" class="form-control" placeholder="" id="" value="{{$data['sub_location']}}">
+
             <input type="hidden" name="fullname" class="form-control" placeholder="" id="" value="{{$data['fullname']}}">
 
             <!-- <div class="row mt-4">
