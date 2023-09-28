@@ -24,13 +24,18 @@ if(isset($_POST['continue'])){
     <link href="{{asset('css/text.css')}}" rel="stylesheet">
     <title>Applicants index page</title>
 </head>
-<body>
-    <div class="container-fluid" style="background-image: url('images/photo.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;opacity:0.8;height:auto">
-        <div class="row mx-auto " id="header" >
-            <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
+<body style="background-image: url('images/back.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container-fluid" >
+        {{-- <div class="row justify-content-center " id="header" > --}}
+            <div class="row justify-content-center">
+            <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
+            </div>
+            <div class="row justify-content-center">
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            </div>
+        {{-- </div> --}}
         </div>
-        <div class="container">
+        <div class="container-fluid">
     <div class="row">
 		<div class="col-md-12 bg-light mt-5  py-2">
 		<ul class="progressbar">
@@ -43,11 +48,11 @@ if(isset($_POST['continue'])){
 	</div>
 </div>
 <div class="column mt-5">
-    <p class="font-weight-bold mx-4 text-white font-italic" style="font-size: 17px;">If you have registered before, no need to register again just request for a bursary <a href="{{url('request_bursary')}}" style="text-decoration: underline;color:yellow">Request a Bursary Here.</a></p>
-    <p class="font-weight-bold mx-4 mt-3 text-white font-italic" style="font-size: 17px">You can also track your bursary request process <a href="{{route('track_process')}}" style="text-decoration: underline;color:yellow"> Track process Here.</a></p>
+    <p class="font-weight-bold mx-4 text-white font-italic" style="font-size: 20px;">If you have registered before, no need to register again just request for a bursary <a href="{{url('request_bursary')}}" style="text-decoration: underline;color:#010178">Request a Bursary Here.</a></p>
+    <p class="font-weight-bold mx-4 mt-3 text-white font-italic" style="font-size: 20px">You can also track your bursary request process <a href="{{route('track_process')}}" style="text-decoration: underline;color:#010178"> Track process Here.</a></p>
 </div>
-<div class="card mt-5">
-    <div class="card-header">
+<div class=" mt-5">
+    <div class="card-header" id="head" style="background-color: #166651">
         @if(session()->has('message'))
         <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
             <span class="font-weight-bold">{{session()->get('message')}}</span>
@@ -59,9 +64,9 @@ if(isset($_POST['continue'])){
         @if(session()->has('success'))
         <p class="font-weight-bold text-success">{{session()->get('success')}}</p>
         @endif
-        <h4 class="text-center font-weight-bold">Fill Your Details here</h4>
+        <h4 class="text-center font-weight-bold text-white">Fill Your Details here</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="background-color: rgb(206, 176, 138)">
         <form action="{{url('school_details')}}" method="post">
             @csrf
             <div class="row">
@@ -220,7 +225,7 @@ if(isset($_POST['continue'])){
                     @endif
                 </div>
             </div>
-            <input type="submit" name="continue" class="btn btn-primary mt-5 font-weight-bold" style="float: right;color:black" value="CONTINUE TO NEXT">
+            <input type="submit" name="continue" class="btn mt-5 font-weight-bold mb-4" style="float: right;color:white;background-color:#166651" value="CONTINUE TO NEXT">
         </form>
     </div>
 </div>

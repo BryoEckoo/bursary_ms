@@ -11,13 +11,15 @@
     <link href="{{asset('css/text.css')}}" rel="stylesheet">
     <title>Institution page</title>
 </head>
-<body>
-    <div class="container-fluid" style="background-image: url('images/photo.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;opacity:0.8;height:auto">
-        <div class="row mx-auto " id="header" >
-            <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
-        </div>
-        <div class="container">
+<body style="background-image: url('images/back.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
+            </div>
+            <div class="row justify-content-center">
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            </div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 bg-light mt-5  py-2">
                 <ul class="progressbar">
@@ -29,27 +31,27 @@
 		</div>
 	</div>
 </div>
-<div class="card mt-5">
-    <div class="card-header">
+<div class=" mt-5">
+    <div class="card-header" style="background-color: #166659">
                 {{-- <input type="text" name="bursary_name" class="form-control" placeholder="Bursary name" id="" value="{{$data['reg_no']}}">
                 <input type="text" name="bursary_name" class="form-control" placeholder="Bursary name" id="" value="{{$data['second_name']}}"> --}}
 
-        <h4 class="text-center font-weight-bold">Bursary Details </h4>
+        <h4 class="text-center font-weight-bold text-white">Bursary Details </h4>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="background-color: rgb(206, 176, 138)">
         <form action="{{route('summary')}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-4">
                     <label class="font-weight-bold">Bursary Name :</label>
-                    <input type="text" name="bursary_name" class="form-control" placeholder="Bursary name" id="" value="">
+                    <input type="text" name="bursary_name" class="form-control font-weight-bold" placeholder="Bursary name" id="" value="CDF Bursary" readonly>
                     @if($errors->has('bursary_name'))
                     <span class="text-danger">{{$errors->first('bursary_name')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Bursary Type :</label>
-                    <select name="bursary_type" id="" class="form-control">
+                    <select name="bursary_type" id="" class="form-control font-weight-bold">
                         <option value="">-Select Type Below-</option>
                         <option>NC NCDF</option>
                         <option>Elimu Fund</option>
@@ -62,7 +64,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Disburser :</label>
-                    <input type="text" class="form-control"name="disburser">
+                    <input type="text" class="form-control font-weight-bold"name="disburser" value="County Government" readonly>
                     @if($errors->has('disburser'))
                     <span class="text-danger">{{$errors->first('disburser')}}</span>
                     @endif

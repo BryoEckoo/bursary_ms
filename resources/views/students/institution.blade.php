@@ -10,13 +10,15 @@
     <link href="{{asset('css/text.css')}}" rel="stylesheet">
     <title>Institution page</title>
 </head>
-<body>
-    <div class="container-fluid" style="background-image: url('images/photo.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;opacity:0.8;auto">
-        <div class="row mx-auto " id="header" >
-            <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
-        </div>
-        <div class="container">
+<body style="background-image: url('images/back.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
+            </div>
+            <div class="row justify-content-center">
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            </div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 bg-light mt-5  py-2">
                 <ul class="progressbar">
@@ -28,11 +30,11 @@
 		</div>
 	</div>
 </div>
-<div class="card mt-5">
-    <div class="card-header">
-        <h4 class="text-center font-weight-bold">Fill School Details here</h4>
+<div class="mt-5">
+    <div class="card-header" style="background-color: #166659">
+        <h4 class="text-center font-weight-bold text-white">Fill School Details here</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="background-color: rgb(206, 176, 138)">
         <form action="{{route('bursary')}}" method="post">
             @csrf
             @method('post')

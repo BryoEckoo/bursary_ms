@@ -17,12 +17,14 @@
         </style>
 
 </head>
-<body>
-    <div class="container-fluid" style="background-image: url('images/photo.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;opacity:0.8;height:100vh">
-        <div class="row mx-auto " id="header" >
-            <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
-        </div>
+<body style="background-image: url('images/back.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
+            </div>
+            <div class="row justify-content-center">
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            </div>
         <hr>
         <div class="containe-fluid">
             <div class="column">

@@ -11,13 +11,15 @@
     <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script>
     <link href="{{asset('css/text.css')}}" rel="stylesheet">
 </head>
-<body>
-    <div class="container-fluid" style="background-image: url('images/photo.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;opacity:0.8;height:auto">
-        <div class="row mx-auto " id="header" >
-            <img src="{{asset('images/logo.png')}}" alt="" srcset="" width="10%">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 30px">Bursary Management System</h5>
-        </div>
-        <div class="container">
+<body style="background-image: url('images/back.jpg');background-repeat:no-repeat;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
+            </div>
+            <div class="row justify-content-center">
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            </div>
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 bg-light mt-5  py-2">
                 <ul class="progressbar">
@@ -36,10 +38,10 @@
         @if(session()->has('message'))
         <span class="text-danger font-weight-bold">{{session()->get('message')}}</span>
         @endif
-    <div class="card">
-        <div class="card-header" id="headingOne">
+    <div class="">
+        <div class="card-header" id="headingOne" style="background-color: #166659">
             {{-- <h4 class="text-center font-weight-bold">Student Details</h4> --}}
-            <p class="btn font-weight-bold" style="color: black;text-decoration:underline" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <p class="btn font-weight-bold" style="color: white;text-decoration:underline" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 Student Details
             </p>
             @if($errors->has('first_name'))
@@ -47,7 +49,7 @@
             @endif
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
+        <div class="card-body" style="background-color: rgb(206, 176, 138)">
             <label>First Name :</label>
             <input type="text" name="first_name" class="form-control" value="{{$data['first_name']}}" >
             <label>Second Name</label>
@@ -82,15 +84,15 @@
         </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header" id="headingOne">
+    <div class="mt-2">
+        <div class="card-header" id="headingOne" style="background-color: #166659">
             {{-- <h4 class="text-center font-weight-bold">School/Institution Details</h4> --}}
-            <p class="btn font-weight-bold" style="color: black;text-decoration:underline" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+            <p class="btn font-weight-bold" style="color: white;text-decoration:underline" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
                 School/Institution Details
             </p>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
+        <div class="card-body" style="background-color: rgb(206, 176, 138)">
             <label>School Type :</label>
             <input type="text" name="school_type" class="form-control" value="{{$data['school_type']}}">
             <label>Reg/UPI/ADM No :</label>
@@ -105,15 +107,15 @@
         </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header" id="headingOne">
+    <div class=" mt-2">
+        <div class="card-header" id="headingOne" style="background-color: #166659">
             {{-- <h4 class="text-center font-weight-bold">Bursary Details</h4> --}}
-            <p class="btn font-weight-bold" style="color: black;text-decoration:underline" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+            <p class="btn font-weight-bold" style="color: white;text-decoration:underline" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
                 Bursary Details
             </p>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
+        <div class="card-body" style="background-color: rgb(206, 176, 138)">
            
             <label>Bursary Name :</label>
             <input type="text" name="bursary_name" class="form-control" value="{{$data['bursary_name']}}">
@@ -128,7 +130,7 @@
     </div>
         
     </div>
-    <div class="row justify-content-between">
+    <div class="row justify-content-between mb-4" style="background-color: ">
         <a href="{{url('bursary')}}" name="index" class="btn btn-success mt-5 font-weight-bold">
     {{-- <input type="submit" name="previous" class="btn btn-success mt-5 font-weight-bold" style="float: left" value="PREVIOUS"> --}}
     PREVIOUS
