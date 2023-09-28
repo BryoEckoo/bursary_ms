@@ -31,7 +31,7 @@ if(isset($_POST['continue'])){
             <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="" srcset="" width="10%">
             </div>
             <div class="row justify-content-center">
-            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 40px;text-transform:uppercase">Bursary Management System</h5>
+            <h5 class="mt-5 mx-5 font-weight-bold text-white" style="font-size: 41px;text-transform:uppercase">Bursary Management System</h5>
             </div>
         {{-- </div> --}}
         </div>
