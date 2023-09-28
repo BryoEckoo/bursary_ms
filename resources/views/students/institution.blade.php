@@ -21,7 +21,7 @@
                 <div class="col-md-12 bg-light mt-5  py-2">
                 <ul class="progressbar">
                   <li class="active font-weight-bold" style="color:green">Stu-Details</li>
-                  <li  class="font-weight-bold" style="color:green">School-Information</li>
+                  <li  class="active font-weight-bold" style="color:green">School-Information</li>
                   <li  class="font-weight-bold" style="color:green">Bursary-details</li>
                   <li class="font-weight-bold" style="color:green">Summary-Details</li>
         </ul>
