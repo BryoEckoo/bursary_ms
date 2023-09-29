@@ -61,7 +61,12 @@ class UsersController extends Controller
             "sub_location"=>$request->sub_location
         ];
         session()->put('data', $data);
+        // print_r($data['first_name']);
+        if($data['first_name'] != ''){
         return view('students.institution',compact('data'));
+        }else{
+            echo "please fill the fields";
+        }
     }
     public function previous(Request $request){
         return view('students.index');

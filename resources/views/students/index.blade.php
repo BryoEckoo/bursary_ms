@@ -72,7 +72,7 @@ if(isset($_POST['continue'])){
             <div class="row">
                 <div class="col-md-4">
                     <label class="font-weight-bold">Enter First Name :</label>
-                    <input type="text" name="first_name" class="form-control <?php echo ($errors->first('first_name')) ? 'border border-danger' : '';?>" placeholder="Enter your first name">
+                    <input type="text" name="first_name" class="form-control <?php echo ($errors->first('first_name')) ? 'border border-danger' : '';?>" placeholder="Enter your first name" value="">
                     @if($errors->has('first_name'))
                     <span class="text-danger">{{$errors->first('first_name')}}</span>
                     @endif
