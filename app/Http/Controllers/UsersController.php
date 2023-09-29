@@ -72,7 +72,7 @@ class UsersController extends Controller
         return view('students.index');
     }
     public function index(){
-        return view('index');
+        return view('dashboard');
     }
     public function burs_details(Request $request){
         $request->validate([
