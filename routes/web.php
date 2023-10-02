@@ -18,9 +18,7 @@ use App\Http\Controllers\UsersController;
 Route::get('/', function () {
     return view('students.index');
 });
-Route::get('login', function () {
-    return view('login');
-});
+Route::post('login', [AdminController::class, 'login']);
 Route::get('register', function () {
     return view('register');
 });

@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container col-md-8" style="margin-top: 20vh">
-        <div class="row" style="border: .1px solid black">
+        <div class="row" style="border: .1px light black">
         <div class="col-md-6">
             
             <div class="card-header jalign-item-center" style="background-image: url('images/logo.png');background-position:center;background-repeat:no-repeat;height:50vh">
@@ -20,12 +20,15 @@
             </div>
             <div class="col-md-6" style="margin-top: 6vh">
             <div class="card-body">
+                @if(session()->has('message'))
+                <span class="text-sucess">{{session()->get('message')}}</span>
+                @endif
                 <form method="POST" action="{{url('login')}}">
                     @csrf
-                <label class="font-weight-bold">Enter Phone no :</label>
-                <input type="number" name="phone" class="form-control" id="">
+                <label class="font-weight-bold">Enter Email address :</label>
+                <input type="text" name="email" class="form-control" id="" placeholder="example@admin.com" value="">
                 <label class="font-weight-bold">Enter Password :</label>
-                <input type="password" name="password" class="form-control" id="">
+                <input type="password" name="password" class="form-control" id="" placeholder="********">
                 <input type="submit" class="btn btn-primary mt-2" value="LOGIN">
                 </form>
                 <div class="row justify-content-between">
