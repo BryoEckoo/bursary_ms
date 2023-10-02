@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
 <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}">
 
 		<link rel="stylesheet" href="{{asset('/css/style.css')}}">
-	</head>
     @include('config.head')
 
     <body>
