@@ -15,10 +15,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- Fontawesome CSS -->
-<link rel="stylesheet" href="{{asset('css/css/fontawesome.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/css/all.min.css')}}">
+<link rel="stylesheet" href="{{asset('css/fontawesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('css/all.min.css')}}">
 
 <!-- Main CSS -->
-<link rel="stylesheet" href="{{asset('css/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu8tAPbW80jEzW0Yuh86M83xqSD3eqKJk"></script>
     </head>
