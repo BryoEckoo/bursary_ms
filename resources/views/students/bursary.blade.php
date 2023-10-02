@@ -52,7 +52,7 @@
                 <div class="col-md-4">
                     <label class="font-weight-bold">Bursary Type :</label>
                     <select name="bursary_type" id="" class="form-control font-weight-bold">
-                        <option value="">-Select Type Below-</option>
+                        <option value="" selected><?php echo (old('bursary_type')) ? (old('bursary_type')) : '-Select Type Below-';?></option>
                         <option>NC NCDF</option>
                         <option>Elimu Fund</option>
                         <option>KCB Scholarship</option>

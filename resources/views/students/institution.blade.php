@@ -42,7 +42,7 @@
                 <div class="col-md-4">
                     <label class="font-weight-bold">Institution :</label>
                     <select name="school_type" class="form-control">
-                        <option value="">-select school-</option>
+                        <option value="" selected><?php echo(old('school_type')) ? old('school_type') : '-select school-';?></option>
                         <option>Primary school</option>
                         <option>Secondary School</option>
                         <option>University/College/TVET</option>
@@ -53,14 +53,14 @@
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Enter UPI No/Adm No/Reg No :</label>
-                    <input type="text" name="reg_no" class="form-control" placeholder="Enter your upi/adm/reg no.">
+                    <input type="text" name="reg_no" class="form-control" placeholder="Enter your upi/adm/reg no." value="{{old('reg_no')}}">
                     @if($errors->has('reg_no'))
                     <span class="text-danger">{{$errors->first('reg_no')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">School name :</label>
-                    <input type="text" class="form-control" name="school_name" placeholder="Enter achool name">
+                    <input type="text" class="form-control" name="school_name" placeholder="Enter achool name" value="{{old('school_name')}}">
                     @if($errors->has('school_name'))
                     <span class="text-danger">{{$errors->first('school_name')}}</span>
                     @endif
@@ -69,14 +69,14 @@
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <label class="font-weight-bold">Bank Name :</label>
-                        <input type="text" name="bank_name" class="form-control" placeholder="Enter bank name" id="">
+                        <input type="text" name="bank_name" class="form-control" placeholder="Enter bank name" id="" value="{{old('bank_name')}}">
                         @if($errors->has('bank_name'))
                     <span class="text-danger">{{$errors->first('bank_name')}}</span>
                     @endif
                     </div>
                     <div class="col-md-6">
                         <label class="font-weight-bold">Bank Acc-No :</label>
-                        <input type="number" name="account_no" class="form-control" placeholder="Enter account number" id="">
+                        <input type="number" name="account_no" class="form-control" placeholder="Enter account number" id="" value="{{old('account_no')}}">
                         @if($errors->has('account_no'))
                     <span class="text-danger">{{$errors->first('account_no')}}</span>
                     @endif

@@ -72,24 +72,24 @@ if(isset($_POST['continue'])){
             <div class="row">
                 <div class="col-md-4">
                     <label class="font-weight-bold">Enter First Name :</label>
-                    <input type="text" name="first_name" class="form-control <?php echo ($errors->first('first_name')) ? 'border border-danger' : '';?>" placeholder="Enter your first name" value="">
+                    <input type="text" name="first_name" class="form-control <?php echo ($errors->first('first_name')) ? 'border border-danger' : '';?> font-weight-bold" placeholder="Enter your first name" value="{{old('first_name')}}">
                     @if($errors->has('first_name'))
                     <span class="text-danger">{{$errors->first('first_name')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Enter Second Name :</label>
-                    <input type="text" name="second_name" class="form-control <?php echo ($errors->first('second_name')) ? 'border border-danger' : '';?>" placeholder="Enter your second name">
+                    <input type="text" name="second_name" class="form-control <?php echo ($errors->first('second_name')) ? 'border border-danger' : '';?> font-weight-bold" placeholder="Enter your second name" value="{{old('second_name')}}">
                     @if($errors->has('second_name'))
                     <span class="text-danger">{{$errors->first('second_name')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Age :</label>
-                    <select name="age" class="form-control <?php echo ($errors->first('age')) ? 'border border-danger' : '';?>">
-                        <option value="">-select Age-</option>
+                    <select name="age" class="form-control <?php echo ($errors->first('age')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('age')) ? old('age') : '-select age-';?></option>
                         <?php
-    for ($i = 5; $i <= 25; $i++) {
+    for ($i = 13; $i <= 27; $i++) {
         echo "<option value=\"$i\">$i</option>";
     }
     ?>
@@ -102,8 +102,8 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
             <div class="col-md-6">
                     <label class="font-weight-bold">Gender :</label>
-                    <select name="gender" class="form-control <?php echo ($errors->first('gender')) ? 'border border-danger' : '';?>">
-                        <option value="">-select gender-</option>
+                    <select name="gender" class="form-control <?php echo ($errors->first('gender')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('gender')) ? old('gender') : '-select gender-';?></option>
                         <option> Male</option> 
                         <option>Female</option>
                     </select>
@@ -113,8 +113,8 @@ if(isset($_POST['continue'])){
                 </div>
                 <div class="col-md-6">
                     <label class="font-weight-bold">Family Status :</label>
-                    <select name="family_status" class="form-control <?php echo ($errors->first('family_status')) ? 'border border-danger' : '';?>">
-                        <option value="">-select status-</option>
+                    <select name="family_status" class="form-control <?php echo ($errors->first('family_status')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('family_status')) ? old('family_status') : '-select status-';?></option>
                         <option>Rich</option>
                         <option>Average</option>
                         <option>Poor</option>
@@ -128,22 +128,22 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
             <div class="col-md-4">
                     <label class="font-weight-bold">Enter Parent/Guardian Name :</label>
-                    <input type="text" name="parent_guardian_name" class="form-control <?php echo ($errors->first('parent_guardian_name')) ? 'border border-danger' : '';?>" placeholder="Enter parent name">
+                    <input type="text" name="parent_guardian_name" value="{{old('parent_guardian_name')}}" class="form-control font-weight-bold <?php echo ($errors->first('parent_guardian_name')) ? 'border border-danger' : '';?>" placeholder="Enter parent name">
                     @if($errors->has('parent_guardian_name'))
                     <span class="text-danger">{{$errors->first('parent_guardian_name')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Enter Phone No :</label>
-                    <input type="number" name="phone" class="form-control <?php echo ($errors->first('phone')) ? 'border border-danger' : '';?>" placeholder="Enter phone number">
+                    <input type="number" name="phone" class="form-control font-weight-bold <?php echo ($errors->first('phone')) ? 'border border-danger' : '';?>" placeholder="Enter phone number" value="{{old('phone')}}">
                     @if($errors->has('phone'))
                     <span class="text-danger">{{$errors->first('phone')}}</span>
                     @endif
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">Occupation :</label>
-                    <select name="occupation" class="form-control <?php echo ($errors->first('occupation')) ? 'border border-danger' : '';?>">
-                        <option value="">-select occupation-</option>
+                    <select name="occupation" class="form-control <?php echo ($errors->first('occupation')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('occupation')) ? old('occupation') : '-select occupation-';?></option>
                         <option>Employed</option>
                         <option>Self-employed</option>
                         <option>Contract</option>
@@ -158,14 +158,14 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label class="font-weight-bold">Email :</label>
-                    <input type="email" name="email" placeholder="Enter the parent email address" class="form-control <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" id="">
+                    <input type="email" name="email" placeholder="Enter the parent email address" class="form-control font-weight-bold <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" id="" value="{{old('email')}}">
                     @if($errors->has('email'))
                     <span class="text-danger">{{$errors->first('email')}}</span>
                     @endif
                 </div>
                 <div class="col-md-6">
                     <label class="font-weight-bold">Id No :</label>
-                    <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control <?php echo ($errors->first('id_no')) ? 'border border-danger' : '';?>" id="">
+                    <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control font-weight-bold <?php echo ($errors->first('id_no')) ? 'border border-danger' : '';?>" id="" value="{{old('id_no')}}">
                     @if($errors->has('id_no'))
                     <span class="text-danger">{{$errors->first('id_no')}}</span>
                     @endif
@@ -174,8 +174,8 @@ if(isset($_POST['continue'])){
             <div class="row mt-4">
                 <div class="col-md-3">
                     <label class="font-weight-bold">County :</label>
-                    <select name="county" class="form-control <?php echo ($errors->first('county')) ? 'border border-danger' : '';?>">
-                        <option value="">-select county-</option>
+                    <select name="county" class="form-control <?php echo ($errors->first('county')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('county')) ? old('county') : '-select county-';?></option>
                         <option>Uasin Gishu</option>
                     </select>
                     @if($errors->has('county'))
@@ -184,8 +184,8 @@ if(isset($_POST['continue'])){
                 </div>
                 <div class="col-md-3">
                     <label class="font-weight-bold">Ward :</label>
-                    <select name="ward" class="form-control <?php echo ($errors->first('ward')) ? 'border border-danger' : '';?>">
-                        <option value="">-select ward-</option>
+                    <select name="ward" class="form-control <?php echo ($errors->first('ward')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('ward')) ? old('ward') : '-select ward-';?></option>
                         <option>Ziwa</option>
                         <option>Soy</option>
                         <option>Kipsomba</option>
@@ -199,8 +199,8 @@ if(isset($_POST['continue'])){
                 </div>
                 <div class="col-md-3">
                     <label class="font-weight-bold">Location :</label>
-                    <select name="location" class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?>">
-                        <option value="">-select location-</option>
+                    <select name="location" class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('location')) ? old('location') : '-select location-';?></option>
                         <option>Munyaka</option>
                         <option>Silas</option>
                         <option>Ilula</option>
@@ -213,8 +213,8 @@ if(isset($_POST['continue'])){
                 </div>
                 <div class="col-md-3">
                     <label class="font-weight-bold">Sub-Location :</label>
-                    <select name="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?>">
-                        <option value="">-select sub-location-</option>
+                    <select name="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
+                        <option value="" selected><?php echo(old('sub_location')) ? old('sub_location') : '-select sub-location-';?></option>
                         <option>Subaru</option>
                         <option>Bondeni</option>
                         <option>Kamkunji</option>
