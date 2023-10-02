@@ -20,6 +20,14 @@
             "dest": "/public/images/"
         },
         {
+            "src": "/css/css/(.*)",
+            "dest": "/public/css/css"
+        },
+        {
+            "src": "/slimscroll/(.*)",
+            "dest": "/public/slimscroll/"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
