@@ -20,6 +20,10 @@
             "dest": "/public/images/"
         },
         {
+            "src": "/DataTables/(.*)",
+            "dest": "/public/DataTables/"
+        },
+        {
             "src": "/slimscroll/(.*)",
             "dest": "/public/slimscroll/"
         },

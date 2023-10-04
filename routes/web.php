@@ -45,3 +45,4 @@ Route::post('request',[UsersController::class, 'req_search']);
 Route::get('/mpesa',[Mpesa::class, 'push']);
 Route::get('logout',[UsersController::class, 'logout']);
 Route::post('reset_password',[AdminController::class, 'reset']);
+Route::get('applications',[AdminController::class, 'applications']);

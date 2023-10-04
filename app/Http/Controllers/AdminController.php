@@ -71,4 +71,13 @@ public function reset(Request $request){
     return redirect('login')->with('message','reset email sent successfully');
  }
 }
+
+public function applications(){
+    if(!session('res')){
+        return redirect('login');
+    }else{
+        $data = DB::table('applications')->orderBy('id','DESC')->get();
+        return view('applications',compact('data'));
+    }
+}
 }

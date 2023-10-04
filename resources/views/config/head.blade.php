@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 <title>BMS</title>
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{asset('images/logo.png')}}">
 
@@ -14,6 +15,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset('DataTables/DataTables-1.13.4/css/jquery.dataTables.css')}}" />
+{{-- <script type="text/javascript" src="{{asset('DataTables/DataTables-1.13.4/js/jquery.dataTables.js')}}"></script> --}}
 
 
 <!-- Fontawesome CSS -->
