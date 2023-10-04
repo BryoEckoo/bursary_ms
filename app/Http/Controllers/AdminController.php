@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\mailSend;
 use App\Models\Admins;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Prompts\Table;
 
 class AdminController extends Controller
@@ -22,7 +24,10 @@ class AdminController extends Controller
         // $admin->password = Hash::make($request->password);
         // $admin->save();
         // return redirect('login')->with('success','Admin saved successfully');
-        
+        $request->validate([
+            "email"=>'required',
+            "password"=>'required'
+        ]);
         $password = ($request->password);
         $req = Admins::where('email',$request->email)->count();
         if($req <=0){
@@ -54,4 +59,16 @@ class AdminController extends Controller
 // # Make the second curl request with properly formatted JSON data
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
+public function reset(Request $request){
+ $c = Admins::where('email',$request->email)->count();
+ if($c <=0){
+    return redirect('login')->with('message','Email address not found.Please enter a valid email address');
+ }else{
+    $reset ='reset password';
+    $url = 'https://bursary-ms.vercel.app/rest/'.$request->email;
+    $name = 'Kindly use the link privided below to reset your password'  .$url;
+    Mail::to($request->email)->send(new mailSend($name));
+    return redirect('login')->with('message','reset email sent successfully');
+ }
+}
 }
