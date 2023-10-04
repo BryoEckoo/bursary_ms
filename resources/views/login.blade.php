@@ -23,17 +23,17 @@
                 @if(session()->has('message'))
                 <span class="text-sucess">{{session()->get('message')}}</span>
                 @endif
-                <form method="POST" action="{{url('login')}}">
+                <form method="POST" action="{{url('login-custom')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Email address :</label>
-                <input type="text" name="email" class="form-control" id="" placeholder="example@admin.com" value="">
+                <input type="text" name="email" class="form-control" id="" placeholder="example@admin.com" value="{{old('email')}}">
                 <label class="font-weight-bold">Enter Password :</label>
                 <input type="password" name="password" class="form-control" id="" placeholder="********">
                 <input type="submit" class="btn btn-primary mt-2" value="LOGIN">
                 </form>
                 <div class="row justify-content-between">
-                   <p class="mt-5">If not Registered Click <a href="{{url('register')}}"> Here</a></p>
-                   <a href="#" data-toggle="modal" data-target="#Modal" class="mt-5">Forgot Password?</a>
+                   {{-- <p class="mt-5">If not Registered Click <a href="{{url('register')}}"> Here</a></p> --}}
+                   <a href="" data-toggle="modal" data-target="#Modal" class="mt-5">Forgot Password?</a>
             </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <h4 class="text-center">Reset Password</h4>
              </div>
              <div class="modal-body">
-                <form method="get" action="">
+                <form method="post" action="{{url('reset_password')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Email :</label>
                  <input type="email" name="email" class="form-control" id="">

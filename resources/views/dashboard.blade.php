@@ -64,6 +64,11 @@
 							
 												
 											</h3>
+											@if(session('res'))
+    @foreach(session('res') as $value)
+    <p>{{$value->email}}</p>
+    @endforeach
+    @endif
 											<h6>Students</h6>
 										</div>										
 									</div>

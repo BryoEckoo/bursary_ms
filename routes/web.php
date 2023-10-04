@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Mpesa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\UsersController;
 Route::get('/', function () {
     return view('students.index');
 });
-Route::post('login', [AdminController::class, 'login']);
+Route::post('login-custom', [AdminController::class, 'login']);
 Route::get('register', function () {
     return view('register');
 });
@@ -42,3 +43,4 @@ Route::post('track',[UsersController::class, 'check'])->name('track');
 Route::get('request_bursary',[UsersController::class, 'request']);
 Route::post('request',[UsersController::class, 'req_search']);
 Route::get('/mpesa',[Mpesa::class, 'push']);
+Route::get('logout',[UsersController::class, 'logout']);

@@ -72,6 +72,9 @@ class UsersController extends Controller
         return view('students.index');
     }
     public function index(){
+        if(!session('res')){
+            return redirect('login');
+        }
         return view('dashboard');
     }
     public function burs_details(Request $request){
@@ -471,5 +474,9 @@ class UsersController extends Controller
         } else {
             return 'Error: ' . $response['ResponseDescription'];
         }
+    }
+    public function logout(){
+        session()->forget('res');
+        return redirect('login');
     }
 }
