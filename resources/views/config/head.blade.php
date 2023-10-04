@@ -10,7 +10,8 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}">
-<script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script>
+{{-- <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\mailSend;
+use App\Models\Admins;
 use App\Models\Application;
 
 use App\Models\Parents;
@@ -75,7 +76,12 @@ class UsersController extends Controller
         if(!session('res')){
             return redirect('login');
         }
-        return view('dashboard');
+        $today = date('Y/m/d');
+        $staff = Admins::all()->count();
+        $student = Student::all()->count();
+        $application = Application::where('today_date',$today)->count();
+        $apps = DB::table('applications')->orderBy('id','ASC')->limit(7)->get();
+        return view('dashboard',compact('staff','student','application','apps'));
     }
     public function burs_details(Request $request){
         $request->validate([
@@ -271,7 +277,7 @@ class UsersController extends Controller
         // ],[
         //     "first_name.required"=>"Empty fields are not allowed",
         // ]);
-        date_default_timezone_set('Africa/Nairobi');
+        // date_default_timezone_set('Africa/Nairobi');
         $counts = Student::where('phone',$request->phone)->count();
         if($counts <= 0){
         $app_ref ='BUR' .random_int(1000,9999);
@@ -318,6 +324,7 @@ class UsersController extends Controller
         $application->account_no = $request->account_no;
         $application->location = $request->location;
         $application->status = "Pending...";
+        $application->today_date = date('Y/m/d');
         $application->save();
 
         

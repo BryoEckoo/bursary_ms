@@ -112,23 +112,26 @@
 					
 					<!-- User Menu -->
 					<li class="nav-item dropdown has-arrow">
-						<a href="{{url('index')}}" class="dropdown-toggle nav-link" data-toggle="dropdown">
+						<a href="{{url('index')}}" class="dropdown-toggle nav-link" data-toggle="dropdown" id="menu1">
 							<span class="user-img"><img class="rounded-circle" src="" width="31" alt="User Loggedin"></span>
 						</a>
-						<div class="dropdown-menu">
+						<div class="dropdown-menu"  role="menu"  aria-labelledby="menu1">
 							<div class="user-header">
-								<div class="avatar avatar-sm">
+								{{-- <div class="avatar avatar-sm">
 									<img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-								</div>
+								</div> --}}
 								<div class="user-text">
-
-						
+												@if(session('res'))
+    @foreach(session('res') as $value)
+    <p>{{$value->email}}</p>
+    @endforeach
+    @endif
 								</div>
 							</div>
-							<a class="dropdown-item" href="profile">My Profile</a>
+							<a class="dropdown-item" href="{{url('profile')}}">My Profile</a>
 							
 							
-							<a class="dropdown-item" href="logout">Logout</a>
+							<a class="dropdown-item" href="{{url('logout')}}">Logout</a>
 						</div>
 					</li>
 					<!-- /User Menu -->

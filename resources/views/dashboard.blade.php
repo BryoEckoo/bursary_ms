@@ -43,7 +43,7 @@
 										</div>
 										<div class="db-info">
 											<h3>
-												
+												{{$staff}}
 											</h3>
 											<h6>Staff</h6>
 										</div>										
@@ -61,14 +61,8 @@
 										</div>
 										<div class="db-info">
 											<h3>
-							
-												
+										{{$student}}
 											</h3>
-											@if(session('res'))
-    @foreach(session('res') as $value)
-    <p>{{$value->email}}</p>
-    @endforeach
-    @endif
 											<h6>Students</h6>
 										</div>										
 									</div>
@@ -85,7 +79,7 @@
 										</div>
 										<div class="db-info">
 											<h3>
-						
+												{{$application}}
 											</h3>
 											<h6>Today's Applications</h6>
 										</div>										
@@ -131,6 +125,34 @@
 								</div>
 								<div class="card-body">
 									<div id="line_graph"></div>
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<td class="font-weight-bold text-center">#</td>
+												<td class="font-weight-bold text-center">REF-NO.</td>
+												<td class="font-weight-bold text-center">Applicant Name</td>
+												<td class="font-weight-bold text-center">Location</td>
+												<td class="font-weight-bold text-center">Status</td>
+												<td class="font-weight-bold text-center" colspan="3">Actions</td>
+											</tr>
+										</thead>
+										@foreach($apps as $val)
+										<tbody>
+											<tr>
+												<td>{{$val->id}}</td>
+												<td>{{$val->reference_number}}</td>
+												<td>{{$val->student_fullname}}</td>
+												<td>{{$val->location}}</td>
+												<td class="text-warning font-weight-bold">{{$val->status}}</td>
+												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a></td>
+												<td class="text-center"><a href="{{url('delete/'.$val->id)}}"class="btn btn-danger">Delete</a></td>
+												<td class="text-center"><a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
+											</tr>
+										</tbody>
+										@endforeach
+										</table>
+									</div>
 								</div>
 							</div>
 							<!-- /Revenue Chart -->
@@ -148,7 +170,8 @@
 		<!-- /Main Wrapper -->
 		@include('config.scripts')
     </body>
-    <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script>
+	
+    {{-- <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script> --}}
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('bootstrap/js/popper.min.js')}}"></script>
 </html>

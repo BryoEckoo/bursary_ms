@@ -37,7 +37,7 @@
 								<a href="{{url('users')}}"><i class="fa fa-user"></i> <span>Users</span></a>
 							</li>
 							<li> 
-								<a href="{{url('logout')}}"><i class="fa fa-cog"></i> <span>settings</span></a>
+								<a href="{{url('settings')}}"><i class="fa fa-cog"></i> <span>settings</span></a>
 							</li>
 						</ul>
 					</div>
