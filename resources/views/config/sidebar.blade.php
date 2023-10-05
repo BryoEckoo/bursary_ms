@@ -18,7 +18,7 @@
 							</li>
 							
 							<li> 
-								<a href="{{url('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
+								<a href="{{route('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
 							</li>
 						
 							<li> 

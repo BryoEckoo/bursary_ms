@@ -29,7 +29,7 @@
 							</li>
 							
 							<li class="active"> 
-								<a href="{{url('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
+								<a href="{{route('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
 							</li>
 						
 							<li> 
@@ -163,7 +163,16 @@
 									</div>						
 								</div> --}}
 								<div class="card-body">
-									<div id="line_graph"></div>
+									<div id="line_graph">
+                                        @if(session()->has('message'))
+                                        <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('message')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
+                                    </div>
 									<div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="sample">
                                         <thead>
@@ -171,7 +180,7 @@
                                                 <td class="font-weight-bold text-center">#</td>
                                                 <td class="font-weight-bold text-center">Full Name</td>
                                                 <td class="font-weight-bold text-center">Age</td>
-                                                <td class="font-weight-bold text-center">School Type</td>
+                                                <td class="font-weight-bold text-center">School Level</td>
                                                 <td class="font-weight-bold text-center">County</td>
                                                 <td class="font-weight-bold text-center">Location</td>
                                                 <td class="font-weight-bold text-center">Sub-location</td>
@@ -188,14 +197,54 @@
                                                 <td>{{$val->school_level}}</td>
                                                 <td>{{$val->county}}</td>
                                                 <td>{{$val->location}}</td>
-                                                <td class="text-warning font-weight-bold">{{$val->sub_location}}</td>
-                                                <td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
-                                                <a href="" data-toggle="modal" data-target="#Modal" class="btn btn-danger">Delete</a>
+                                                <td class=" font-weight-bold">{{$val->sub_location}}</td>
+                                                <td class="text-center"><a href="{{url('edit')}}"class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->student_fullname}}">Edit</a>
+                                                <a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+                                                <div id="Edit{{$val->student_fullname}}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                        <form method="post" action="{{url('update/'.$val->id)}}">
+                                                            @csrf
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                        
+                                                                <div class="modal-header" style="background: #398AD7; color: #fff;">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">UPDATE</h4>
+                                                                </div>
+                                        
+                                                                <div class="modal-body">
+                                                                    <form method="POST" action="">
+                                                                        @csrf
+                                                                    <label for="">Fullname :</label>
+                                                                    <input type="text" name="fullname" value="{{$val->student_fullname}}" class="form-control">
+                                                                    <label for="">Age :</label>
+                                                                    <input type="number" name="age" value="{{$val->age}}" class="form-control">
+                                                                    <label for="">School Level :</label>
+                                                                    <input type="text" name="school_level" value="{{$val->school_level}}" class="form-control">
+                                                                    <label for="">County :</label>
+                                                                    <input type="text" name="county" value="{{$val->county}}" class="form-control">
+                                                                    <label for="">Location :</label>
+                                                                    <input type="text" name="location" value="{{$val->location}}" class="form-control">
+                                                                    <label for="">Sub Location :</label>
+                                                                    <input type="text" name="sub_location" value="{{$val->sub_location}}" class="form-control">
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" name="delete_acc" class="btn btn-danger">UPDATE</button>
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                        </form>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <div id="Modal" class="modal fade" role="dialog">
+                                            {{-- edit student record --}}
+                                            
+                                            {{-- delete record --}}
+                                            <div id="Modal{{$val->id}}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
-                                                    <form method="POSt">
+                                                    <form method="post" action="{{url('delete/'.$val->id)}}">
+                                                        @csrf
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
                                     
@@ -205,10 +254,8 @@
                                                             </div>
                                     
                                                             <div class="modal-body">
-                                                                <input type="hidden" name="deleteid" value="">
-                                                                <input type="hidden" name="email" value="">
                                                                 <p>
-                                                                    <div class="alert alert-danger">Are you Sure you want Delete <strong>?</strong></p>
+                                                                    <div class="alert alert-danger">Are you Sure you want Delete.... <strong>{{$val->student_fullname}}?</strong></p>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" name="delete_acc" class="btn btn-danger">YES</button>

@@ -46,4 +46,5 @@ Route::get('/mpesa',[Mpesa::class, 'push']);
 Route::get('logout',[UsersController::class, 'logout']);
 Route::post('reset_password',[AdminController::class, 'reset']);
 Route::get('applications',[AdminController::class, 'applications']);
-Route::get('applicants',[AdminController::class, 'applicants']);
+Route::get('students',[AdminController::class, 'applicants'])->name('applicants');
+Route::post('delete/{id}',[AdminController::class,'delete']);
