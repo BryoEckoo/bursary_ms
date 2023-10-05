@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\mailSend;
 use App\Models\Admins;
+use App\Models\Application;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -93,5 +94,10 @@ public function delete(Request $request,$id){
     $query = Student::findOrFail($id);
     $query->delete();
     return back()->with('message','The student record was deleted successfuly');
+}
+public function delete_application(Request $request,$id){
+    $query = Application::findOrFail($id);
+    $query->delete();
+    return back()->with('message','The application record was deleted successfuly');
 }
 }

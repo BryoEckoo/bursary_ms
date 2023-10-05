@@ -48,3 +48,4 @@ Route::post('reset_password',[AdminController::class, 'reset']);
 Route::get('applications',[AdminController::class, 'applications']);
 Route::get('students',[AdminController::class, 'applicants'])->name('applicants');
 Route::post('delete/{id}',[AdminController::class,'delete']);
+Route::post('delete_application/{id}',[AdminController::class,'delete_application']);
