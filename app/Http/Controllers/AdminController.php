@@ -80,4 +80,12 @@ public function applications(){
         return view('applications',compact('data'));
     }
 }
+public function applicants(){
+    if(!session('res')){
+        return redirect('login');
+    }else{
+        $data = DB::table('students')->orderBy('id','DESC')->get();
+        return view('applicants',compact('data'));
+    }
+}
 }

@@ -24,11 +24,11 @@
 							<li > 
 								<a href="{{url('index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
-							<li class="active"> 
+							<li > 
 								<a href="{{url('applications')}}"><i class="fa fa-users"></i> <span>Applications</span></a>
 							</li>
 							
-							<li> 
+							<li class="active"> 
 								<a href="{{url('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
 							</li>
 						
@@ -66,7 +66,7 @@
 							<div class="col-sm-12">
 								<!--<h3 class="page-title">Welcome Admin!</h3>-->
 								<ul class="breadcrumb">
-									<li class="breadcrumb-item active">Applications</li>
+									<li class="breadcrumb-item active">Applicants</li>
 								</ul>
 							</div>
 						</div>
@@ -165,39 +165,64 @@
 								<div class="card-body">
 									<div id="line_graph"></div>
 									<div class="table-responsive">
-										<table class="table table-bordered table-striped" id="sample">
-										<thead>
-											<tr>
-												<td class="font-weight-bold text-center">#</td>
-												<td class="font-weight-bold text-center">REF-NO.</td>
-												<td class="font-weight-bold text-center">Applicant Name</td>
-												<td class="font-weight-bold text-center">School Type</td>
-												<td class="font-weight-bold text-center">Location</td>
-                                                <td class="font-weight-bold text-center">Application Date</td>
-												<td class="font-weight-bold text-center">Status</td>
-												<td class="font-weight-bold text-center">Actions</td>
-											</tr>
-										</thead>
-										
-										<tbody>
-											@foreach($data as $val)
-											<tr>
-												<td>{{$val->id}}</td>
-												<td>{{$val->reference_number}}</td>
-												<td>{{$val->student_fullname}}</td>
-                                                <td>{{$val->school_type}}</td>
-												<td>{{$val->location}}</td>
-                                                <td>{{$val->today_date}}</td>
-												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
-												<a href="{{url('delete/'.$val->id)}}"class="btn btn-danger">Delete</a>
-												<a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
-											</tr>
-											@endforeach
-										</tbody>
-										
-										</table>
-									</div>
+                                        <table class="table table-bordered table-striped" id="sample">
+                                        <thead>
+                                            <tr>
+                                                <td class="font-weight-bold text-center">#</td>
+                                                <td class="font-weight-bold text-center">Full Name</td>
+                                                <td class="font-weight-bold text-center">Age</td>
+                                                <td class="font-weight-bold text-center">School Type</td>
+                                                <td class="font-weight-bold text-center">County</td>
+                                                <td class="font-weight-bold text-center">Location</td>
+                                                <td class="font-weight-bold text-center">Sub-location</td>
+                                                <td class="font-weight-bold text-center">Actions</td>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            @foreach($data as $val)
+                                            <tr>
+                                                <td>{{$val->id}}</td>
+                                                <td>{{$val->student_fullname}}</td>
+                                                <td>{{$val->age}}</td>
+                                                <td>{{$val->school_level}}</td>
+                                                <td>{{$val->county}}</td>
+                                                <td>{{$val->location}}</td>
+                                                <td class="text-warning font-weight-bold">{{$val->sub_location}}</td>
+                                                <td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
+                                                <a href="" data-toggle="modal" data-target="#Modal" class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <div id="Modal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form method="POSt">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                    
+                                                            <div class="modal-header" style="background: #398AD7; color: #fff;">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Delete</h4>
+                                                            </div>
+                                    
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="deleteid" value="">
+                                                                <input type="hidden" name="email" value="">
+                                                                <p>
+                                                                    <div class="alert alert-danger">Are you Sure you want Delete <strong>?</strong></p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="delete_acc" class="btn btn-danger">YES</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                                                                </div>
+                                                            </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </tbody>
+                                        
+                                        </table>
+                                    </div>
 								</div>
 							</div>
 							<!-- /Revenue Chart -->
@@ -206,6 +231,8 @@
 					</div>
 
 				</div>
+
+                
 
 			</div>
 			<!-- /Page Wrapper -->

@@ -126,7 +126,7 @@
 								<div class="card-body">
 									<div id="line_graph"></div>
 									<div class="table-responsive">
-										<table class="table table-bordered table-striped">
+										<table class="table table-bordered table-striped" id="sample">
 										<thead>
 											<tr>
 												<td class="font-weight-bold text-center">#</td>
@@ -134,23 +134,25 @@
 												<td class="font-weight-bold text-center">Applicant Name</td>
 												<td class="font-weight-bold text-center">Location</td>
 												<td class="font-weight-bold text-center">Status</td>
-												<td class="font-weight-bold text-center" colspan="3">Actions</td>
+												<td class="font-weight-bold text-center">Actions</td>
 											</tr>
 										</thead>
-										@foreach($apps as $val)
+										
 										<tbody>
+											@foreach($apps as $val)
 											<tr>
 												<td>{{$val->id}}</td>
 												<td>{{$val->reference_number}}</td>
 												<td>{{$val->student_fullname}}</td>
 												<td>{{$val->location}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a></td>
-												<td class="text-center"><a href="{{url('delete/'.$val->id)}}"class="btn btn-danger">Delete</a></td>
-												<td class="text-center"><a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
+												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
+												<a href="{{url('delete/'.$val->id)}}"class="btn btn-danger">Delete</a>
+												<a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
 											</tr>
+											@endforeach
 										</tbody>
-										@endforeach
+										
 										</table>
 									</div>
 								</div>
@@ -174,4 +176,11 @@
     {{-- <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script> --}}
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('bootstrap/js/popper.min.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="{{asset('DataTables/DataTables-1.13.4/js/jquery.dataTables.js')}}"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        $('#sample').DataTable();
+    } );
+    </script>
 </html>
