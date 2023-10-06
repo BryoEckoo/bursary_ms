@@ -27,7 +27,6 @@
             "src": "/slimscroll/(.*)",
             "dest": "/public/slimscroll/"
         },
-
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
