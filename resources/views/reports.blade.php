@@ -24,7 +24,7 @@
 							<li > 
 								<a href="{{url('index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
-							<li class="active"> 
+							<li > 
 								<a href="{{url('applications')}}"><i class="fa fa-users"></i> <span>Applications</span></a>
 							</li>
 							
@@ -32,7 +32,7 @@
 								<a href="{{route('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
 							</li>
 						
-							<li> 
+							<li class="active"> 
 								<a href="{{url('reports')}}"><i class="fa fa-shopping-cart"></i> <span>Bursary Reports</span></a>
 							</li>
 						
@@ -66,7 +66,7 @@
 							<div class="col-sm-12">
 								<!--<h3 class="page-title">Welcome Admin!</h3>-->
 								<ul class="breadcrumb">
-									<li class="breadcrumb-item active">Applications</li>
+									<li class="breadcrumb-item active font-weight-bold" style="text-transform: uppercase;">Reports</li>
 								</ul>
 							</div>
 						</div>
@@ -148,7 +148,7 @@
 
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="container col-md-8">
 						
 							<!-- Revenue Chart -->
 							<div class="card card-chart">
@@ -173,91 +173,19 @@
                                                  </div>
                                         @endif
 									</div>
-									<div class="table-responsive">
-										<table class="table table-bordered table-striped" id="sample">
-										<thead>
-											<tr>
-												<td class="font-weight-bold text-center">#</td>
-												<td class="font-weight-bold text-center">REF-NO.</td>
-												<td class="font-weight-bold text-center">Applicant Name</td>
-												<td class="font-weight-bold text-center">School Type</td>
-												<td class="font-weight-bold text-center">Location</td>
-                                                <td class="font-weight-bold text-center">Application Date</td>
-												<td class="font-weight-bold text-center">Status</td>
-												<td class="font-weight-bold text-center">Actions</td>
-											</tr>
-										</thead>
-										
-										<tbody>
-											@foreach($data as $val)
-											<tr>
-												<td>{{$val->id}}</td>
-												<td>{{$val->reference_number}}</td>
-												<td>{{$val->student_fullname}}</td>
-                                                <td>{{$val->school_type}}</td>
-												<td>{{$val->location}}</td>
-                                                <td>{{$val->today_date}}</td>
-												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
-												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
-												<a href=""class="btn btn-success" data-toggle="modal" data-target="#Approve{{$val->id}}">Approve</a>
-											{{-- approve record --}}
-											<div id="Approve{{$val->id}}" class="modal fade" role="dialog">
-												<div class="modal-dialog">
-													<form method="post" action="{{url('approve_application/'.$val->id)}}">
-														@csrf
-														<!-- Modal content-->
-														<div class="modal-content">
-									
-															<div class="modal-header" style="background: #398AD7; color: #fff;">
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-																<h4 class="modal-title">Approve</h4>
-															</div>
-									
-															<div class="modal-body">
-																<p>
-																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>{{$val->reference_number}}?</strong></p>
-																</div>
-																<div class="modal-footer">
-																	<button type="submit" name="approve" class="btn btn-success">YES</button>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
-																</div>
-															</div>
-													</form>
-													</div>
-												</div>
-											</td>
-											{{-- delete record --}}
-											<div id="Modal{{$val->id}}" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    <form method="post" action="{{url('delete_application/'.$val->id)}}">
-                                                        @csrf
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                    
-                                                            <div class="modal-header" style="background: #398AD7; color: #fff;">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h4 class="modal-title">Delete</h4>
-                                                            </div>
-                                    
-                                                            <div class="modal-body">
-                                                                <p>
-                                                                    <div class="alert alert-danger">Are you Sure you want Delete.... <strong>{{$val->reference_number}}?</strong></p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" name="delete_acc" class="btn btn-danger">YES</button>
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
-                                                                </div>
-                                                            </div>
-                                                    </form>
-                                                    </div>
-                                                </div>
-											</tr>
-											@endforeach
-										</tbody>
-										
-										</table>
-									</div>
+									<form action="{{url('print')}}" method="post">
+                                        @csrf
+                                        <label>Select Year :</label>
+                                        <select name="year" id="" class="form-control">
+											<option>-select year-</option>
+                                            <option>2020</option>
+                                            <option>2021</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                        </select>
+                                        <input type="submit" value="PRINT" class="btn btn-warning mt-2">
+                                    </form>
 								</div>
 							</div>
 							<!-- /Revenue Chart -->

@@ -28,6 +28,10 @@
             "dest": "/public/slimscroll/"
         },
         {
+            "src": "/fpdf183/(.*)",
+            "dest": "/public/fpdf183/"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }

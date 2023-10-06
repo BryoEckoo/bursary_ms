@@ -39,8 +39,8 @@
 							<li class="submenu">
 								<a href="{{url('index')}}"><i class="fa fa-file"></i> <span>Reports</span> <span class="menu-arrow"></span></a>
 								<ul>
-									<li><a href="{{url('term_report')}}">Term Report</a></li>
-									<li><a href="{{url('yearly_report')}}">Yearly Report</a></li>
+									<li><a href="{{url('location_report')}}">Location Report</a></li>
+									<li><a href="{{url('sub_location_report')}}">Sub-location Report</a></li>
 								</ul>
 							</li>
 				
