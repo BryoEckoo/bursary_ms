@@ -52,4 +52,8 @@ Route::post('delete_application/{id}',[AdminController::class,'delete_applicatio
 Route::post('approve_application/{id}',[AdminController::class,'approve_application']);
 Route::get('reports',[AdminController::class, 'reports']);
 Route::post('print',[AdminController::class, 'print']);
+Route::get('location_report',[AdminController::class, 'location_report']);
+Route::post('print_location',[AdminController::class, 'print_location']);
+
+
 
