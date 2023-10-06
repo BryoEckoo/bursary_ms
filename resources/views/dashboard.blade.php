@@ -156,8 +156,34 @@
 												<td>{{$val->location}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
 												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
-												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}"class="btn btn-danger">Delete</a>
-												<a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
+												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+												<a href="" data-toggle="modal" data-target="#Approve{{$val->id}}" class="btn btn-success">Approve</a>
+											{{-- approve record --}}
+											<div id="Approve{{$val->id}}" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+													<form method="post" action="{{url('approve_application/'.$val->id)}}">
+														@csrf
+														<!-- Modal content-->
+														<div class="modal-content">
+									
+															<div class="modal-header" style="background: #398AD7; color: #fff;">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">Approve</h4>
+															</div>
+									
+															<div class="modal-body">
+																<p>
+																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>{{$val->reference_number}}?</strong></p>
+																</div>
+																<div class="modal-footer">
+																	<button type="submit" name="approve" class="btn btn-success">YES</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+																</div>
+															</div>
+													</form>
+													</div>
+												</div>
+											</td>
 											</tr>
 											 {{-- delete record --}}
 											 <div id="Modal{{$val->id}}" class="modal fade" role="dialog">

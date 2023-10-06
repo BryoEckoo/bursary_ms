@@ -49,3 +49,5 @@ Route::get('applications',[AdminController::class, 'applications']);
 Route::get('students',[AdminController::class, 'applicants'])->name('applicants');
 Route::post('delete/{id}',[AdminController::class,'delete']);
 Route::post('delete_application/{id}',[AdminController::class,'delete_application']);
+Route::post('approve_application/{id}',[AdminController::class,'approve_application']);
+

@@ -100,4 +100,23 @@ public function delete_application(Request $request,$id){
     $query->delete();
     return back()->with('message','The application record was deleted successfuly');
 }
+public function approve_application(Request $request,$id){
+    $res = DB::select("SELECT status FROM applications WHERE id = '".$id."'");
+    foreach($res as $data){
+        if($data->status == 'Approved'){
+            return back()->with('message','The application status is already approved. You cant approve it again.');
+        }else{
+    DB::update("UPDATE applications SET status ='Approved' WHERE id = '".$id."'");
+
+    $re = DB::select("SELECT student_fullname FROM applications WHERE id = '".$id."'");
+    foreach($re as $data){
+        $query = DB::select("SELECT parent_email FROM parents WHERE student_fullname ='".$data->student_fullname."'");
+        foreach($query as $value){
+            $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+            Mail::to($value->parent_email)->send(new mailSend($name));
+        }
+    }
+    return back()->with('message','The application status approved successfuly and email has been sent to parent');
+}}
+  }
 }

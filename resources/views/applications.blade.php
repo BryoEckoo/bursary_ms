@@ -163,7 +163,16 @@
 									</div>						
 								</div> --}}
 								<div class="card-body">
-									<div id="line_graph"></div>
+									<div id="line_graph">
+										@if(session()->has('message'))
+                                        <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('message')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
+									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-striped" id="sample">
 										<thead>
@@ -190,8 +199,59 @@
                                                 <td>{{$val->today_date}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
 												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
-												<a href="{{url('delete/'.$val->id)}}"class="btn btn-danger">Delete</a>
-												<a href="{{url('approve/'.$val->id)}}"class="btn btn-success">Approve</a></td>
+												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+												<a href=""class="btn btn-success" data-toggle="modal" data-target="#Approve{{$val->id}}">Approve</a>
+											{{-- approve record --}}
+											<div id="Approve{{$val->id}}" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+													<form method="post" action="{{url('approve_application/'.$val->id)}}">
+														@csrf
+														<!-- Modal content-->
+														<div class="modal-content">
+									
+															<div class="modal-header" style="background: #398AD7; color: #fff;">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">Approve</h4>
+															</div>
+									
+															<div class="modal-body">
+																<p>
+																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>{{$val->reference_number}}?</strong></p>
+																</div>
+																<div class="modal-footer">
+																	<button type="submit" name="approve" class="btn btn-success">YES</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+																</div>
+															</div>
+													</form>
+													</div>
+												</div>
+											</td>
+											{{-- delete record --}}
+											<div id="Modal{{$val->id}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <form method="post" action="{{url('delete_application/'.$val->id)}}">
+                                                        @csrf
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                    
+                                                            <div class="modal-header" style="background: #398AD7; color: #fff;">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">Delete</h4>
+                                                            </div>
+                                    
+                                                            <div class="modal-body">
+                                                                <p>
+                                                                    <div class="alert alert-danger">Are you Sure you want Delete.... <strong>{{$val->reference_number}}?</strong></p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="delete_acc" class="btn btn-danger">YES</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                                                                </div>
+                                                            </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
 											</tr>
 											@endforeach
 										</tbody>
