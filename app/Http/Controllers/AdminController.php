@@ -6,7 +6,8 @@ use App\Mail\mailSend;
 use App\Models\Admins;
 use App\Models\Application;
 use App\Models\Student;
-use FPDF;
+// use FPDF;
+// use Fpdf\Fpdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Prompts\Table;
+require_once(public_path().'/fpdf183/fpdf.php');
 
 class AdminController extends Controller
 {
@@ -141,7 +143,7 @@ public function approve_application(Request $request,$id){
                 $res = Student::all();
            $counter = 0; 
     
-        $pdf = new FPDF('P','mm',array(150,250));
+        $pdf = new \FPDF('P','mm',array(150,250));
         $pdf->AddPage();
 
         // Set font and text color
@@ -294,7 +296,7 @@ foreach($res as $data){
             
                 // if($request->location == $value->location){ 
             $counter = 0; 
-            $pdf = new FPDF('P','mm',array(150,250));
+            $pdf = new \FPDF('P','mm',array(150,250));
             $pdf->AddPage();
     
             // Set font and text color

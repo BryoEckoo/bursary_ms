@@ -20,6 +20,10 @@
             "dest": "/public/images/"
         },
         {
+            "src": "/fpdf183/(.*)",
+            "dest": "/public/fpdf183/"
+        },
+        {
             "src": "/DataTables/(.*)",
             "dest": "/public/DataTables/"
         },
