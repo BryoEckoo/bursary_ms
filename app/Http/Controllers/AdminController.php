@@ -291,4 +291,12 @@ foreach($res as $data){
         }
     }
   }
+  public function users(){
+    if(!session('res')){
+        return redirect('login');
+    }else{
+    $value = Admins::all();
+    return view('users',compact('value'));
+  }
+}
 }
