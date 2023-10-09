@@ -132,16 +132,15 @@ public function approve_application(Request $request,$id){
     }
   }
   public function print(Request $request){
-    $re = DB::select("SELECT created_at FROM students");
-    foreach($re as $data){
-        $datetime = $data->created_at;
-        // $carbonDate = Carbon::parse($datetime);
-        $year = date("Y", strtotime($datetime));
-        $array = str_split($year,4);
-        foreach ($array as $subArray) {
-            if ($subArray == $request->year) {
-                $res = Student::all();
-           $counter = 0; 
+    // $re = DB::select("SELECT * FROM students WHERE year = '".$request->year."'");
+        $re = Student::where('year', $request->year)->get();
+        if(count($re) <=0){
+                return back()->with('message','The year is not available in the records.');
+        }else{
+            foreach($re as $data){
+            $res = DB::select("SELECT * FROM students WHERE year = '".$request->year."'");
+
+        $counter = 0; 
     
         $pdf = new \FPDF('P','mm',array(150,250));
         $pdf->AddPage();
@@ -204,78 +203,8 @@ foreach($res as $data){
 
         // exit();
                 break; // If found, you can break out of the loop to stop further iterations.
-            }else{
-                return back()->with('message','The year is not available in the records.');
-            }
+            
         }
-        // if($request->year != $year){
-        //     return back()->with('message','The year is not available in the records.');
-        // }
-//         else{
-//             $res = Student::all();
-//     $counter = 0; 
-    
-//         $pdf = new FPDF('P','mm',array(150,250));
-//         $pdf->AddPage();
-
-//         // Set font and text color
-//         $imagePath = public_path('images/logo.png'); // Replace with the actual image path
-//         $pdf->Image($imagePath, 65,10,-300); 
-//         // $pdf->Image("{{asset('images/logo.png')}}",65,10,-300);
-
-//   $pdf->cell(50, 20,"", 0,1, '');
-// $pdf->setFont('Arial','B',12);
-//   $pdf->cell(120, 6,"COUNTY GOVERNMENT OF NANDI", 0,1, 'C');
-//   $pdf->setFont('Arial','B',10);
-//   $pdf->cell(120, 6, "P.O BOX 40-30100", 0, 1, 'C');
-//   $pdf->cell(120, 6, "info@nandicounty.go.ke", 0, 1, 'C');
-
-//   $pdf->setFont('Arial','B',9);
-
-// $pdf->cell(50, 3,"", 0,1, '');
-
-// $pdf->cell(10, 6,"", 0,0, 'C');
-
-//   $pdf->cell(50, 6,"County: Nandi County", 0,0, 'C');
-
-//   $pdf->cell(50, 6,"Year Selected: ".$request->year, 0,1, 'C');
-
-// $pdf->cell(50, 1,"", 0,1, '');
-  
-// $pdf->setFont('Arial','B',8);
-// $pdf->cell(1, 4,"", 0,0, '');
-// $pdf->cell(7, 6,"S/N", 1,0, '');
-// $pdf->cell(35, 6,"Student Name", 1,0, '');
-// $pdf->cell(28, 6,"School Name", 1,0, '');
-// $pdf->cell(32, 6,"School Level", 1,0, '');
-// $pdf->cell(30, 6,"Date Updated", 1,1, '');
-// // $pdf->cell(40, 6,"Month Updated", 1,1, '');
-// $pdf->setFont('Arial','',11);
-
-
-// $pdf->setFont('Arial','',8);
-// foreach($res as $data){
-//         // Add content to the PDF
-//         $counter++;
-//         $pdf->cell(1, 4,"", 0,0, '');
-//         $pdf->cell(7, 6,$counter, 1,0, '');
-//         // $pdf->cell(30, 6,$data->id, 1,0, '');
-//         $pdf->cell(35, 6,$data->student_fullname, 1,0, '');
-//         $pdf->cell(28, 6,$data->school_name, 1,0, '');
-//         $pdf->cell(32, 6,$data->school_level, 1,0, '');
-//         $pdf->cell(30, 6,$data->updated_at, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
-//                     // Check if we have printed 10 rows, then start a new page
-       
-//  }
-//  if ($pdf->GetY() >= 200) {
-//     $pdf->AddPage();
-// }
-//         // Output the PDF (you can choose to save it to a file or send it as a response)
-//         $pdf->Output();
-//         // $pdf->Output("NandiCountyBursary.pdf",'D'); //'D' indicated download
-
-//         // exit();
-//         }
     }
   }
   public function location_report(){
@@ -287,11 +216,12 @@ foreach($res as $data){
     }
   }
   public function print_location(Request $request){
-    $res = DB::select("SELECT * FROM students WHERE location = '".$request->location."'");
-    foreach($res as $value){
-        if($value->location != $request->location){
+    $res = Student::where("location",$request->location)->get();
+    
+        if(count($res) <=0){
                 return back()->with('message','The location is not available in the records.');
             }else{
+                foreach($res as $value){
             $query = DB::select("SELECT * FROM students WHERE location = '".$request->location."'");
             
                 // if($request->location == $value->location){ 
@@ -336,16 +266,16 @@ foreach($res as $data){
     
     $pdf->setFont('Arial','',8);
     // foreach($query as $data){
-        foreach($query as $value){
+        foreach($query as $val){
             // Add content to the PDF
             $counter++;
             $pdf->cell(1, 4,"", 0,0, '');
             $pdf->cell(7, 6,$counter, 1,0, '');
             // $pdf->cell(30, 6,$data->id, 1,0, '');
-            $pdf->cell(35, 6,$value->student_fullname, 1,0, '');
-            $pdf->cell(28, 6,$value->school_name, 1,0, '');
-            $pdf->cell(32, 6,$value->school_level, 1,0, '');
-            $pdf->cell(30, 6,$value->updated_at, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
+            $pdf->cell(35, 6,$val->student_fullname, 1,0, '');
+            $pdf->cell(28, 6,$val->school_name, 1,0, '');
+            $pdf->cell(32, 6,$val->school_level, 1,0, '');
+            $pdf->cell(30, 6,$val->updated_at, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
                         // Check if we have printed 10 rows, then start a new page
            
      }
@@ -358,9 +288,7 @@ foreach($res as $data){
     
             // exit();
                     break;
-        // }
-    }
-// }
+        }
     }
   }
 }
