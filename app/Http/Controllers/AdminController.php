@@ -302,7 +302,17 @@ foreach($res as $data){
 public function reset_pass(Request $request, $email){
     $email_reset = $email;
     return view('reset',compact('email_reset'));
-    //  DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$email."'");
-    // return redirect('login')->with('message','Password changed successfully');
+}
+public function pass_reset(Request $request){
+$request->validate([
+    "password"=>'required',
+    "re_password"=>'required'
+]);
+if($request->re_password != $request->password){
+    return back()->with('message','RE-PASSWORD does not match PASSWORD');
+}else{
+      DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$request->email."'");
+    return redirect('login')->with('success','Password changed successfully');
+}
 }
 }

@@ -17,15 +17,31 @@
         <div class="card-header">
             <h4 class="text-center font-weight-bold">Reset password here</h4>
         </div>
+        <div class="card-body">
+            @if(session()->has('message'))
+                                        <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('message')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
     <form method="POST" action="{{url('reset_pass')}}">
         @csrf
-        <input type="email" class="form-control" value="{{$email_reset}}">
+        <input type="hidden" name="email" class="form-control" value="{{$email_reset}}">
         <label>Enter Password</label>
-        <input type="password" name="password" class="form-control" id="">
+        <input type="password" name="password" class="form-control" id="" value="{{old('password')}}">
+        @if($errors->has('password'))
+        <span class="text-danger">{{$errors->first('password')}}</span><br>
+        @endif
         <label for="">Re-enter password</label>
-        <input type="password" name="re_password" class="form-control" id="">
+        <input type="password" name="re_password" class="form-control" id="" value="{{old('re_password')}}">
+        @if($errors->has('re_password'))
+        <span class="text-danger">{{$errors->first('re_password')}}</span><br>
+        @endif
         <input type="submit" value="RESET PASSWORD" class="btn btn-primary mt-2">
     </form>
+        </div>
     </div>
     </div>
 </body>
