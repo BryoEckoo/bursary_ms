@@ -66,10 +66,6 @@ class AdminController extends Controller
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
 public function reset(Request $request){
-    // $request->validate([
-    //     "email_reset"=>'required'
-    // ]);
-
  $c = Admins::where('email',$request->email)->count();
  if($c <=0){
     return redirect('login')->with('message','Email address not found.Please enter a valid email address');
@@ -303,8 +299,8 @@ foreach($res as $data){
     return view('users',compact('value'));
   }
 }
-public function reset_pass(Request $request){
-     DB::update('UPDATE admins SET password = "'.$request->password.'" WHERE email = ');
+public function reset_pass(Request $request, $email){
+     DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$email."'");
     return redirect('login')->with('message','Password changed successfully');
 }
 }
