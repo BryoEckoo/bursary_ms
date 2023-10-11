@@ -22,7 +22,12 @@
             <div class="col-md-6" style="margin-top: 6vh">
             <div class="card-body">
                 @if(session()->has('message'))
-                <span class="text-sucess">{{session()->get('message')}}</span>
+                <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                    <span class="font-weight-bold">{{session()->get('message')}}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                         </button>
+                         </div>
                 @endif
                 @if($errors->has('email_reset'))
                 <div class="alert alert-danger alert-dismissible fade show text-center"  role="alert" style="position:sticky">
