@@ -24,6 +24,14 @@
                 @if(session()->has('message'))
                 <span class="text-sucess">{{session()->get('message')}}</span>
                 @endif
+                @if($errors->has('email_reset'))
+                <div class="alert alert-danger alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                    <span class="font-weight-bold">{{$errors->first('email_reset')}}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                         </button>
+                         </div>
+                 @endif
                 <form method="POST" action="{{url('login-custom')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Email address :</label>
@@ -59,6 +67,9 @@
                     @csrf
                 <label class="font-weight-bold">Enter Email :</label>
                  <input type="email" name="email" class="form-control" id="">
+                 @if($errors->has('email_reset'))
+                 <span>{{$errors->first('email_reset')}}</span><br>
+                 @endif
                  <input type="submit" value="Reset" name="reset" class="btn btn-primary mt-2">
                 </form>
              </div>

@@ -66,13 +66,17 @@ class AdminController extends Controller
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
 public function reset(Request $request){
+    $request->validate([
+        "email_reset"=>'required'
+    ]);
+    
  $c = Admins::where('email',$request->email)->count();
  if($c <=0){
     return redirect('login')->with('message','Email address not found.Please enter a valid email address');
  }else{
     $reset ='reset password';
     $url = 'https://bursary-ms.vercel.app/rest/'.$request->email;
-    $name = 'Kindly use the link privided below to reset your password \n' .$url;
+    $name = 'Kindly use the link privided below to reset your password \n\n'  .$url;
     Mail::to($request->email)->send(new mailSend($name));
     return redirect('login')->with('message','reset email sent successfully');
  }
@@ -298,5 +302,9 @@ foreach($res as $data){
     $value = Admins::all();
     return view('users',compact('value'));
   }
+}
+public function reset_pass(Request $request){
+     DB::update('UPDATE admins SET password = "'.$request->password.'" WHERE email = ');
+    return redirect('login')->with('message','Password changed successfully');
 }
 }
