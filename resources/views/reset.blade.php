@@ -14,6 +14,7 @@
 <body>
     <form method="POST" action="{{url('reset_pass')}}">
         @csrf
+        <input type="email" class="form-control" value="{{$email_reset}}">
         <label>Enter Password</label>
         <input type="password" name="password" class="form-control" id="">
         <label for="">Re-enter password</label>

@@ -71,7 +71,7 @@ public function reset(Request $request){
     return redirect('login')->with('message','Email address not found.Please enter a valid email address');
  }else{
     $reset ='reset password';
-    $url = 'https://bursary-ms.vercel.app/rest/'.$request->email;
+    $url = 'https://bursary-ms.vercel.app/reset/'.$request->email;
     $name = 'Kindly use the link privided below to reset your password \n\n'  .$url;
     Mail::to($request->email)->send(new mailSend($name));
     return redirect('login')->with('message','reset email sent successfully');
@@ -300,7 +300,9 @@ foreach($res as $data){
   }
 }
 public function reset_pass(Request $request, $email){
-     DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$email."'");
-    return redirect('login')->with('message','Password changed successfully');
+    $email_reset = $email;
+    return view('reset',compact('email_reset'));
+    //  DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$email."'");
+    // return redirect('login')->with('message','Password changed successfully');
 }
 }

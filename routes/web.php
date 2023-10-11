@@ -56,5 +56,6 @@ Route::get('location_report',[AdminController::class, 'location_report']);
 Route::post('print_location',[AdminController::class, 'print_location']);
 Route::get('users',[AdminController::class, 'users']);
 Route::get('reset/{email}',[AdminController::class, 'reset_pass']);
+// Route::post('reset_pass')
 
 
