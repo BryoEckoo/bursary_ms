@@ -307,9 +307,13 @@ public function reset(Request $request){
  }
 }
 public function reset_pass(Request $request, $email,$token){
+    if(!session('ses')){
+    return redirect('login')->with('message','Invalid token');
+    }else{
     $email_reset = $email;
     $token_reset = $token;
     return view('reset',compact('email_reset','token_reset'));
+    }
 }
 public function pass_reset(Request $request){
 $request->validate([
