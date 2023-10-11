@@ -149,7 +149,55 @@
 
 					<div class="row">
 						<div class="container col-md-10">
-						
+                            {{-- succes message --}}
+                            @if(session()->has('message'))
+                            <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                <span class="font-weight-bold">{{session()->get('message')}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                     </button>
+                                     </div>
+                            @endif
+                            {{--  --}}
+                              {{-- error message --}}
+                              @if(session()->has('error'))
+                              <div class="alert alert-danger alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                  <span class="font-weight-bold">{{session()->get('error')}}</span>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                       </button>
+                                       </div>
+                              @endif
+                              {{--  --}}
+                            <a href="" class="btn btn-secondary" data-toggle="modal" data-target="#New">Add New User</a>
+                            <div class="modal fade" id="New" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           <h4 class="text-center">Add New USer</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <form method="post" action="{{url('add_user')}}">
+                                               @csrf
+                                               <label class="font-weight-bold">Enter Fullname :</label>
+                                            <input type="text" name="name" class="form-control" id="" required >
+                                           <label class="font-weight-bold">Enter Email :</label>
+                                            <input type="email" name="email" class="form-control" id="" required >
+                                            <label class="font-weight-bold">Enter Phone :</label> 
+                                            <input type="number" name="phone" class="form-control" id="" required >
+                                            <label class="font-weight-bold">Select Role :</label> 
+                                            <select name="role" id="" class="form-control" required>
+                                                <option>--select role--</option>
+                                                <option>Admin</option>
+                                                <option>Ass_admin</option>
+                                             </select>
+                                            <input type="submit" value="A D D" name="add" class="btn btn-success form-control mt-2">
+                                           </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 							<!-- Revenue Chart -->
 							{{-- <div class="card card-chart"> --}}
 								<div class="card-body">
@@ -171,9 +219,62 @@
                                                     <td>{{$data->id}}</td>
                                                     <td>{{$data->fullname}}</td>
                                                     <td>{{$data->email}}</td>
-                                                    <td><a href="" class="btn btn-primary">EDIT</a>
-                                                    <a href="" class="btn btn-secondary">Change Password</a></td>
+                                                    <td><a href="" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$data->id}}">EDIT</a>
+                                                         <!-- edit user modal -->
+     <div class="modal fade" id="Modal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                <h4 class="text-center">Edit User Details</h4>
+             </div>
+             <div class="modal-body">
+                <form method="post" action="{{url('edit_user/'.$data->id)}}">
+                    @csrf
+                    <label class="font-weight-bold">Enter Fullname :</label>
+                 <input type="text" name="name" class="form-control" id="" required value="{{$data->fullname}}">
+                <label class="font-weight-bold">Enter Email :</label>
+                 <input type="email" name="email" class="form-control" id="" required value="{{$data->email}}">
+                 <label class="font-weight-bold">Enter Phone :</label>
+                 <input type="number" name="phone" class="form-control" id="" required value="{{$data->phone}}">
+                 <label class="font-weight-bold">Enter Role :</label>
+                 <select name="role" id="" class="form-control" required>
+                    <option  selected>{{$data->role}}</option>
+                    <option>--select role--</option>
+                    <option>Admin</option>
+                    <option>Ass_admin</option>
+                 </select>
+                 <input type="submit" value="E D I T" name="edit" class="btn btn-success form-control mt-2">
+                </form>
+             </div>
+         </div>
+     </div>
+ </div>
+                                                    <a href="" class="btn btn-secondary"  data-toggle="modal" data-target="#Change{{$data->id}}">Change Password</a></td>
                                                 </tr>
+                                                                                                     <!-- edit user modal -->
+     <div class="modal fade" id="Change{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h4 class="text-center">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                   <form method="post" action="{{url('change_password/'.$data->id)}}">
+                       @csrf
+                       <label class="font-weight-bold">Enter Current Password :</label>
+                    <input type="password" name="current_pass" class="form-control" id="" required>
+                   <label class="font-weight-bold">Enter New Password :</label>
+                    <input type="password" name="new_pass" class="form-control" id="" required>
+                    <label class="font-weight-bold">Re-Enter New Password :</label>
+                    <input type="password" name="re_pass" class="form-control" id="" required>
+                    <input type="submit" value="R E S E T" name="reset" class="btn btn-success form-control mt-2">
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
                                                 @endforeach
                                             </tbody>
                                         </table>

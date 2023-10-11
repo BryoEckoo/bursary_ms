@@ -28,7 +28,7 @@ class mailSend extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Dear Aplicant!!.',
+            subject: 'Dear User!!.',
         );
     }
 

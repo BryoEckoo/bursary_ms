@@ -57,5 +57,7 @@ Route::post('print_location',[AdminController::class, 'print_location']);
 Route::get('users',[AdminController::class, 'users']);
 Route::get('reset/{email}/{token}',[AdminController::class, 'reset_pass']);
 Route::post('reset_pass',[AdminController::class, 'pass_reset']);
-
+route::post('edit_user/{id}',[AdminController::class, 'edit_user']);
+Route::post('change_password/{id}',[AdminController::class, 'change_pass']);
+Route::post('add_user',[AdminController::class,'add_user']);
 

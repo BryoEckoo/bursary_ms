@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Laravel\Prompts\Table;
 require_once(public_path().'/fpdf183/fpdf.php');
 
@@ -307,7 +308,7 @@ public function reset(Request $request){
  }
 }
 public function reset_pass(Request $request, $email,$token){
-     $email_reset = $email;
+    $email_reset = $email;
     $token_reset = $token;
     if($email_reset != $email){
     return redirect('login')->with('message','Invalid reset token');
@@ -327,5 +328,39 @@ if($request->re_password != $request->password){
       DB::update("UPDATE admins SET password = '".$request->password."' WHERE email = '".$request->email."'");
     return redirect('login')->with('success','Password changed successfully');
 }
+}
+public function edit_user(Request $request,$id){
+    $edit = DB::update("UPDATE admins SET fullname='".$request->name."',email ='".$request->email."',phone='".$request->phone."',role='".$request->role."' WHERE id = '".$id."'");
+    return back()->with('message','User details edited successfully');
+}
+public function change_pass(Request $request, $id){
+    $current_pass = DB::select("SELECT password FROM admins WHERE id ='".$id."'");
+    foreach($current_pass as $pass){
+        // echo $pass->password;
+        if($request->current_pass != $pass->password){
+            return back()->with('error','The provided current password doesnt match the current admin password');
+        }
+        elseif($request->re_pass != $request->new_pass){
+        return back()->with('error','Re-passworword doesnt match the new password');
+    }else{
+        DB::update("UPDATE admins SET password='".$request->new_pass."' WHERE id= '".$id."'");
+        return back()->with('message','User password changed successfully');
+    }
+    }
+}
+public function add_user(Request $request){
+    $admin = new Admins();
+    $admin->fullname = $request->name;
+    $admin->email = $request->email;
+    $admin->phone = $request->phone;
+    $admin->role = $request->role;
+    $admin->password = Str::random(6);
+    $admin->save();
+
+    // 
+    $url = 'https://bursary-ms.vercel.app/login';
+    $name = 'Use This password "'.$admin->password.'" to logon to using your email address  '  .$url;
+    Mail::to($request->email)->send(new mailSend($name));
+    return back()->with('message','New user added successfully');
 }
 }
