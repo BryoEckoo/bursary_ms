@@ -66,10 +66,10 @@
                 <form method="post" action="{{url('reset_password')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Email :</label>
-                 <input type="email" name="email" class="form-control" id="">
-                 @if($errors->has('email_reset'))
+                 <input type="email" name="email" class="form-control" id="" required>
+                 {{-- @if($errors->has('email_reset'))
                  <span>{{$errors->first('email_reset')}}</span><br>
-                 @endif
+                 @endif --}}
                  <input type="submit" value="Reset" name="reset" class="btn btn-primary mt-2">
                 </form>
              </div>

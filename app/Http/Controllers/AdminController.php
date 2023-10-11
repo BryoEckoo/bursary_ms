@@ -66,10 +66,10 @@ class AdminController extends Controller
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
 public function reset(Request $request){
-    $request->validate([
-        "email_reset"=>'required'
-    ]);
-    
+    // $request->validate([
+    //     "email_reset"=>'required'
+    // ]);
+
  $c = Admins::where('email',$request->email)->count();
  if($c <=0){
     return redirect('login')->with('message','Email address not found.Please enter a valid email address');
