@@ -12,6 +12,11 @@
     <title>reset password</title>
 </head>
 <body>
+    <div class="container-fluid col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center font-weight-bold">Reset password here</h4>
+        </div>
     <form method="POST" action="{{url('reset_pass')}}">
         @csrf
         <input type="email" class="form-control" value="{{$email_reset}}">
@@ -21,6 +26,8 @@
         <input type="password" name="re_password" class="form-control" id="">
         <input type="submit" value="RESET PASSWORD" class="btn btn-primary mt-2">
     </form>
+    </div>
+    </div>
 </body>
 <script src={{asset('bootstrap/js/bootstrap.min.js')}}></script>
 <script src={{asset('bootstrap/popper/popper.min.js')}}></script>
