@@ -65,19 +65,6 @@ class AdminController extends Controller
 // # Make the second curl request with properly formatted JSON data
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
-public function reset(Request $request){
- $c = Admins::where('email',$request->email)->count();
- if($c <=0){
-    return redirect('login')->with('message','Email address not found.Please enter a valid email address');
- }else{
-    $reset ='reset password';
-    $url = 'https://bursary-ms.vercel.app/reset/'.$request->email;
-    $name = 'Kindly use the link privided below to reset your password \n\n'  .$url;
-    Mail::to($request->email)->send(new mailSend($name));
-    return redirect('login')->with('message','reset email sent successfully');
- }
-}
-
 public function applications(){
     if(!session('res')){
         return redirect('login');
@@ -299,9 +286,30 @@ foreach($res as $data){
     return view('users',compact('value'));
   }
 }
-public function reset_pass(Request $request, $email){
+
+public function reset(Request $request){
+    $ses = session()->get('ses',[]);
+    $token = bin2hex(random_bytes(32)); 
+
+    $ses = [
+        "token"=>$token,
+    ];
+ $c = Admins::where('email',$request->email)->count();
+ if($c <=0){
+    return redirect('login')->with('message','Email address not found.Please enter a valid email address');
+ }else{
+    $reset ='reset password';
+    $url = 'https://bursary-ms.vercel.app/reset/'.$request->email.'/'.$token;
+    $name = 'Kindly use the link privided below to reset your password \n\n'  .$url;
+    Mail::to($request->email)->send(new mailSend($name));
+    session()->put('ses',$ses);
+    return redirect('login')->with('message','reset email sent successfully');
+ }
+}
+public function reset_pass(Request $request, $email,$token){
     $email_reset = $email;
-    return view('reset',compact('email_reset'));
+    $token_reset = $token;
+    return view('reset',compact('email_reset','token_reset'));
 }
 public function pass_reset(Request $request){
 $request->validate([
