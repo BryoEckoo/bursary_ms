@@ -155,7 +155,50 @@
 												<td>{{$val->student_fullname}}</td>
 												<td>{{$val->location}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
+												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->id}}">Edit</a>
+													<div class="modal fade" id="Edit{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           <h4 class="text-center">EDIT APPLICATION</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <form method="post" action="{{url('edit/'.$val->reference_number)}}">
+                                               @csrf
+                                               <label class="font-weight-bold">Reference Number :</label>
+                                            <input type="text" name="ref" class="form-control" id="" required >
+                                           <label class="font-weight-bold">UPI/ADM/REG No :</label>
+                                            <input type="text" name="upi_reg" class="form-control" id="" required >
+                                            <label class="font-weight-bold">Fullname :</label> 
+                                            <input type="text" name="name" class="form-control" id="" required >
+                                            <label class="font-weight-bold">School type :</label> 
+                                            <select name="school_type" id="" class="form-control" required>
+                                                <option>--select role--</option>
+                                                <option>Primary</option>
+                                                <option>Secondary</option>
+												<option>University</option>
+                                             </select>
+											 <label class="font-weight-bold">School name :</label> 
+                                            <input type="text" name="name" class="form-control" id="" required >
+											<label class="font-weight-bold">School type :</label> 
+                                            <select name="location" id="" class="form-control" required>
+                                                <option>--select role--</option>
+                                                <option>Jerusalem</option>
+                                                <option>Munyaka</option>
+												<option>Ziwa</option>
+												<option>Ilula</option>
+												<option>Block10</option>
+												<option>Subaru</option>
+												<option>Vet</option>
+
+                                             </select>
+                                            <input type="submit" value="E D I T" name="edit" class="btn btn-success form-control mt-2">
+                                           </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
 												<a href="" data-toggle="modal" data-target="#Approve{{$val->id}}" class="btn btn-success">Approve</a>
 											{{-- approve record --}}
