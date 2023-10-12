@@ -57,7 +57,7 @@
 			<!-- /Sidebar -->
 			
 			<!-- Page Wrapper -->
-            <div class="page-wrapper">
+            <div class="page-wrapper mt-5">
 			
                 <div class="content container-fluid">
 
@@ -219,7 +219,10 @@
                                                     <td>{{$data->id}}</td>
                                                     <td>{{$data->fullname}}</td>
                                                     <td>{{$data->email}}</td>
-                                                    <td><a href="" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$data->id}}">EDIT</a>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#Modal{{$data->id}}">EDIT</a></div>
                                                          <!-- edit user modal -->
      <div class="modal fade" id="Modal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -250,7 +253,7 @@
          </div>
      </div>
  </div>
-                                                    <a href="" class="btn btn-secondary"  data-toggle="modal" data-target="#Change{{$data->id}}">Change Password</a></td>
+                                                    <div class="col-md-6"><a href="" class="btn btn-secondary"  data-toggle="modal" data-target="#Change{{$data->id}}">Change Password</a></div></div></td>
                                                 </tr>
                                                                                                      <!-- edit user modal -->
      <div class="modal fade" id="Change{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

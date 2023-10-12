@@ -1,5 +1,5 @@
 <!-- jQuery -->
-        <script src="{{asset('bootstrap/jquery-3.5.1.min.js')}}"></script>
+        <script src="{{asset('bootstrap/jquery/jquery-3.5.1.min.js')}}"></script>
 		
 		<!-- Bootstrap Core JS -->
         <script src="{{asset('bootstrap/js/popper.min.js')}}"></script>

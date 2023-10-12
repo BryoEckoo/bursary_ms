@@ -1,9 +1,9 @@
 <!-- Logo -->
                 <div class="header-left">
-                    <a href="dashboard" class="logo">
+                    <a href="{{url('index')}}" class="logo">
 						<img src="{{asset('images/logo.png')}}" alt="Logo">
 					</a>
-					<a href="dashboard" class="logo logo-small">
+					<a href="{{url('index')}}" class="logo logo-small">
 						<img src="{{asset('images/logo.png')}}" alt="Logo" width="30" height="30">
 					</a>
                 </div>
