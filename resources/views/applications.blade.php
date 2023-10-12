@@ -172,6 +172,14 @@
                                                  </button>
                                                  </div>
                                         @endif
+										@if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('success')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
 									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-striped" id="sample">
@@ -198,7 +206,57 @@
 												<td>{{$val->location}}</td>
                                                 <td>{{$val->today_date}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href="{{url('edit/'.$val->id)}}"class="btn btn-primary">Edit</a>
+												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->reference_number}}">Edit</a>
+													<div class="modal fade" id="Edit{{$val->reference_number}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+														aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																   <h4 class="text-center">EDIT APPLICATION</h4>
+																</div>
+																<div class="modal-body">
+																   <form method="post" action="{{url('edit/'.$val->reference_number)}}">
+																	   @csrf
+																	   <label class="font-weight-bold">Reference Number :</label>
+																	<input type="text" name="ref" class="form-control" id="" readonly value="{{$val->reference_number}}">
+																   <label class="font-weight-bold">UPI/ADM/REG No :</label>
+																	<input type="text" name="upi_reg" class="form-control" id="" required value="{{$val->adm_upi_reg_no}}">
+																	<label class="font-weight-bold">Fullname :</label> 
+																	<input type="text" name="name" class="form-control" id="" required value="{{$val->student_fullname}}">
+																	
+																	<label class="font-weight-bold">School type :</label> 
+																	<select name="school_type" id="" class="form-control">
+																		<option selected>{{$val->school_type}}</option>
+																		<option>--select role--</option>
+																		<option>Primary School</option>
+																		<option>Secondary School</option>
+																		<option>University School</option>
+																	 </select>
+																	 <label class="font-weight-bold">School name :</label> 
+																	<input type="text" name="school_name" class="form-control" id="" required value="{{$val->school_name}}">
+																	<label class="font-weight-bold">Location :</label> 
+																	<select name="location" id="" class="form-control" required>
+																		<option selected>{{$val->location}}</option>
+																		<option>--select role--</option>
+																		<option>Jerusalem</option>
+																		<option>Munyaka</option>
+																		<option>Ziwa</option>
+																		<option>Ilula</option>
+																		<option>Block10</option>
+																		<option>Subaru</option>
+																		<option>Vet</option>
+																		<option class="">Langas</option>
+																	 </select>
+																	 <label class="font-weight-bold">Bank name :</label> 
+																	<input type="text" name="bank" class="form-control" id="" value="moi">
+																	<label class="font-weight-bold">School Account no :</label> 
+																	<input type="number" name="account" class="form-control" id="" required value="{{$val->account_no}}">
+																	<input type="submit" value="E D I T" name="edit" class="btn btn-success form-control mt-2">
+																   </form>
+																</div>
+															</div>
+														</div>
+													</div>
 												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
 												<a href=""class="btn btn-success" data-toggle="modal" data-target="#Approve{{$val->id}}">Approve</a>
 											{{-- approve record --}}

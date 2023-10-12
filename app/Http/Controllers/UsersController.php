@@ -81,7 +81,10 @@ class UsersController extends Controller
         $student = Student::all()->count();
         $application = Application::where('today_date',$today)->count();
         $apps = DB::table('applications')->orderBy('id','ASC')->limit(7)->get();
-        return view('dashboard',compact('staff','student','application','apps'));
+        foreach($apps as $data){
+            $stues = DB::select("SELECT * FROM students WHERE student_fullname ='".$data->student_fullname."'");
+        }
+        return view('dashboard',compact('staff','student','application','apps','stues'));
     }
     public function burs_details(Request $request){
         $request->validate([

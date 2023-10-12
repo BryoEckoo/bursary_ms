@@ -60,4 +60,4 @@ Route::post('reset_pass',[AdminController::class, 'pass_reset']);
 route::post('edit_user/{id}',[AdminController::class, 'edit_user']);
 Route::post('change_password/{id}',[AdminController::class, 'change_pass']);
 Route::post('add_user',[AdminController::class,'add_user']);
-
+Route::post('edit/{reference_number}',[AdminController::class, 'edit_apps']);

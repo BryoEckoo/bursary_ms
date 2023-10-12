@@ -6,6 +6,7 @@ use App\Mail\mailSend;
 use App\Models\Admins;
 use App\Models\Application;
 use App\Models\Student;
+use DateTime;
 // use FPDF;
 // use Fpdf\Fpdf;
 use Illuminate\Http\RedirectResponse;
@@ -362,5 +363,12 @@ public function add_user(Request $request){
     $name = 'Use This password "'.$admin->password.'" to logon to using your email address  '  .$url;
     Mail::to($request->email)->send(new mailSend($name));
     return back()->with('message','New user added successfully');
+}
+public function edit_apps(Request $request, $reference_number){
+    $today =date('Y-m-d H:i:s');
+    DB::update('UPDATE applications SET student_fullname ="'.$request->name.'", adm_upi_reg_no = "'.$request->upi_reg.'",school_type = "'.$request->school_type.'",school_name = "'.$request->school_name.'"
+    ,location = "'.$request->location.'",bank_name = "'.$request->bank.'",account_no = "'.$request->account.'",updated_at ="'.$today.'"  WHERE reference_number = "'.$reference_number.'"');
+
+    return back()->with('success','Application details for reference number : "'.$reference_number.'" updated successfully');
 }
 }

@@ -133,6 +133,14 @@
                                                  </button>
                                                  </div>
                                         @endif
+										@if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('success')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
 									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-striped" id="sample">
@@ -146,7 +154,23 @@
 												<td class="font-weight-bold text-center">Actions</td>
 											</tr>
 										</thead>
-										
+										{{-- @foreach($stues as $stu)
+											<label class="font-weight-bold">Parent Name :</label> 
+                                            <input type="text" name="parent_name" class="form-control" id="" required value="{{$stu->parent_guardian_name}}">
+											<label class="font-weight-bold">Parent Email :</label> 
+                                            <input type="email" name="parent_email" class="form-control" id="" required value="{{$stu->parent_email}}">
+											<label class="font-weight-bold">Parent Phone :</label> 
+                                            <input type="text" name="parent_phone" class="form-control" id="" required value="{{$stu->phone}}">
+											<label class="font-weight-bold">Family Status :</label> 
+                                            <select name="family_status" id="" class="form-control" required>
+												<option selected>{{$stu->family_status}}</option>
+                                                <option>--select role--</option>
+                                                <option>Very Rich</option>
+                                                <option>Rich</option>
+												<option>Poor</option>
+												<option>Average</option>
+                                             </select>
+											 @endforeach --}}
 										<tbody>
 											@foreach($apps as $val)
 											<tr>
@@ -155,8 +179,8 @@
 												<td>{{$val->student_fullname}}</td>
 												<td>{{$val->location}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->id}}">Edit</a>
-													<div class="modal fade" id="Edit{{$val->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->student_fullname}}">Edit</a>
+													<div class="modal fade" id="Edit{{$val->student_fullname}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -167,18 +191,19 @@
                                            <form method="post" action="{{url('edit/'.$val->reference_number)}}">
                                                @csrf
                                                <label class="font-weight-bold">Reference Number :</label>
-                                            <input type="text" name="ref" class="form-control" id="" required value="{{$val->reference_number}}">
+                                            <input type="text" name="ref" class="form-control" id="" readonly value="{{$val->reference_number}}">
                                            <label class="font-weight-bold">UPI/ADM/REG No :</label>
                                             <input type="text" name="upi_reg" class="form-control" id="" required value="{{$val->adm_upi_reg_no}}">
                                             <label class="font-weight-bold">Fullname :</label> 
                                             <input type="text" name="name" class="form-control" id="" required value="{{$val->student_fullname}}">
+											
                                             <label class="font-weight-bold">School type :</label> 
-                                            <select name="school_type" id="" class="form-control" required value="{{$val->school_type}}">
+                                            <select name="school_type" id="" class="form-control">
 												<option selected>{{$val->school_type}}</option>
                                                 <option>--select role--</option>
                                                 <option>Primary School</option>
-                                                <option>Secondary</option>
-												<option>University</option>
+                                                <option>Secondary School</option>
+												<option>University School</option>
                                              </select>
 											 <label class="font-weight-bold">School name :</label> 
                                             <input type="text" name="school_name" class="form-control" id="" required value="{{$val->school_name}}">
