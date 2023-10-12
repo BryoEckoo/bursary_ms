@@ -301,6 +301,7 @@ class UsersController extends Controller
         $students->school_level = $request->school_type;
         $students->adm_upi_reg_no = $request->reg_no;
         $students->school_name = $request->school_name;
+        $students->year = date('Y');
         $students->save();
             
         //save parent details

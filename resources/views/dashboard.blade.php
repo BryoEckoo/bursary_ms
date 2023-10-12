@@ -167,22 +167,24 @@
                                            <form method="post" action="{{url('edit/'.$val->reference_number)}}">
                                                @csrf
                                                <label class="font-weight-bold">Reference Number :</label>
-                                            <input type="text" name="ref" class="form-control" id="" required >
+                                            <input type="text" name="ref" class="form-control" id="" required value="{{$val->reference_number}}">
                                            <label class="font-weight-bold">UPI/ADM/REG No :</label>
-                                            <input type="text" name="upi_reg" class="form-control" id="" required >
+                                            <input type="text" name="upi_reg" class="form-control" id="" required value="{{$val->adm_upi_reg_no}}">
                                             <label class="font-weight-bold">Fullname :</label> 
-                                            <input type="text" name="name" class="form-control" id="" required >
+                                            <input type="text" name="name" class="form-control" id="" required value="{{$val->student_fullname}}">
                                             <label class="font-weight-bold">School type :</label> 
-                                            <select name="school_type" id="" class="form-control" required>
+                                            <select name="school_type" id="" class="form-control" required value="{{$val->school_type}}">
+												<option selected>{{$val->school_type}}</option>
                                                 <option>--select role--</option>
-                                                <option>Primary</option>
+                                                <option>Primary School</option>
                                                 <option>Secondary</option>
 												<option>University</option>
                                              </select>
 											 <label class="font-weight-bold">School name :</label> 
-                                            <input type="text" name="name" class="form-control" id="" required >
-											<label class="font-weight-bold">School type :</label> 
+                                            <input type="text" name="school_name" class="form-control" id="" required value="{{$val->school_name}}">
+											<label class="font-weight-bold">Location :</label> 
                                             <select name="location" id="" class="form-control" required>
+												<option selected>{{$val->location}}</option>
                                                 <option>--select role--</option>
                                                 <option>Jerusalem</option>
                                                 <option>Munyaka</option>
@@ -191,8 +193,12 @@
 												<option>Block10</option>
 												<option>Subaru</option>
 												<option>Vet</option>
-
+												<option class="">Langas</option>
                                              </select>
+											 <label class="font-weight-bold">Bank name :</label> 
+                                            <input type="text" name="bank" class="form-control" id="" value="moi">
+											<label class="font-weight-bold">School Account no :</label> 
+                                            <input type="number" name="account" class="form-control" id="" required value="{{$val->account_no}}">
                                             <input type="submit" value="E D I T" name="edit" class="btn btn-success form-control mt-2">
                                            </form>
                                         </div>
@@ -216,7 +222,7 @@
 									
 															<div class="modal-body">
 																<p>
-																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>{{$val->reference_number}}?</strong></p>
+																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>omaa{{$val->reference_number}}?</strong></p>
 																</div>
 																<div class="modal-footer">
 																	<button type="submit" name="approve" class="btn btn-success">YES</button>
