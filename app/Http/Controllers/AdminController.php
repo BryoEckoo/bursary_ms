@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Prompts\Table;
 require_once(public_path().'/fpdf183/fpdf.php');
@@ -395,7 +396,8 @@ public function upload_doc(Request $request){
     foreach(session('res') as $value)
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
-    $path = $file->store('beneficiary_document', 'local');
+    // $path = $file->store('beneficiary_document', 'local');
+    Storage::put('storage/beneficiary_document/' . $fileName, $file);
 
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
