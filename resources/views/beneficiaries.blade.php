@@ -164,12 +164,18 @@
                                            <h4 class="text-center">Upload New Beneficiary Document</h4>
                                         </div>
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('upload')}}" >
+                                           <form method="post" action="{{url('upload')}}" enctype="multipart/form-data">
                                                @csrf
                                                <label class="font-weight-bold">Enter Document Name :</label>
-                                            <input type="text" name="name" class="form-control" id="" required >
+                                            <input type="text" name="document_name" placeholder="Enter the document name" class="form-control" id="" required >
+                                            @if($errors->has('document_name'))
+                                            <span class="text-danger">{{$errors->first('document_name')}}</span><br>
+                                            @endif
                                            <label class="font-weight-bold">select Document :</label>
-                                            <input type="file" name="document" class="form-control" id="" required >
+                                            <input type="file" name="document" class="form-control" id="" placeholder="choose a document" required >
+                                            @if($errors->has('document'))
+                                            <span class="text-danger">{{$errors->first('document')}}</span><br>
+                                            @endif
                                             <input type="submit" value="U P L O A D" name="upload" class="btn btn-success form-control mt-2">
                                            </form>
                                         </div>
@@ -213,6 +219,7 @@
                                             <tr>
                                                 <td class="font-weight-bold text-center">#</td>
                                                 <td class="font-weight-bold text-center">Document Name</td>
+                                                <td class="font-weight-bold text-center">Document</td>
                                                 <td class="font-weight-bold text-center">Updated at</td>
                                                 <td class="font-weight-bold text-center">Uploaded By</td>
                                                 <td class="font-weight-bold text-center">Actions</td>
@@ -225,10 +232,11 @@
                                                 <td>{{$data->id}}</td>
                                                 <td>{{$data->document_name}}</td>
                                                 <td>{{$data->document}}</td>
-                                                <td>{{$data->update_at}}</td>
+                                                <td>{{$data->updated_at}}</td>
+                                                <td>{{$data->uploaded_by}}</td>
                                                 <td class="">
                                                     <div class="row justify-content-around">
-                                                    <a href="" class="btn btn-warning">DOWNLOAD</a>
+                                                    <a href="{{url('download/'.$data->document)}}" class="btn btn-warning">DOWNLOAD</a>
                                                     <a href="" class="btn btn-secondary">View</a>
                                                     </div>
                                                 </td>

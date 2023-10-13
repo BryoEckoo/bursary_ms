@@ -63,3 +63,5 @@ Route::post('add_user',[AdminController::class,'add_user']);
 Route::post('edit/{reference_number}',[AdminController::class, 'edit_apps']);
 Route::post('update/{id}',[AdminController::class, 'update_user']);
 Route::get('beneficiaries',[AdminController::class, 'beneficiary']);
+Route::post('upload',[AdminController::class, 'upload_doc']);
+Route::get('download/{document}',[AdminController::class, 'download']);

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Beneficiary extends Model
 {
     use HasFactory;
+    protected $table = 'beneficiary_upload';
+
     protected $fillable =[
         'document_name',
         'document'

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->String('document_name');
             $table->String('document');
+            $table->String('uploaded_by');
             $table->timestamps();
         });
     }
