@@ -32,6 +32,10 @@
             "dest": "/public/slimscroll/"
         },
         {
+            "src": "/beneficiary_document/(.*)",
+            "dest": "/storage/beneficiary_document/"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
