@@ -175,6 +175,14 @@
                                                  </button>
                                                  </div>
                                         @endif
+										@if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('success')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
                                     </div>
 									<div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="sample">
@@ -216,12 +224,20 @@
                                                                 </div>
                                         
                                                                 <div class="modal-body">
-                                                                    <form method="POST" action="">
-                                                                        @csrf
                                                                     <label for="" class="font-weight-bold">Fullname :</label>
                                                                     <input type="text" name="fullname" value="{{$val->student_fullname}}" class="form-control">
                                                                     <label for="" class="font-weight-bold">Age :</label>
                                                                     <input type="number" name="age" value="{{$val->age}}" class="form-control">
+																	<label for="" class="font-weight-bold">Family Status :</label>
+                                                                    <select name="family_status" id="" class="form-control">
+																		<option selected>{{$val->family_status}}</option>
+																		<option>--select status--</option>
+																		<option>Rich</option>
+																		<option>Average</option>
+																		<option>Poor</option>
+																		<option>Very-poor</option>
+																		
+																	 </select>
                                                                     <label for="" class="font-weight-bold">School Level :</label>
 																	<select name="school_level" id="" class="form-control">
 																		<option selected>{{$val->school_level}}</option>
@@ -242,6 +258,14 @@
 																	 </select>
                                                                     <label for="" class="font-weight-bold">County :</label>
                                                                     <input type="text" name="county" value="{{$val->county}}" class="form-control">
+																	<label for="" class="font-weight-bold">Ward :</label>
+																	<select name="ward" id="" class="form-control">
+																		<option selected>{{$val->ward}}</option>
+																		<option>--select ward--</option>
+																		<option>Kimumu</option>
+																		<option>Ainabkio</option>
+																		<option>Moiben</option>
+																	 </select>
                                                                     <label for="" class="font-weight-bold">Location :</label>
                                                                     <select name="location" id="" class="form-control">
 																		<option selected>{{$val->location}}</option>
@@ -266,8 +290,7 @@
                                                                     <div class="modal-footer">
                                                                         <button type="submit" name="delete_acc" class="btn btn-danger">UPDATE</button>
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
-                                                                    </div>
-                                                                    </form>
+																	</div>
                                                                 </div>
                                                         </form>
                                                         </div>

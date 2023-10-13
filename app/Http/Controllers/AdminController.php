@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\mailSend;
 use App\Models\Admins;
 use App\Models\Application;
+use App\Models\beneficiary;
 use App\Models\Student;
 use DateTime;
 // use FPDF;
@@ -366,9 +367,23 @@ public function add_user(Request $request){
 }
 public function edit_apps(Request $request, $reference_number){
     $today =date('Y-m-d H:i:s');
-    DB::update('UPDATE applications SET student_fullname ="'.$request->name.'", adm_upi_reg_no = "'.$request->upi_reg.'",school_type = "'.$request->school_type.'",school_name = "'.$request->school_name.'"
+    DB::update('UPDATE applications SET student_fullname ="'.$request->fullname.'", adm_upi_reg_no = "'.$request->upi_reg.'",school_type = "'.$request->school_type.'",school_name = "'.$request->school_name.'"
     ,location = "'.$request->location.'",bank_name = "'.$request->bank.'",account_no = "'.$request->account.'",updated_at ="'.$today.'"  WHERE reference_number = "'.$reference_number.'"');
 
     return back()->with('success','Application details for reference number : "'.$reference_number.'" updated successfully');
+}
+public function update_user(Request $request, $id){
+    $today =date('Y-m-d H:i:s');
+    DB::update('UPDATE students SET student_fullname ="'.$request->fullname.'", age = "'.$request->age.'", family_status = "'.$request->family_status.'",school_level = "'.$request->school_level.'",school_name = "'.$request->school_name.'"
+    ,county = "'.$request->county.'", ward = "'.$request->ward.'",location = "'.$request->location.'",sub_location = "'.$request->sub_location.'",updated_at ="'.$today.'"  WHERE id = "'.$id.'"');
+    return back()->with('success','Student details for id : "'.$id.'" updated successfully');
+}
+public function beneficiary(){
+    if(!session('res')){
+        return redirect('login');
+    }else{
+    $value = DB::select("SELECT * FROM beneficiary_upload");
+    return view('beneficiaries',compact('value'));
+  }
 }
 }
