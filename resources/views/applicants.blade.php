@@ -25,11 +25,14 @@
 								<a href="{{url('index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
 							<li > 
-								<a href="{{url('applications')}}"><i class="fa fa-users"></i> <span>Applications</span></a>
+								<a href="{{url('applications')}}"><i class="fa fa-file"></i> <span>Applications</span></a>
 							</li>
 							
 							<li class="active"> 
-								<a href="{{route('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
+								<a href="{{route('applicants')}}"><i class="fa fa-list"></i> <span>Applicants</span></a>
+							</li>
+							<li> 
+								<a href="{{url('beneficiaries')}}"><i class="fa fa-users"></i> <span>Beneficiaries</span></a>
 							</li>
 						
 							<li> 
@@ -215,18 +218,51 @@
                                                                 <div class="modal-body">
                                                                     <form method="POST" action="">
                                                                         @csrf
-                                                                    <label for="">Fullname :</label>
+                                                                    <label for="" class="font-weight-bold">Fullname :</label>
                                                                     <input type="text" name="fullname" value="{{$val->student_fullname}}" class="form-control">
-                                                                    <label for="">Age :</label>
+                                                                    <label for="" class="font-weight-bold">Age :</label>
                                                                     <input type="number" name="age" value="{{$val->age}}" class="form-control">
-                                                                    <label for="">School Level :</label>
-                                                                    <input type="text" name="school_level" value="{{$val->school_level}}" class="form-control">
-                                                                    <label for="">County :</label>
+                                                                    <label for="" class="font-weight-bold">School Level :</label>
+																	<select name="school_level" id="" class="form-control">
+																		<option selected>{{$val->school_level}}</option>
+																		<option>--select school-level--</option>
+																		<option>Primary School</option>
+																		<option>Secondary School</option>
+																		<option>University/TVET/College</option>
+																	 </select>
+																	<label for="" class="font-weight-bold">School Name :</label>
+                                                                    <select name="school_name" id="" class="form-control">
+																		<option selected>{{$val->school_name}}</option>
+																		<option>--select school--</option>
+																		<option>Moi Girls High School</option>
+																		<option>G.K High School</option>
+																		<option>U.G High School</option>
+																		<option>Umoja High School</option>
+																		<option>Kapsoya Secondary School</option>
+																	 </select>
+                                                                    <label for="" class="font-weight-bold">County :</label>
                                                                     <input type="text" name="county" value="{{$val->county}}" class="form-control">
-                                                                    <label for="">Location :</label>
-                                                                    <input type="text" name="location" value="{{$val->location}}" class="form-control">
-                                                                    <label for="">Sub Location :</label>
-                                                                    <input type="text" name="sub_location" value="{{$val->sub_location}}" class="form-control">
+                                                                    <label for="" class="font-weight-bold">Location :</label>
+                                                                    <select name="location" id="" class="form-control">
+																		<option selected>{{$val->location}}</option>
+																		<option>--select location--</option>
+																		<option>Boma</option>
+																		<option>Mwanzo</option>
+																		<option>Kipkaren</option>
+																		<option>Langas</option>
+																		<option>Jerusalem</option>
+																		<option>Berlin</option>
+																	 </select>
+                                                                    <label for="" class="font-weight-bold">Sub Location :</label>
+                                                                    <select name="sub_location" id="" class="form-control">
+																		<option selected>{{$val->sub_location}}</option>
+																		<option>--select sub_location--</option>
+																		<option>Soy</option>
+																		<option>Kiplombe</option>
+																		<option>Ngurunga</option>
+																		<option>Quinet</option>
+																		<option>Kapsoya</option>
+																	 </select>
                                                                     <div class="modal-footer">
                                                                         <button type="submit" name="delete_acc" class="btn btn-danger">UPDATE</button>
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>

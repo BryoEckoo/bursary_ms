@@ -25,11 +25,14 @@
 								<a href="{{url('index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
 							<li > 
-								<a href="{{url('applications')}}"><i class="fa fa-users"></i> <span>Applications</span></a>
+								<a href="{{url('applications')}}"><i class="fa fa-file"></i> <span>Applications</span></a>
 							</li>
 							
 							<li> 
-								<a href="{{route('applicants')}}"><i class="fa fa-map-marker-alt"></i> <span>Applicants</span></a>
+								<a href="{{route('applicants')}}"><i class="fa fa-list"></i> <span>Applicants</span></a>
+							</li>
+                            <li> 
+								<a href="{{url('beneficiaries')}}"><i class="fa fa-users"></i> <span>Beneficiaries</span></a>
 							</li>
 						
 							<li > 
