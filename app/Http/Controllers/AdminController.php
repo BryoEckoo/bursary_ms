@@ -408,7 +408,7 @@ public function upload_doc(Request $request){
 }
 public function download($document){
     $filename = $document;
-    $doc = storage_path('beneficiary_document/'.$filename);
+    $doc = public_path('beneficiary_document/'.$filename);
     return response()->download($doc);
 }
 }
