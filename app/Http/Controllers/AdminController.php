@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -397,13 +398,14 @@ public function upload_doc(Request $request){
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
     // $path = $file->store('beneficiary_document', 'local');
-    Storage::put('/beneficiary_document/' . $fileName, $file);
+    // Storage::put('/beneficiary_document/' . $fileName, $file);
+   $data =  File::get($fileName);
 
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
     $doc = new Beneficiary();
     $doc->document_name = $request->document_name;
-    $doc->document = $fileName;
+    $doc->document = $data;
     $doc->uploaded_by = $value->email;
     $doc->save();
     return back()->with('success','Document uploaded successfully');
