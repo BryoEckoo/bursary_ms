@@ -395,7 +395,7 @@ public function upload_doc(Request $request){
     foreach(session('res') as $value)
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
-    $file-> move(public_path('/beneficiary_document'), $fileName);
+    $file-> move('storage/beneficiary_document', $fileName);
 
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
@@ -408,7 +408,7 @@ public function upload_doc(Request $request){
 }
 public function download($document){
     $filename = $document;
-    $doc = public_path('beneficiary_document/'.$filename);
+    $doc = storage_path('beneficiary_document/'.$filename);
     return response()->download($doc);
 }
 }
