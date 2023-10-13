@@ -399,7 +399,7 @@ public function upload_doc(Request $request){
     $fileName = $file->getClientOriginalName();
     // $path = $file->store('beneficiary_document', 'local');
     // Storage::put('/beneficiary_document/' . $fileName, $file);
-   $data =  File::get($fileName);
+   $data =  File::get($file);
 
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
