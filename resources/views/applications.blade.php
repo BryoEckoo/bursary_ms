@@ -257,7 +257,7 @@
 															</div>
 														</div>
 													</div>
-												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+												{{-- <a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a> --}}
 												<a href=""class="btn btn-success" data-toggle="modal" data-target="#Approve{{$val->id}}">Approve</a>
 											{{-- approve record --}}
 											<div id="Approve{{$val->id}}" class="modal fade" role="dialog">

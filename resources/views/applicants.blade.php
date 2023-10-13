@@ -199,7 +199,7 @@
                                                 <td>{{$val->location}}</td>
                                                 <td class=" font-weight-bold">{{$val->sub_location}}</td>
                                                 <td class="text-center"><a href="{{url('edit')}}"class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->student_fullname}}">Edit</a>
-                                                <a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+                                                {{-- <a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a> --}}
                                                 <div id="Edit{{$val->student_fullname}}" class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                         <form method="post" action="{{url('update/'.$val->id)}}">

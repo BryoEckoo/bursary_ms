@@ -230,7 +230,7 @@
                                     </div>
                                 </div>
                             </div>
-												<a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a>
+												{{-- <a href="" data-toggle="modal" data-target="#Modal{{$val->id}}" class="btn btn-danger">Delete</a> --}}
 												<a href="" data-toggle="modal" data-target="#Approve{{$val->id}}" class="btn btn-success">Approve</a>
 											{{-- approve record --}}
 											<div id="Approve{{$val->id}}" class="modal fade" role="dialog">
@@ -247,7 +247,7 @@
 									
 															<div class="modal-body">
 																<p>
-																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>omaa{{$val->reference_number}}?</strong></p>
+																	<div class="alert alert-warning">Are you Sure you want Approve.... <strong>{{$val->reference_number}}?</strong></p>
 																</div>
 																<div class="modal-footer">
 																	<button type="submit" name="approve" class="btn btn-success">YES</button>
