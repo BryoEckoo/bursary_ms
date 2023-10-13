@@ -411,4 +411,5 @@ public function download($document){
     $doc = storage_path('beneficiary_document/'.$filename);
     return response()->download($doc);
 }
+// p
 }
