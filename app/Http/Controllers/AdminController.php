@@ -393,19 +393,21 @@ public function upload_doc(Request $request){
         'document_name'=>'required',
         'document'=>'required'
     ]);
+    // if($request->hasFile(document))
     if(session('res'))
     foreach(session('res') as $value)
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
+    $file->storeAs('storage/beneficiary_document/',$fileName);
     // $path = $file->store('beneficiary_document', 'local');
-    $data =  Storage::put('/' . $fileName,$file);
+    // $data =  Storage::put('/' . $fileName,$file);
 //    $data =  File::get($file);
 
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
     $doc = new Beneficiary();
     $doc->document_name = $request->document_name;
-    $doc->document = $data;
+    $doc->document = $fileName;
     $doc->uploaded_by = $value->email;
     $doc->save();
     return back()->with('success','Document uploaded successfully');
