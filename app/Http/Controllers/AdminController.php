@@ -399,7 +399,7 @@ public function upload_doc(Request $request){
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
     // $file->storeAs('beneficiary_document/',$fileName);
-     $file->store('beneficiary_document/');
+     $file->store('beneficiary_document','public');
     // $data =  Storage::put('/' . $fileName,$file);
 //    $data =  File::get($file);
 
@@ -414,7 +414,7 @@ public function upload_doc(Request $request){
 }
 public function download($document){
     $filename = $document;
-    $doc = storage_path('beneficiary_document/'.$filename);
+    $doc = storage_path('app/beneficiary_document/');
     return response()->download($doc);
 }
 // p
