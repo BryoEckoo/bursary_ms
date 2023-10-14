@@ -398,8 +398,8 @@ public function upload_doc(Request $request){
     foreach(session('res') as $value)
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
-    $file->storeAs('storage/beneficiary_document/',$fileName);
-    // $path = $file->store('beneficiary_document', 'local');
+    // $file->storeAs('beneficiary_document/',$fileName);
+     $file->store('beneficiary_document/');
     // $data =  Storage::put('/' . $fileName,$file);
 //    $data =  File::get($file);
 
