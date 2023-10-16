@@ -396,25 +396,24 @@ public function upload_doc(Request $request){
     // if($request->hasFile(document))
     if(session('res'))
     foreach(session('res') as $value)
-    $file = $request->file('document');
-    $fileName = $file->getClientOriginalName();
-    // $file->storeAs('beneficiary_document/',$fileName);
-     $file->store('beneficiary_document','public');
-    // $data =  Storage::put('/' . $fileName,$file);
-//    $data =  File::get($file);
-
+    // $file = $request->file('document');
+    // $fileName = $file->getClientOriginalName();
+    // $file-> move(storage_path('/beneficiary_document/'), $fileName);
+    // $file = base64_encode(file_get_contents($request->file('document')));
+    $filename = uniqid() . '.jpg';
+    $path = $request->file('document')->move(public_path('student_uploads'), $filename);
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
     $doc = new Beneficiary();
     $doc->document_name = $request->document_name;
-    $doc->document = $fileName;
+    $doc->document = $filename;
     $doc->uploaded_by = $value->email;
     $doc->save();
     return back()->with('success','Document uploaded successfully');
 }
 public function download($document){
     $filename = $document;
-    $doc = storage_path('app/beneficiary_document/');
+    $doc = storage_path('beneficiary_document/'.$filename);
     return response()->download($doc);
 }
 // p
