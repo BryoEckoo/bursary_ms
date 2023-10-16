@@ -236,8 +236,12 @@
                                                 <td>{{$data->uploaded_by}}</td>
                                                 <td class="">
                                                     <div class="row justify-content-around">
+														<div class="col-md-6">
                                                     <a href="{{url('download/'.$data->document)}}" class="btn btn-warning">DOWNLOAD</a>
+														</div>
+														<div class="col-md-6">
                                                     <a href="" class="btn btn-secondary">View</a>
+														</div>
                                                     </div>
                                                 </td>
                                             </tr>

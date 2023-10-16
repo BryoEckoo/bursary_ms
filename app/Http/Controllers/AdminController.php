@@ -396,17 +396,19 @@ public function upload_doc(Request $request){
     // if($request->hasFile(document))
     if(session('res'))
     foreach(session('res') as $value)
-    // $file = $request->file('document');
-    // $fileName = $file->getClientOriginalName();
-    // $file-> move(storage_path('/beneficiary_document/'), $fileName);
+    $file = $request->file('document');
+    $fileName = $file->getClientOriginalName();
+    $file-> move(storage_path('/beneficiary_document/'), $fileName);
+
     // $file = base64_encode(file_get_contents($request->file('document')));
-    $filename = uniqid() . '.jpg';
-    $path = $request->file('document')->move(public_path('student_uploads'), $filename);
+    // $filename = uniqid() . '.jpg';
+    // $path = $request->file('document')->move(public_path('student_uploads'), $filename);
+    
     // DB::insert("INSERT INTO beneficiary_upload (document_name,document,uploaded_by) VALUES ('$request->document_name','$fileName','$value->email')");
 
     $doc = new Beneficiary();
     $doc->document_name = $request->document_name;
-    $doc->document = $filename;
+    $doc->document = $fileName;
     $doc->uploaded_by = $value->email;
     $doc->save();
     return back()->with('success','Document uploaded successfully');
