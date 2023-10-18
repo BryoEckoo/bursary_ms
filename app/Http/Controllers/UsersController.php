@@ -396,73 +396,35 @@ class UsersController extends Controller
             'email'=>'required',
         ]);
         $data = Student::where('parent_email',$request->email)->orWhere('phone',$request->email)->count();
-        if($data >=1){
-            // $value = DB::select("SELECT * FROM students WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
-            // foreach($value as $item){
-            //     // echo $item->student_fullname;
-            //     $students = new Student();
-            //     // $students->app_ref = $app_ref;
-            //     $students->firstname = $item->firstname;
-            //     $students->secondname = $item->secondname;
-            //     $students->student_fullname = $item->student_fullname;
-            //     $students->age = $item->age;
-            //     $students->gender = $item->gender;
-            //     $students->parent_guardian_name = $item->parent_guardian_name;
-            //     $students->phone = $item->phone;
-            //     $students->family_status = $item->family_status;
-            //     $students->occupation = $item->occupation;
-            //     $students->parent_email = $item->parent_email;
-            //     $students->parent_id_no = $item->parent_id_no;
-            //     $students->county = $item->county;
-            //     $students->ward = $item->ward;
-            //     $students->location = $item->location;
-            //     $students->school_level = $item->school_level;
-            //     $students->adm_upi_reg_no = $item->adm_upi_reg_no;
-            //     $students->school_name = $item->school_name;
-            //     $students->save();
-            // }  
-
-            // $data = DB::select("SELECT * FROM parents WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
-            // foreach($data as $request){
-            //     //save parent details
-            //     $parents =new Parents();
-            //     $parents->parent_guardian_name = $request->parent_guardian_name;
-            //     $parents->student_fullname = $request->student_fullname;
-            //     $parents->phone = $request->phone;
-            //     $parents->parent_email = $request->parent_email;
-            //     $parents->parent_id_no = $request->parent_id_no;
-            //     $parents->occupation = $request->occupation;
-            //     $parents->save();
-            // }
+        if($data >0 ){
             $value = DB::select("SELECT * FROM students WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
             foreach($value as $item){
-                $data = DB::select("SELECT * FROM parents WHERE parent_email = '".$request->email."' OR phone = '".$request->email."'");
-            foreach($data as $req){
-            $dat = DB::select("SELECT * FROM applications WHERE student_fullname = '".$req->student_fullname."'");
-            foreach($dat as $request){
-                //save application
                 $app_ref ='BUR' .random_int(1000,9999);
+               
+            $dat = DB::select("SELECT * FROM applications WHERE student_fullname = '".$item->student_fullname."'");
+            foreach($dat as $result){
+                //save application
+                
 
                 $application = new Application();
                 $application->reference_number = $app_ref;
                 $application->student_fullname = $item->student_fullname;
                 $application->adm_upi_reg_no = $item->adm_upi_reg_no;
-                $application->school_type = $request->school_type;
-                $application->school_name = $request->school_name;
-                $application->bank_name = $request->bank_name;
-                $application->account_no = $request->account_no;
+                $application->school_type = $result->school_type;
+                $application->school_name = $result->school_name;
+                $application->bank_name = $result->bank_name;
+                $application->account_no = $result->account_no;
                 $application->location = $item->location;
                 $application->status = "Pending...";
                 $application->save();
             }
-        }
         $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
     Mail::to($item->parent_email)->send(new mailSend($name));
     }
     
-            return redirect('/')->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
+            return back()->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
-            return redirect('request_bursary')->with('message','The email address or phone number is not registered');
+            return back()->with('message','The email address or phone number is not registered');
         }
     }
     public function push(Request $request)
@@ -489,5 +451,96 @@ class UsersController extends Controller
     public function logout(){
         session()->forget('res');
         return redirect('login');
+    }
+
+    //student new
+    public function student_index(){
+        return view('students.dashboard');
+    }
+    public function student_application(){
+        return view('students.application');
+    }
+    public function submit_application(Request $request){
+        $request->validate([
+            "fullname"=>'required',
+            "age"=>'required',
+            "gender"=>'required',
+            "parent_guardian_name"=>'required',
+            "phone"=>'required',
+            "occupation"=>'required',
+            "family_status"=>'required',
+            "email"=>'required',
+            "id_no"=>'required',
+            "county"=>'required',
+            "ward"=>'required',
+            "location"=>'required',
+            "sub_location"=>'required',
+            "school_type"=>'required',
+            "reg_no"=>'required',
+            "school_name"=>'required',
+            "bank_name"=>'required',
+            "account_no"=>'required',
+            "fee_structure"=>'required',
+        ]);
+
+        $counts = Student::where('phone',$request->phone)->count();
+        if($counts <= 0){
+        $app_ref ='BUR' .random_int(1000,9999);
+        $students = new Student();
+        // $students->app_ref = $app_ref;
+        $students->student_fullname = $request->fullname;
+        $students->age = $request->age;
+        $students->gender = $request->gender;
+        $students->parent_guardian_name = $request->parent_guardian_name;
+        $students->phone = $request->phone;
+        $students->family_status = $request->family_status;
+        $students->occupation = $request->occupation;
+        $students->parent_email = $request->email;
+        $students->parent_id_no = $request->id_no;
+        $students->county = $request->county;
+        $students->ward = $request->ward;
+        $students->location = $request->location;
+        $students->sub_location = $request->sub_location;
+        $students->school_level = $request->school_type;
+        $students->adm_upi_reg_no = $request->reg_no;
+        $students->school_name = $request->school_name;
+        $students->year = date('Y');
+        $students->save();
+            
+        //save parent details
+        $parents =new Parents();
+        $parents->parent_guardian_name = $request->parent_guardian_name;
+        $parents->student_fullname = $request->fullname;
+        $parents->phone = $request->phone;
+        $parents->parent_email = $request->email;
+        $parents->parent_id_no = $request->id_no;
+        $parents->occupation = $request->occupation;
+        $parents->save();
+
+        //save application
+        $application = new Application();
+        $application->reference_number = $app_ref;
+        $application->student_fullname = $request->fullname;
+        $application->adm_upi_reg_no = $request->reg_no;
+        $application->school_type = $request->school_type;
+        $application->school_name = $request->school_name;
+        $application->bank_name = $request->bank_name;
+        $application->account_no = $request->account_no;
+        $application->location = $request->location;
+        $application->status = "Pending...";
+        $application->today_date = date('Y/m/d');
+        $application->save();
+
+        
+        // Session()->flush();
+        $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
+        Mail::to($request->email)->send(new mailSend($name));
+        return back()->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
+        }else{
+            return back()->with('message','The student is already registered.Just request for a bursary');
+        }
+    }
+    public function student_request(){
+        return view('students.bursary_request');
     }
 }

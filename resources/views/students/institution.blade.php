@@ -60,7 +60,16 @@
                 </div>
                 <div class="col-md-4">
                     <label class="font-weight-bold">School name :</label>
-                    <input type="text" class="form-control" name="school_name" placeholder="Enter achool name" value="{{old('school_name')}}">
+                    <select name="school_name" class="form-control" id="">
+                        <option>{{old('school_name')}}</option>
+                        <option selected value="">-select your school-</option>
+                        <option>Umoja High</option>
+                        <option>Kimumu Secondary School</option>
+                        <option>UG High School</option>
+                        <option>64 Secondary School</option>
+                        <option>Central Secondary School</option>
+                    </select>
+                    {{-- <input type="text" class="form-control" name="school_name" placeholder="Enter achool name" value="{{old('school_name')}}"> --}}
                     @if($errors->has('school_name'))
                     <span class="text-danger">{{$errors->first('school_name')}}</span>
                     @endif

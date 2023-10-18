@@ -65,3 +65,9 @@ Route::post('update/{id}',[AdminController::class, 'update_user']);
 Route::get('beneficiaries',[AdminController::class, 'beneficiary']);
 Route::post('upload',[AdminController::class, 'upload_doc']);
 Route::get('download/{document}',[AdminController::class, 'download']);
+// Students new page
+Route::get('students/index',[UsersController::class, 'student_index']);
+Route::get('students/new_applications',[UsersController::class, 'student_application']);
+Route::post('submit_application',[UsersController::class, 'submit_application']);
+Route::get('students/request_application',[UsersController::class, 'student_request']);
+Route::post('student_request',[UsersController::class, 'req_search']);

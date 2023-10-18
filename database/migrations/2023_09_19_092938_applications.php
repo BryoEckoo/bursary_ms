@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('bank_name');
             $table->bigInteger('account_no');
+            $table->date('today_date');
             $table->timestamps();
         });
     }
