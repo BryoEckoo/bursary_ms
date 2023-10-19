@@ -465,12 +465,12 @@ class UsersController extends Controller
             return view('students.dashboard',compact('value'));
         }
     }else{
-        return view('students.login');
+        return redirect('/');
     }
     }
     public function student_application(){
         if(!session('res')){
-            return redirect('students/login');
+            return redirect('/');
         }else{
         return view('students.application');
         }
@@ -557,14 +557,14 @@ class UsersController extends Controller
     }
     public function student_request(){
         if(!session('res')){
-            return redirect('students/login');
+            return redirect('/');
         }else{
         return view('students.bursary_request');
         }
     }
     public function stu_app(){
         if(!session('res')){
-            return redirect('students/login');
+            return redirect('/');
         }else{
             foreach(session('res') as $datas)
             $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$datas->email."'");
@@ -640,6 +640,6 @@ class UsersController extends Controller
         }
         public function stu_logout(){
             session()->forget('res');
-            return view('students.login');
+            return redirect('/');
         }
 }
