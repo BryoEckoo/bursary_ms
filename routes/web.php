@@ -71,3 +71,11 @@ Route::get('students/new_applications',[UsersController::class, 'student_applica
 Route::post('submit_application',[UsersController::class, 'submit_application']);
 Route::get('students/request_application',[UsersController::class, 'student_request']);
 Route::post('student_request',[UsersController::class, 'req_search']);
+Route::get('students/application',[UsersController::class, 'stu_app']);
+Route::get('students/login',[UsersController::class, 'stu_login']);
+Route::post('students/login_req',[UsersController::class, 'req_login']);
+Route::get('students/register',[UsersController::class, 'stu_register']);
+Route::post('students/register_req',[UsersController::class, 'req_register']);
+Route::get('students/logout',[UsersController::class, 'stu_logout']);
+
+

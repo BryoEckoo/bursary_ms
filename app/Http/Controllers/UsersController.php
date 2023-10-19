@@ -8,6 +8,7 @@ use App\Models\Application;
 
 use App\Models\Parents;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Safaricom\Mpesa\Facade\Mpesa;
@@ -455,7 +456,10 @@ class UsersController extends Controller
 
     //student new
     public function student_index(){
-        return view('students.dashboard');
+        if(session('res'))
+        foreach(session('res') as $data)
+        $value = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
+            return view('students.dashboard',compact('value'));
     }
     public function student_application(){
         return view('students.application');
@@ -543,4 +547,68 @@ class UsersController extends Controller
     public function student_request(){
         return view('students.bursary_request');
     }
+    public function stu_app(){
+        $data = Application::where('student_fullname','Dan Ndong')->get();
+       
+        return view('students.my_applications',compact('data'));
+    }
+    public function stu_login(){
+        return view('students.login');
+    }
+    public function req_login(Request $request){
+        $request->validate([
+            "email"=>'required',
+            "password"=>'required'
+        ]);
+        $password = ($request->password);
+        $req = User::where('email',$request->email)->count();
+        if($req <=0){
+         return redirect('students/login')->with('message','Email address not registered!');
+        }else{
+            $users = DB::table('users')->select('password')->where('email', $request->email)->get();
+            foreach($users as $ad){
+                if($password === $ad->password){
+                    $res = session()->get('res',[]);
+                    $res = DB::table('users')->where('email', $request->email)->get();
+                    
+                    session()->put('res',$res);
+                    // print_r(session('res')); 
+                    return redirect('students/index'); 
+                    
+                }else{
+                   return redirect('students/login')->with('message','Wrong password!!.');
+                }
+                
+            }
+           
+        }
+    }
+    public function stu_register(){
+        return view('students.register');
+    }
+    public function req_register(Request $request){
+        $request->validate([
+            "email"=>'required',
+            "password"=>'required',
+            "re_password"=>'required'
+        ]);
+        $check = User::where('email',$request->email)->count();
+        if($check >0){
+            return back()->with('message','The email address is already taken');
+        }elseif($request->re_password != $request->password){
+            return back()->with('message','The re-password doesnt match with password');
+            }elseif($check <=0 && $request->re_password == $request->password){
+                $user = new User();
+                $user->email = $request->email;
+                $user->password = $request->password;
+                $user->save();
+                return redirect('students/login');
+            }else{
+            return back()->with('message','Something went wrong please try again.');
+            }
+        }
+        public function stu_logout(){
+            session()->forget('res');
+            return redirect('students/login');
+        }
 }

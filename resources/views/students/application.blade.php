@@ -85,8 +85,8 @@
 							<div class="card card-chart">
 								<div class="card-header">
 									<div class="row align-items-center">
-										<div class="col-6">
-											<h5 class="card-title font-weight-bold" style="font-size: 30px"><span style="color: #0f893b">New</span> - <span style="color: orange">Application</span></h5>
+										<div class="col-12">
+											<h5 class="font-weight-bold text-center" style="font-size: 30px"><span style="color: #0f893b">New</span> - <span style="color: orange">Application</span></h5>
 										</div>
 										<div class="col-6">
 											                                        

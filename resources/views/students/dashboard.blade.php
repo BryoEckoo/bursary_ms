@@ -85,8 +85,8 @@
 							<div class="card card-chart">
 								<div class="card-header">
 									<div class="row align-items-center">
-										<div class="col-6">
-											<h5 class="card-title font-weight-bold" style="font-size: 30px"><span style="color: #0f893b">Recent</span> - <span style="color: orange">Applications</span></h5>
+										<div class="col-12">
+											<h5 class="font-weight-bold text-center" style="font-size: 30px"><span style="color: #0f893b">Recent</span> - <span style="color: orange">Applications</span></h5>
 										</div>
 										<div class="col-6">
 											                                        
@@ -109,14 +109,15 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											@foreach($value as $item)
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td class="text-warning font-weight-bold"></td>
-												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit">Edit</a>
-													<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                
+												<td>{{$item->id}}</td>
+												<td>{{$item->parent_email}}</td>
+												<td>{{$item->student_fullname}}</td>
+												<td class="text-warning font-weight-bold">{{$item->phone}}</td>
+												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit">Edit</a></td>
+						<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -167,8 +168,10 @@
                                 </div>
                             </div>
 										
-											</td>
+											
+                                           
 											</tr>
+                                             @endforeach
 											 {{-- delete record --}}
 											 
 										</tbody>
