@@ -308,7 +308,7 @@
                                                 </div>
                                             </div>
                                                 <div class="row mt-4">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <label class="font-weight-bold">Bank Name :</label>
                                                         <select name="bank_name" class="form-control <?php echo ($errors->first('bank_name')) ? 'border border-danger' : '';?>" id="">
                                                             <option value="">-select Bank-</option>
@@ -321,20 +321,25 @@
                                                     <span class="text-danger">{{$errors->first('bank_name')}}</span>
                                                     @endif
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <label class="font-weight-bold">Bank Acc-No :</label>
                                                         <input type="number" name="account_no" class="form-control <?php echo ($errors->first('account_no')) ? 'border border-danger' : '';?>" placeholder="Enter account number" id="" value="{{old('account_no')}}">
                                                         @if($errors->has('account_no'))
                                                     <span class="text-danger">{{$errors->first('account_no')}}</span>
                                                     @endif
                                                     </div>
-                                                    {{-- <div class="col-md-4">
+                                                    <div class="col-md-3">
+                                                        <label class="font-weight-bold">School Admission Letter :</label>
+                                                        <input type="file" name="adm_letter" class="form-control ">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-3">
                                                         <label class="font-weight-bold">School Fees Structure Upload :</label>
                                                         <input type="file" name="fee_structure" class="form-control <?php echo ($errors->first('fee_structure')) ? 'border border-danger' : '';?>" placeholder="Choose a file" id="" value="{{old('fee_structure')}}">
                                                         @if($errors->has('fee_structure'))
                                                     <span class="text-danger">{{$errors->first('fee_structure')}}</span>
                                                     @endif
-                                                    </div> --}}
+                                                    </div>
                                                 </div>
                                                 <input type="submit" name="apply" class="btn mt-5 font-weight-bold mb-4" style="float: right;color:white;background-color:#0f893b;" value="SUBMIT APPLICATION">
                                     </div>
