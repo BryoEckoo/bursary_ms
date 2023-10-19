@@ -104,6 +104,7 @@
 												<td class="font-weight-bold text-center">#</td>
 												<td class="font-weight-bold text-center">REF-NO.</td>
 												<td class="font-weight-bold text-center">Applicant Name</td>
+												<td class="font-weight-bold text-center">Date</td>
 												<td class="font-weight-bold text-center">Status</td>
 												<td class="font-weight-bold text-center">Actions</td>
 											</tr>
@@ -113,9 +114,10 @@
 											<tr>
                                                 
 												<td>{{$item->id}}</td>
-												<td>{{$item->parent_email}}</td>
+												<td>{{$item->reference_number}}</td>
 												<td>{{$item->student_fullname}}</td>
-												<td class="text-warning font-weight-bold">{{$item->phone}}</td>
+												<td>{{$item->today_date}}</td>
+												<td class="text-warning font-weight-bold">{{$item->status}}</td>
 												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit">Edit</a></td>
 						<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">

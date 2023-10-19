@@ -49,7 +49,7 @@
                 <input type="submit" class="btn btn-primary mt-2" value="REGISTER">
                 </form>
                 <div class="row justify-content-between">
-                   <p class="mt-5">If Registered Click <a href="{{url('students/login')}}"> Here</a></p>
+                   <p class="mt-5">If Registered Click <a href="{{url('/')}}"> Here</a></p>
             </div>
             </div>
         </div>

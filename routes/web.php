@@ -17,7 +17,7 @@ use App\Http\Controllers\App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', function () {
-    return view('students.index');
+    return view('students.login');
 });
 Route::post('login-custom', [AdminController::class, 'login']);
 Route::get('register', function () {
@@ -25,7 +25,7 @@ Route::get('register', function () {
 });
 Route::get('login', [UsersController::class, 'Login']);
 Route::post('school_details', [UsersController::class, 'stu_details']);
-Route::get('/',[UsersController::class, 'previous'])->name('back');
+// Route::get('/',[UsersController::class, 'previous'])->name('back');
 //
 Route::get('school_details',[UsersController::class, 'back'])->name('school_details');
 Route::get('index',[UsersController::class, 'index']);

@@ -456,13 +456,24 @@ class UsersController extends Controller
 
     //student new
     public function student_index(){
-        if(session('res'))
+        if(session('res')){
         foreach(session('res') as $data)
-        $value = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
+        $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
+        foreach($vals as $data){
+            $value = DB::select("SELECT * FROM applications WHERE student_fullname ='".$data->student_fullname."'");
+        // print_r($value);
             return view('students.dashboard',compact('value'));
+        }
+    }else{
+        return view('students.login');
+    }
     }
     public function student_application(){
+        if(!session('res')){
+            return redirect('students/login');
+        }else{
         return view('students.application');
+        }
     }
     public function submit_application(Request $request){
         $request->validate([
@@ -545,15 +556,31 @@ class UsersController extends Controller
         }
     }
     public function student_request(){
+        if(!session('res')){
+            return redirect('students/login');
+        }else{
         return view('students.bursary_request');
+        }
     }
     public function stu_app(){
-        $data = Application::where('student_fullname','Dan Ndong')->get();
-       
-        return view('students.my_applications',compact('data'));
+        if(!session('res')){
+            return redirect('students/login');
+        }else{
+            foreach(session('res') as $datas)
+            $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$datas->email."'");
+            foreach($vals as $dat){
+                $data = DB::select("SELECT * FROM applications WHERE student_fullname ='".$dat->student_fullname."'");
+           
+                return view('students.my_applications',compact('data'));
+            }
+        }
     }
     public function stu_login(){
-        return view('students.login');
+        // if(!session('res')){
+            return view('students/login');
+        // }else{
+        // return redirect('students/index');
+        // }
     }
     public function req_login(Request $request){
         $request->validate([
@@ -584,7 +611,11 @@ class UsersController extends Controller
         }
     }
     public function stu_register(){
-        return view('students.register');
+        // if(!session('res')){
+            return view('students.register');
+        // }else{
+        // return redirect('students/index');
+        // }
     }
     public function req_register(Request $request){
         $request->validate([
@@ -609,6 +640,6 @@ class UsersController extends Controller
         }
         public function stu_logout(){
             session()->forget('res');
-            return redirect('students/login');
+            return view('students.login');
         }
 }
