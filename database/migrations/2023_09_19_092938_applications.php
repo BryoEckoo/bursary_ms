@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('bank_name');
             $table->bigInteger('account_no');
             $table->date('today_date');
+            $table->date('year');
             $table->timestamps();
         });
     }

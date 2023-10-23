@@ -44,9 +44,9 @@
 								<a href="{{url('students/new_applications')}}"><i class="fa fa-file"></i> <span>New Application</span></a>
 							</li>
 							
-                            <li> 
+                            {{-- <li> 
 								<a href="{{url('students/request_application')}}"><i class="fa fa-key"></i> <span>Request Application</span></a>
-							</li>
+							</li> --}}
 							<li> 
 								<a href="{{url('students/application')}}"><i class="fa fa-list"></i> <span>My Applications</span></a>
 							</li>

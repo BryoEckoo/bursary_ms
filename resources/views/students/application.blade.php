@@ -44,9 +44,9 @@
 								<a href="{{url('students/new_applications')}}"><i class="fa fa-file"></i> <span>New Application</span></a>
 							</li>
 							
-                            <li> 
+                            {{-- <li> 
 								<a href="{{url('students/request_application')}}"><i class="fa fa-key"></i> <span>Request Application</span></a>
-							</li>
+							</li> --}}
 							<li> 
 								<a href="{{url('students/application')}}"><i class="fa fa-list"></i> <span>My Applications</span></a>
 							</li>
@@ -119,7 +119,7 @@
                                             
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <label class="font-weight-bold">Enter Full Name :</label>
+                                                        <label class="font-weight-bold">Enter Students Full Name :</label>
                                                         <input type="text" name="fullname" class="form-control <?php echo ($errors->first('fullname')) ? 'border border-danger' : '';?> font-weight-bold" placeholder="Enter your first name" value="{{old('first_name')}}">
                                                         @if($errors->has('fullname'))
                                                         <span class="text-danger">{{$errors->first('fullname')}}</span>
@@ -195,13 +195,17 @@
                                                         <span class="text-danger">{{$errors->first('family_status')}}</span>
                                                         @endif
                                                     </div>
+                                                    @if(session('res'))
+                                                    @foreach(session('res') as $data)
                                                     <div class="col-md-4">
                                                         <label class="font-weight-bold">Email :</label>
-                                                        <input type="email" name="email" placeholder="Enter the parent email address" class="form-control font-weight-bold <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" id="" value="{{old('email')}}">
+                                                        <input type="email" readonly name="email" placeholder="Enter the parent email address" class="form-control font-weight-bold <?php echo ($errors->first('email')) ? 'border border-danger' : '';?>" id="" value="{{$data->email}}">
                                                         @if($errors->has('email'))
                                                         <span class="text-danger">{{$errors->first('email')}}</span>
                                                         @endif
                                                     </div>
+                                                    @endforeach
+                                                    @endif
                                                     <div class="col-md-4">
                                                         <label class="font-weight-bold">Id No :</label>
                                                         <input type="number" name="id_no" placeholder="Enter the parent id number" class="form-control font-weight-bold <?php echo ($errors->first('id_no')) ? 'border border-danger' : '';?>" id="" value="{{old('id_no')}}">
@@ -262,6 +266,12 @@
                                                         @if($errors->has('sub_location'))
                                                         <span class="text-danger">{{$errors->first('sub_location')}}</span>
                                                         @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-4">
+                                                    <div class="col-md-5">
+                                                    <label class="font-weight-bold">Application Year :</label>
+                                                    <input type="text" readonly name="year" class="form-control" value="<?php echo date('Y');?>">
                                                     </div>
                                                 </div>
                                                 

@@ -460,7 +460,7 @@ class UsersController extends Controller
         foreach(session('res') as $data)
         $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
         foreach($vals as $data){
-            $value = DB::select("SELECT * FROM applications WHERE student_fullname ='".$data->student_fullname."'");
+            $value = DB::select("SELECT * FROM applications WHERE student_fullname ='".$data->student_fullname."' ORDER BY id DESC LIMIT 1");
         // print_r($value);
             return view('students.dashboard',compact('value'));
         }
@@ -476,16 +476,17 @@ class UsersController extends Controller
         }
     }
     public function submit_application(Request $request){
+        $app_ref ='BUR' .random_int(1000,9999);
         $request->validate([
             "fullname"=>'required',
             "age"=>'required',
             "gender"=>'required',
             "parent_guardian_name"=>'required',
-            "phone"=>'required',
+            "phone"=>'required|numeric|digits:10',
             "occupation"=>'required',
             "family_status"=>'required',
             "email"=>'required',
-            "id_no"=>'required',
+            "id_no"=>'required|numeric|digits:8',
             "county"=>'required',
             "ward"=>'required',
             "location"=>'required',
@@ -497,10 +498,16 @@ class UsersController extends Controller
             "account_no"=>'required',
             "fee_structure"=>'required',
         ]);
-
-        $counts = Student::where('phone',$request->phone)->count();
-        if($counts <= 0){
-        $app_ref ='BUR' .random_int(1000,9999);
+        // $counts = DB::table('applications')->where('student_fullname', $request->fullname)->where('year', '!=', $request->year)->count();
+        // $counts = Application::where('student_fullname', $request->fullname)->where('year', '==', $request->year)->count();
+ $count =DB::select("SELECT * FROM applications WHERE student_fullname = '".$request->fullname."' AND year = '".$request->year."'");
+         // $counts = Application::where('student_fullname',$request->fullname)->andWhere('year','!=',$request->year)->count();
+        if($count > 0){
+            return back()->with('message','You Already made an application. You can only make one application per year.');
+    }else{
+        $stu = Student::where('student_fullname',$request->fullname)->count();
+        if($stu <=0){
+       
         $students = new Student();
         // $students->app_ref = $app_ref;
         $students->student_fullname = $request->fullname;
@@ -544,6 +551,7 @@ class UsersController extends Controller
         $application->location = $request->location;
         $application->status = "Pending...";
         $application->today_date = date('Y/m/d');
+        $application->year = $request->year;
         $application->save();
 
         
@@ -552,7 +560,27 @@ class UsersController extends Controller
         Mail::to($request->email)->send(new mailSend($name));
         return back()->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
         }else{
-            return back()->with('message','The student is already registered.Just request for a bursary');
+            //save application
+        $application = new Application();
+        $application->reference_number = $app_ref;
+        $application->student_fullname = $request->fullname;
+        $application->adm_upi_reg_no = $request->reg_no;
+        $application->school_type = $request->school_type;
+        $application->school_name = $request->school_name;
+        $application->bank_name = $request->bank_name;
+        $application->account_no = $request->account_no;
+        $application->location = $request->location;
+        $application->status = "Pending...";
+        $application->today_date = date('Y/m/d');
+        $application->year = $request->year;
+        $application->save();
+
+        
+        // Session()->flush();
+        $name = "Thank you for applying for the bursary. Kindly use this reference number '".$app_ref."'  to track your application";
+        Mail::to($request->email)->send(new mailSend($name));
+        return back()->with('success','Students details recorded and application made successfully.You will receive an email confirmation shortly.');
+        }
         }
     }
     public function student_request(){
