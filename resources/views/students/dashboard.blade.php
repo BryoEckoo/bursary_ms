@@ -97,7 +97,14 @@
 								</div>
 								<div class="card-body">
 									<div id="line_graph">
-									
+                                        @if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('success')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
 									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-striped" id="sample">
@@ -119,8 +126,16 @@
 												<td>{{$item->reference_number}}</td>
 												<td>{{$item->student_fullname}}</td>
 												<td>{{$item->today_date}}</td>
+                                                @if($item->status == 'Approved')
+												<td class="text-success font-weight-bold">{{$item->status}}</td>
+                                                @else
 												<td class="text-warning font-weight-bold">{{$item->status}}</td>
+                                                @endif
+                                                @if($item->status == 'Approved')
+                                                <td></td>
+                                                @else
 												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$item->reference_number}}">Edit</a></td>
+                                                @endif
 						<div class="modal fade" id="Edit{{$item->reference_number}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">

@@ -77,5 +77,6 @@ Route::post('students/login_req',[UsersController::class, 'req_login']);
 Route::get('students/register',[UsersController::class, 'stu_register']);
 Route::post('students/register_req',[UsersController::class, 'req_register']);
 Route::get('students/logout',[UsersController::class, 'stu_logout']);
+Route::post('edit/{reference_number}',[UsersController::class, 'edit']);
 
 

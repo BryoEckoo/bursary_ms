@@ -670,4 +670,19 @@ class UsersController extends Controller
             session()->forget('res');
             return redirect('/');
         }
+        public function edit(Request $request, $reference_number){
+            // $apps = new Application();
+            // $apps->adm_upi_reg_no = $request->upi_reg;
+            // $apps->student_fullname = $request->name;
+            // $apps->school_type = $request->school_type;
+            // $apps->school_name = $request->school_name;
+            // $apps->location = $request->location;
+            // $apps->bank_name = $request->bank;
+            // $apps->account_no = $request->account_no;
+            // $apps->update();
+            $today = date('Y-m-d H:m:s');
+             DB::update("UPDATE applications SET adm_upi_reg_no = '".$request->upi_reg."',student_fullname = '".$request->name."',school_type = '".$request->school_type."',
+            school_name = '".$request->school_name."',location = '".$request->location."',bank_name = '".$request->bank."',account_no = '".$request->account."',updated_at='".$today."' WHERE reference_number = '".$reference_number."'");
+            return back()->with('success','Application updated successfully');
+        }
 }
