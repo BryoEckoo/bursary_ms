@@ -11,11 +11,13 @@
             <div class="header">
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="{{url('index')}}" class="logo">
-						<img src="{{asset('images/logo.png')}}" alt="Logo">
+                    <a href="{{url('students/index')}}" class="logo text-dark font-weight-bold">
+						<img src="{{asset('images/logo.png')}}" alt="Logo" style="margin-right: 20px">
+                        NANDI COUNTY
 					</a>
-					<a href="{{url('index')}}" class="logo logo-small">
-						<img src="{{asset('images/logo.png')}}" alt="Logo" width="30" height="30">
+					<a href="{{url('students/index')}}" class="logo logo-small text-dark font-weight-bold">
+						<img src="{{asset('images/logo.png')}}" alt="Logo" width="30" height="30" style="margin-right: 20px">
+                        NANDI COUNTY
 					</a>
                 </div>
 				<!-- /Logo -->
@@ -41,7 +43,7 @@
 								<a href="{{url('students/index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
 							<li> 
-								<a href="{{url('students/new_applications')}}"><i class="fa fa-file"></i> <span>New Application</span></a>
+								<a href="{{url('students/new_applications')}}"><i class="fa fa-pen"></i> <span>New Application</span></a>
 							</li>
 							
                             {{-- <li> 
@@ -118,8 +120,8 @@
 												<td>{{$item->student_fullname}}</td>
 												<td>{{$item->today_date}}</td>
 												<td class="text-warning font-weight-bold">{{$item->status}}</td>
-												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit">Edit</a></td>
-						<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$item->reference_number}}">Edit</a></td>
+						<div class="modal fade" id="Edit{{$item->reference_number}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -127,28 +129,28 @@
                                            <h4 class="text-center">EDIT APPLICATION</h4>
                                         </div>
                                         <div class="modal-body">
-                                           <form method="post" action="{{url('edit/')}}">
+                                           <form method="post" action="{{url('edit/'.$item->reference_number)}}">
                                                @csrf
                                                <label class="font-weight-bold">Reference Number :</label>
-                                            <input type="text" name="ref" class="form-control" id="" readonly value="">
+                                            <input type="text" name="ref" class="form-control" id="" readonly value="{{$item->reference_number}}">
                                            <label class="font-weight-bold">UPI/ADM/REG No :</label>
-                                            <input type="text" name="upi_reg" class="form-control" id="" required value="">
-                                            <label class="font-weight-bold">Fullname :</label> 
-                                            <input type="text" name="name" class="form-control" id="" required value="">
+                                            <input type="text" name="upi_reg" class="form-control" id="" required value="{{$item->adm_upi_reg_no}}">
+                                            <label class="font-weight-bold">Student Fullname :</label> 
+                                            <input type="text" name="name" class="form-control" id="" required value="{{$item->student_fullname}}">
 											
                                             <label class="font-weight-bold">School type :</label> 
                                             <select name="school_type" id="" class="form-control">
-												<option selected></option>
+												<option selected>{{$item->school_type}}</option>
                                                 <option>--select role--</option>
                                                 <option>Primary School</option>
                                                 <option>Secondary School</option>
 												<option>University School</option>
                                              </select>
 											 <label class="font-weight-bold">School name :</label> 
-                                            <input type="text" name="school_name" class="form-control" id="" required value="">
+                                            <input type="text" name="school_name" class="form-control" id="" required value="{{$item->school_name}}">
 											<label class="font-weight-bold">Location :</label> 
                                             <select name="location" id="" class="form-control" required>
-												<option selected></option>
+												<option selected>{{$item->location}}</option>
                                                 <option>--select role--</option>
                                                 <option>Jerusalem</option>
                                                 <option>Munyaka</option>
@@ -160,9 +162,9 @@
 												<option class="">Langas</option>
                                              </select>
 											 <label class="font-weight-bold">Bank name :</label> 
-                                            <input type="text" name="bank" class="form-control" id="" value="moi">
+                                            <input type="text" name="bank" class="form-control" id="" value="{{$item->bank_name}}">
 											<label class="font-weight-bold">School Account no :</label> 
-                                            <input type="number" name="account" class="form-control" id="" required value="}">
+                                            <input type="number" name="account" class="form-control" id="" required value="{{$item->account_no}}">
                                             <input type="submit" value="E D I T" name="edit" class="btn btn-success form-control mt-2">
                                            </form>
                                         </div>

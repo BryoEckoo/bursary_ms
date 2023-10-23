@@ -41,7 +41,7 @@
 								<a href="{{url('students/index')}}"><i class="fa fa-th-large"></i> <span>Dashboard</span></a>
 							</li>
 							<li > 
-								<a href="{{url('students/new_applications')}}"><i class="fa fa-file"></i> <span>New Application</span></a>
+								<a href="{{url('students/new_applications')}}"><i class="fa fa-pen"></i> <span>New Application</span></a>
 							</li>
 							
                             {{-- <li> 
