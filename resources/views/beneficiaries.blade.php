@@ -156,6 +156,40 @@
 						
 							<!-- Revenue Chart -->
                             <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#New">Add New Beneficiary Document</a>
+                            <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#Print">Print Beneficiary List</a>
+							{{-- print beneficiary docments --}}
+							<div class="modal fade" id="Print" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									   <h4 class="text-center">Print Beneficiary List</h4>
+									</div>
+									<div class="modal-body">
+									   <form method="post" action="{{url('print_beneficiary')}}" >
+										   @csrf
+										   <label class="font-weight-bold">Select Year Below :</label>
+										<select name="year" class="form-control" id="">
+											<option value="">-Select Year-</option>
+											<?php 
+											
+											$years = range(2020, strftime("%Y",time()));
+											foreach ($years as $key) :
+							
+												?>
+												<option><?php echo $key;?></option>
+											<?php endforeach ?>
+										</select>
+										@if($errors->has('year'))
+										<span class="text-danger">{{$errors->first('year')}}</span><br>
+										@endif
+										<input type="submit" value="P R I N T" name="print" class="btn font-weight-bold text-white btn-success form-control mt-2">
+									   </form>
+									</div>
+								</div>
+							</div>
+						</div>
+							{{-- add ne beneficiary document --}}
                             <div class="modal fade" id="New" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
