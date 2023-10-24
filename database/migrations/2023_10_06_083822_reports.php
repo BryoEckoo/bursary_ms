@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('report_name');
             $table->string('student_name');
             $table->string('parent');
+            $table->string('location');
+            $table->string('sub_location');
             $table->string('school_level');
             $table->string('school_name');
             $table->bigInteger('Amount_awarded');
