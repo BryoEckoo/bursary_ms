@@ -244,11 +244,11 @@
                                                         <label class="font-weight-bold">Location :</label>
                                                         <select name="location" id="location" onchange="getSchools(this.value)" id="firstSelect" class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?> font-weight-bold">
                                                             <option value="" selected><?php echo(old('location')) ? old('location') : '-select location-';?></option>
-                                                            <option>Munyaka</option>
+                                                            {{-- <option>Munyaka</option>
                                                             <option>Silas</option>
                                                             <option>Ilula</option>
                                                             <option>Block 10</option>
-                                                            <option>Marura</option>
+                                                            <option>Marura</option> --}}
                                                         </select>
                                                         @if($errors->has('location'))
                                                         <span class="text-danger">{{$errors->first('location')}}</span>
@@ -256,12 +256,12 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label class="font-weight-bold">Sub-Location :</label>
-                                                        <select name="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
+                                                        <select name="sub_location" id="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
                                                             <option value="" selected><?php echo(old('sub_location')) ? old('sub_location') : '-select sub-location-';?></option>
-                                                            <option>Subaru</option>
+                                                            {{-- <option>Subaru</option>
                                                             <option>Bondeni</option>
                                                             <option>Kamkunji</option>
-                                                            <option>Airstrip</option>
+                                                            <option>Airstrip</option> --}}
                                                         </select>
                                                         @if($errors->has('sub_location'))
                                                         <span class="text-danger">{{$errors->first('sub_location')}}</span>
@@ -372,6 +372,38 @@
 		@include('config.scripts')
     </body>
     <script type="text/javascript">
+    let locations = ["Munyaka","Silas"];
+    let Munyaka = ["Jerusalem","Berlin","Subaru"];
+    let Silas = ["Kapsoya","JuniorRate","Ngurunga"];
+
+    let location = document.getElementById('location');
+    let sub-location = document.getElementById('sub-location');
+
+    locations.forEach(function addLocation(item){
+        let option = document.createElement("option");
+        option.text =item;
+        option.value =item;
+        location.appendChild(option);
+    });
+
+    location.onchange = function(){
+        sub-location.innerHTML = "<option></option>";
+        if(this.value == "Munyaka"){
+            addToSub-location(Munyaka);
+        }
+        if(this.value == "Silas"){
+            addToSub-location(Silas);
+        }
+    }
+    function addToSub-location(arr){
+         arr.forEach(function(item){
+            let option = document.createElement("option");
+            option.text =item;
+        option.value =item;
+        sub-location.appendChild(option);
+         });
+    }
+
 function getSchools(location){
     let schoolDropDown = document.querySelector("#school");
 

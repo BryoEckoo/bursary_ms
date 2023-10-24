@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -428,7 +429,7 @@ if(count($res) <=0){
         return back()->with('message','The year is not available in the records.');
     }else{
         foreach($res as $value){
-    $query = DB::select("SELECT * FROM applications WHERE year = '".$request->year."' AND status= 'Approved'");
+    $query = DB::select("SELECT * FROM applications WHERE year = '".$request->year."' AND location = '".$request->location."' AND status= 'Approved'");
     $counter = 0; 
     $pdf = new \FPDF('P','mm',array(150,250));
     $pdf->AddPage();
@@ -449,11 +450,11 @@ $pdf->setFont('Arial','B',9);
 
 $pdf->cell(50, 3,"", 0,1, '');
 
-$pdf->cell(10, 6,"", 0,0, 'C');
+$pdf->cell(35, 6,"County: Nandi County", 0,0, 'C');
 
-$pdf->cell(50, 6,"County: Nandi County", 0,0, 'C');
+$pdf->cell(60, 6,"Year Selected:" .$request->year, 0,0, 'C');
 
-$pdf->cell(50, 6,"Location Selected: ".$request->year, 0,1, 'C');
+$pdf->cell(30, 6,"Location Selected: ".$request->location, 0,1, 'C');
 
 $pdf->cell(50, 1,"", 0,1, '');
 
@@ -488,6 +489,19 @@ $pdf->AddPage();
     $pdf->Output();
             break;
 }
+}
+}
+public function scrab(){
+    // Make a request to the webpage.
+$response = Http::get('https://newsblaze.co.ke/full-list-of-all-county-secondary-schools-in-kenya-school-code-name-location-and-other-details/');
+
+// Extract the data from the table column.
+$schoolNames = [];
+preg_match_all('/<td class="school_name">(.*?)<\/td>/i', $response->body(), $schoolNames);
+
+// Display the school names.
+foreach ($schoolNames[1] as $schoolName) {
+    echo $schoolName . PHP_EOL;
 }
 }
 }

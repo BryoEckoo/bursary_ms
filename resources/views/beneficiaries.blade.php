@@ -183,6 +183,23 @@
 										@if($errors->has('year'))
 										<span class="text-danger">{{$errors->first('year')}}</span><br>
 										@endif
+										<label for="" class="font-weight-bold">Location : (Optional)</label>
+										<select name="location" id="" class="form-control font-weight-bold">
+											<option value="">-Select Location Here-</option>
+											<option>Munyaka</option>
+                                            <option>Silas</option>
+                                            <option>Ilula</option>
+                                            <option>Block 10</option>
+                                            <option>Marura</option>
+										</select>
+										{{-- <label for="" class="font-weight-bold">Sub-Location :</label>
+										<select name="sub_location" id="" class="form-control font-weight-bold">
+											<option value="">-Select sub-location Here-</option>
+											<option>Subaru</option>
+											<option>Bondeni</option>
+											<option>Kamkunji</option>
+											<option>Airstrip</option>
+										</select> --}}
 										<input type="submit" value="P R I N T" name="print" class="btn font-weight-bold text-white btn-success form-control mt-2">
 									   </form>
 									</div>

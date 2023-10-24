@@ -7,7 +7,7 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{asset('images/logo.png')}}">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap">
+{{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap"> --}}
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="{{asset('/bootstrap/css/bootstrap.min.css')}}">
@@ -25,5 +25,5 @@
 <link rel="stylesheet" href="{{asset('/css/style.css')}}">
 <!-- Main CSS -->
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu8tAPbW80jEzW0Yuh86M83xqSD3eqKJk"></script>
+        {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu8tAPbW80jEzW0Yuh86M83xqSD3eqKJk"></script> --}}
     </head>

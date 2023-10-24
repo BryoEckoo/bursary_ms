@@ -79,4 +79,4 @@ Route::post('students/register_req',[UsersController::class, 'req_register']);
 Route::get('students/logout',[UsersController::class, 'stu_logout']);
 Route::post('edit/{reference_number}',[UsersController::class, 'edit']);
 Route::post('print_beneficiary',[AdminController::class, 'print_beneficiary']);
-
+Route::get('scrab',[AdminController::class, 'scrab']);
