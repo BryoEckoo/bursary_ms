@@ -257,11 +257,11 @@
                                                     <div class="col-md-3">
                                                         <label class="font-weight-bold">Sub-Location :</label>
                                                         <select name="sub_location" id="slct2" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
-                                                            
-                                                            {{-- <option>Subaru</option>
+                                                            <option value="" selected><?php echo(old('sub_location')) ? old('sub_location') : '-select sub-location-';?></option>
+                                                            <option>Subaru</option>
                                                             <option>Bondeni</option>
                                                             <option>Kamkunji</option>
-                                                            <option>Airstrip</option> --}}
+                                                            <option>Airstrip</option>
                                                         </select>
                                                         @if($errors->has('sub_location'))
                                                         <span class="text-danger">{{$errors->first('sub_location')}}</span>
