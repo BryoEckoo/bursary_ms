@@ -242,13 +242,13 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label class="font-weight-bold">Location :</label>
-                                                        <select name="location" id="location" onchange="getSchools(this.value)" id="firstSelect" class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?> font-weight-bold">
+                                                        <select name="location" id="slct1" onchange="populate(this.id,'slct2')"  class="form-control <?php echo ($errors->first('location')) ? 'border border-danger' : '';?> font-weight-bold">
                                                             <option value="" selected><?php echo(old('location')) ? old('location') : '-select location-';?></option>
-                                                            {{-- <option>Munyaka</option>
+                                                            <option value="Munyaka">Munyaka</option>
                                                             <option>Silas</option>
                                                             <option>Ilula</option>
                                                             <option>Block 10</option>
-                                                            <option>Marura</option> --}}
+                                                            <option>Marura</option>
                                                         </select>
                                                         @if($errors->has('location'))
                                                         <span class="text-danger">{{$errors->first('location')}}</span>
@@ -256,8 +256,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label class="font-weight-bold">Sub-Location :</label>
-                                                        <select name="sub_location" id="sub_location" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
-                                                            <option value="" selected><?php echo(old('sub_location')) ? old('sub_location') : '-select sub-location-';?></option>
+                                                        <select name="sub_location" id="slct2" class="form-control <?php echo ($errors->first('sub_location')) ? 'border border-danger' : '';?> font-weight-bold">
+                                                            
                                                             {{-- <option>Subaru</option>
                                                             <option>Bondeni</option>
                                                             <option>Kamkunji</option>
@@ -286,7 +286,7 @@
                                                     <label class="font-weight-bold">Institution :</label>
                                                     <select name="school_type" class="form-control <?php echo ($errors->first('school_type')) ? 'border border-danger' : '';?>">
                                                         <option value="" selected><?php echo(old('school_type')) ? old('school_type') : '-select school-';?></option>
-                                                        <option>Primary school</option>
+                                                        {{-- <option>Primary school</option> --}}
                                                         <option>Secondary School</option>
                                                         <option>University/College/TVET</option>
                                                     </select>
@@ -371,7 +371,18 @@
 		<!-- /Main Wrapper -->
 		@include('config.scripts')
     </body>
-    <script type="text/javascript">
+    <script>
+    function populate(s1,s2){
+        var s1 = document.getElementById("s1");
+        var s2 = document.getElementById("s2");
+
+        s2.innerHTML = "";
+        if(s1.value == "Munyaka"){
+            var optionArray = [
+                "Jerusalem","Berlin","Subaru"
+            ];
+        }
+    }
     let locations = ["Munyaka","Silas"];
     let Munyaka = ["Jerusalem","Berlin","Subaru"];
     let Silas = ["Kapsoya","JuniorRate","Ngurunga"];
