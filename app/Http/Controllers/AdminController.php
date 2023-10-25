@@ -119,8 +119,8 @@ public function approve_application(Request $request,$id){
                 // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
                 // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
     
-                // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
-                // Mail::to($value->parent_email)->send(new mailSend($name));
+                $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+                Mail::to($value->parent_email)->send(new mailSend($name));
             }
         }elseif($data->school_type == "University/College/TVET"){
             $total = 10000;
@@ -131,8 +131,8 @@ public function approve_application(Request $request,$id){
                 // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
                 // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
     
-                // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
-                // Mail::to($value->parent_email)->send(new mailSend($name));
+                $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+                Mail::to($value->parent_email)->send(new mailSend($name));
             }
         }
         $query = DB::select("SELECT * FROM parents WHERE student_fullname ='".$data->student_fullname."'");
@@ -141,8 +141,8 @@ public function approve_application(Request $request,$id){
             // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
             // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
 
-            // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
-            // Mail::to($value->parent_email)->send(new mailSend($name));
+            $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+            Mail::to($value->parent_email)->send(new mailSend($name));
         }
     }
     $rad ='REP'. random_int(100,999);
@@ -155,7 +155,6 @@ public function approve_application(Request $request,$id){
             $reports->school_name = $data->school_name;
             $reports->location = $data->location;
             $reports->Amount_awarded = $total;
-            $reports->total_amount_awarded = $total_amount;
             $reports->save();
     return back()->with('message','The application status approved successfuly and email has been sent to parent');
 }}

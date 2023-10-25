@@ -179,7 +179,10 @@
 												<td>{{$val->student_fullname}}</td>
 												<td>{{$val->location}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
-												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->student_fullname}}">Edit</a>
+												@if($val->status == "Approved")
+												<td class="text-center font-weight-bold">No actions to be performed.</td>
+												@else
+												<td class="text-center"><a href=""class="btn btn-primary" id="submit" data-toggle="modal" data-target="#Edit{{$val->student_fullname}}">Edit</a>
 													<div class="modal fade" id="Edit{{$val->student_fullname}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -258,6 +261,7 @@
 													</div>
 												</div>
 											</td>
+											@endif
 											</tr>
 											 {{-- delete record --}}
 											 <div id="Modal{{$val->id}}" class="modal fade" role="dialog">

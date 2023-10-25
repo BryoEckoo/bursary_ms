@@ -211,6 +211,9 @@
 												<td>{{$val->location}}</td>
                                                 <td>{{$val->today_date}}</td>
 												<td class="text-warning font-weight-bold">{{$val->status}}</td>
+												@if($val->status == "Approved")
+												<td class="text-center font-weight-bold">No actions to be performed.</td>
+												@else
 												<td class="text-center"><a href=""class="btn btn-primary" data-toggle="modal" data-target="#Edit{{$val->reference_number}}">Edit</a>
 													<div class="modal fade" id="Edit{{$val->reference_number}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 														aria-hidden="true">
@@ -290,6 +293,7 @@
 													</div>
 												</div>
 											</td>
+											@endif
 											{{-- delete record --}}
 											<div id="Modal{{$val->id}}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
