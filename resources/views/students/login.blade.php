@@ -90,6 +90,14 @@
      </div>
  </div>
 </body>
+<script>
+    const inputFields = document.querySelectorAll('input');
+
+// Turn on autofill for all input fields.
+inputFields.forEach(inputField => {
+  inputField.autocomplete = 'on';
+});
+</script>
 <script src={{asset('bootstrap/js/bootstrap.min.js')}}></script>
 <script src={{asset('bootstrap/popper/popper.min.js')}}></script>
 <script src={{asset('bootstrap/js/bootstrap.js')}}></script>

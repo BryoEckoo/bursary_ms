@@ -374,6 +374,12 @@
 		@include('config.scripts')
     </body>
     <script>
+        const inputFields = document.querySelectorAll('input');
+
+// Turn on autofill for all input fields.
+inputFields.forEach(inputField => {
+  inputField.autocomplete = 'on';
+});
     function populate(s1,s2){
         var s1 = document.getElementById("s1");
         var s2 = document.getElementById("s2");
