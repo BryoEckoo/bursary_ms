@@ -158,6 +158,48 @@
 							<!-- Revenue Chart -->
                             <a href="{{url('print_reports')}}" class="btn btn-primary mb-3">Print All</a>
                             <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#Print">Print By Location</a>
+                            <div class="modal fade" id="Print" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									   <h4 class="text-center">Print Bursement List</h4>
+									</div>
+									<div class="modal-body">
+									   <form method="post" action="{{url('print_reports_location')}}" >
+										   @csrf
+										   {{-- <label class="font-weight-bold">Select Year Below :</label>
+										<select name="year" class="form-control" id="">
+											<option value="">-Select Year-</option>
+											<?php 
+											
+											$years = range(2020, strftime("%Y",time()));
+											foreach ($years as $key) :
+							
+												?>
+												<option><?php echo $key;?></option>
+											<?php endforeach ?>
+										</select> --}}
+										@if($errors->has('year'))
+										<span class="text-danger">{{$errors->first('year')}}</span><br>
+										@endif
+										<label for="" class="font-weight-bold">Location : </label>
+										<select name="location" id="" class="form-control font-weight-bold">
+											<option value="">-Select Location Here-</option>
+											<option>Munyaka</option>
+                                            <option>Silas</option>
+                                            <option>Ilula</option>
+                                            <option>Block 10</option>
+                                            <option>Marura</option>
+                                            <option>Jerusalem</option>
+										</select>
+										
+										<input type="submit" value="P R I N T" name="print" class="btn font-weight-bold text-white btn-success form-control mt-2">
+									   </form>
+									</div>
+								</div>
+							</div>
+						</div>
 							<div class="card card-chart">
 								{{-- <div class="card-header">
 									<div class="row align-items-center">

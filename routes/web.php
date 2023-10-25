@@ -83,3 +83,4 @@ Route::get('scrab',[AdminController::class, 'scrab']);
 Route::post('reset_pass',[UsersController::class,'reset']);
 Route::get('amount_reports',[AdminController::class, 'amount_report']);
 Route::get('print_reports',[AdminController::class,'print_reports']);
+Route::post('print_reports_location',[AdminController::class,'print_reports_location']);

@@ -666,4 +666,78 @@ public function print_reports(){
         
 
 }
+public function print_reports_location(Request $request){
+    $total = 0;
+    $total_amount = DB::select("SELECT SUM(amount_awarded)AS total FROM reports WHERE location ='".$request->location."'")[0]->total;
+
+    function Separate($number) {
+        $formattedCurrency = number_format($number, 0, '.', ',');
+        return str_replace('.', ',', $formattedCurrency);
+      }
+      
+      $number = $total_amount;
+      $formattedNumber = Separate($number);
+
+      $data = DB::select("SELECT * FROM reports WHERE location ='".$request->location."'");
+
+
+      $counter = 0; 
+      $pdf = new \FPDF('P','mm',array(150,250));
+      $pdf->AddPage();
+  
+      // Set font and text color
+      $imagePath = public_path('images/logo.png'); // Replace with the actual image path
+      $pdf->Image($imagePath, 65,10,-300); 
+      // $pdf->Image("{{asset('images/logo.png')}}",65,10,-300);
+  
+  $pdf->cell(50, 20,"", 0,1, '');
+  $pdf->setFont('Arial','B',12);
+  $pdf->cell(120, 6,"COUNTY GOVERNMENT OF NANDI", 0,1, 'C');
+  $pdf->setFont('Arial','B',10);
+  $pdf->cell(120, 6, "P.O BOX 40-30100", 0, 1, 'C');
+  $pdf->cell(120, 6, "info@nandicounty.go.ke", 0, 1, 'C');
+  
+  $pdf->setFont('Arial','B',9);
+  
+  $pdf->cell(50, 3,"", 0,1, '');
+  
+  $pdf->cell(35, 6,"County: Nandi County", 0,0, 'C');
+  
+  $pdf->cell(60, 6,"Year : " .date('Y'), 0,0, 'C');
+  
+  $pdf->cell(30, 6,"Total Amount: ".$formattedNumber, 0,1, 'C');
+  
+  $pdf->cell(50, 1,"", 0,1, '');
+  
+  $pdf->setFont('Arial','B',8);
+  $pdf->cell(1, 4,"", 0,0, '');
+  $pdf->cell(7, 6,"S/N", 1,0, '');
+  $pdf->cell(35, 6,"Student Name", 1,0, '');
+  $pdf->cell(30, 6,"School Name", 1,0, '');
+  $pdf->cell(32, 6,"School Level", 1,0, '');
+  $pdf->cell(30, 6,"Amount", 1,1, '');
+  // $pdf->cell(40, 6,"Month Updated", 1,1, '');
+  $pdf->setFont('Arial','',11);
+  
+  
+  $pdf->setFont('Arial','',8);
+  foreach($data as $val){
+      // Add content to the PDF
+      $counter++;
+      $pdf->cell(1, 4,"", 0,0, '');
+      $pdf->cell(7, 6,$counter, 1,0, '');
+      $pdf->cell(35, 6,$val->student_name, 1,0, '');
+      $pdf->Cell(30, 6,$val->school_name, 1,0, '');
+      $pdf->Cell(32, 6,$val->school_level, 1,0, '');
+      $pdf->cell(30, 6,$val->Amount_awarded, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
+                  // Check if we have printed 10 rows, then start a new page
+     
+  }
+  if ($pdf->GetY() >= 200) {
+  $pdf->AddPage();
+  }
+      // Output the PDF (you can choose to save it to a file or send it as a response)
+      $pdf->Output();
+        
+}
 }
