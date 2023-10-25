@@ -35,7 +35,9 @@
 							<li class="active"> 
 								<a href="{{url('beneficiaries')}}"><i class="fa fa-users"></i> <span>Beneficiaries</span></a>
 							</li>
-						
+							<li> 
+								<a href="{{url('amount_reports')}}"><i class="fa fa-money-bill"></i> <span>Amount Reports</span></a>
+							</li>
 							<li> 
 								<a href="{{url('reports')}}"><i class="fa fa-shopping-cart"></i> <span>Bursary Reports</span></a>
 							</li>
@@ -183,7 +185,7 @@
 										@if($errors->has('year'))
 										<span class="text-danger">{{$errors->first('year')}}</span><br>
 										@endif
-										<label for="" class="font-weight-bold">Location : (Optional)</label>
+										<label for="" class="font-weight-bold">Location : </label>
 										<select name="location" id="" class="form-control font-weight-bold">
 											<option value="">-Select Location Here-</option>
 											<option>Munyaka</option>

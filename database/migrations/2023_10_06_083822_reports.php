@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('reports',function(Blueprint $table){
             $table->id();
             $table->string('report_id');
-            $table->string('report_name');
             $table->string('student_name');
             $table->string('parent');
             $table->string('location');

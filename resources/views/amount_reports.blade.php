@@ -34,10 +34,10 @@
 							<li> 
 								<a href="{{url('beneficiaries')}}"><i class="fa fa-users"></i> <span>Beneficiaries</span></a>
 							</li>
-							<li> 
+							<li class="active"> 
 								<a href="{{url('amount_reports')}}"><i class="fa fa-money-bill"></i> <span>Amount Reports</span></a>
 							</li>
-							<li class="active"> 
+							<li> 
 								<a href="{{url('reports')}}"><i class="fa fa-shopping-cart"></i> <span>Bursary Reports</span></a>
 							</li>
 						
@@ -71,7 +71,7 @@
 							<div class="col-sm-12">
 								<!--<h3 class="page-title">Welcome Admin!</h3>-->
 								<ul class="breadcrumb">
-									<li class="breadcrumb-item active font-weight-bold" style="text-transform: uppercase;">Reports</li>
+									<li class="breadcrumb-item active">Amount Reports</li>
 								</ul>
 							</div>
 						</div>
@@ -153,9 +153,11 @@
 
 
 					<div class="row">
-						<div class="container col-md-8">
+						<div class="col-md-12">
 						
 							<!-- Revenue Chart -->
+                            <a href="{{url('print_reports')}}" class="btn btn-primary mb-3">Print All</a>
+                            <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#Print">Print By Location</a>
 							<div class="card card-chart">
 								{{-- <div class="card-header">
 									<div class="row align-items-center">
@@ -168,8 +170,9 @@
 									</div>						
 								</div> --}}
 								<div class="card-body">
+                                    <h4 class="font-weight-bold">TOTAL BURSEMENT AMOUNT : {{$formattedNumber}}</h4>
 									<div id="line_graph">
-										@if(session()->has('message'))
+                                        @if(session()->has('message'))
                                         <div class="alert alert-warning alert-dismissible fade show text-center"  role="alert" style="position:sticky">
                                             <span class="font-weight-bold">{{session()->get('message')}}</span>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -177,20 +180,47 @@
                                                  </button>
                                                  </div>
                                         @endif
-									</div>
-									<form action="{{url('print')}}" method="post">
-                                        @csrf
-                                        <label>Select Year :</label>
-                                        <select name="year" id="" class="form-control">
-											<option>-select year-</option>
-                                            <option>2020</option>
-                                            <option>2021</option>
-                                            <option>2022</option>
-                                            <option>2023</option>
-                                            <option>2024</option>
-                                        </select>
-                                        <input type="submit" value="PRINT" class="btn btn-warning mt-2">
-                                    </form>
+										@if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show text-center"  role="alert" style="position:sticky">
+                                            <span class="font-weight-bold">{{session()->get('success')}}</span>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                 </button>
+                                                 </div>
+                                        @endif
+                                    </div>
+									<div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="sample">
+                                        <thead>
+                                            <tr>
+                                                <td class="font-weight-bold text-center">#</td>
+                                                <td class="font-weight-bold text-center">Report Id</td>
+                                                <td class="font-weight-bold text-center">Student Name</td>
+                                                <td class="font-weight-bold text-center">Parent Name</td>
+                                                <td class="font-weight-bold text-center">School Level</td>
+                                                <td class="font-weight-bold text-center">School Name</td>
+                                                <td class="font-weight-bold text-center">Location</td>
+                                                <td class="font-weight-bold text-center">Amount Awarded</td>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            @foreach($data as $val)
+                                            <tr>
+                                                <td>{{$val->id}}</td>
+                                                <td>{{$val->report_id}}</td>
+                                                <td>{{$val->student_name}}</td>
+                                                <td>{{$val->parent}}</td>
+                                                <td>{{$val->school_level}}</td>
+                                                <td>{{$val->school_name}}</td>
+                                                <td>{{$val->location}}</td>
+                                                <td>{{$val->Amount_awarded}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        
+                                        </table>
+                                    </div>
 								</div>
 							</div>
 							<!-- /Revenue Chart -->
@@ -199,6 +229,8 @@
 					</div>
 
 				</div>
+
+                
 
 			</div>
 			<!-- /Page Wrapper -->

@@ -6,10 +6,13 @@ use App\Mail\mailSend;
 use App\Models\Admins;
 use App\Models\Application;
 use App\Models\beneficiary;
+use App\Models\Report;
 use App\Models\Student;
 use DateTime;
 // use FPDF;
 // use Fpdf\Fpdf;
+use DOMDocument;
+use DOMXPath;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -35,7 +38,7 @@ class AdminController extends Controller
         // $admin->phone = $request->phone;
         // $admin->password = Hash::make($request->password);
         // $admin->save();
-        // return redirect('login')->with('success','Admin saved successfully');
+        // return redirect('/')->with('success','Admin saved successfully');
         $request->validate([
             "email"=>'required',
             "password"=>'required'
@@ -98,21 +101,62 @@ public function delete_application(Request $request,$id){
     return back()->with('message','The application record was deleted successfuly');
 }
 public function approve_application(Request $request,$id){
-    $res = DB::select("SELECT status FROM applications WHERE id = '".$id."'");
+    $res = DB::select("SELECT * FROM applications WHERE id = '".$id."'");
     foreach($res as $data){
         if($data->status == 'Approved'){
             return back()->with('message','The application status is already approved. You cant approve it again.');
         }else{
     DB::update("UPDATE applications SET status ='Approved' WHERE id = '".$id."'");
 
-    $re = DB::select("SELECT student_fullname FROM applications WHERE id = '".$id."'");
+    $re = DB::select("SELECT * FROM applications WHERE id = '".$id."'");
     foreach($re as $data){
-        $query = DB::select("SELECT parent_email FROM parents WHERE student_fullname ='".$data->student_fullname."'");
+        if($data->school_type == "Secondary School"){
+            $total = 5000;
+            $query = DB::select("SELECT * FROM parents WHERE student_fullname ='".$data->student_fullname."'");
+            foreach($query as $value){
+                $total_amount = 0;
+                
+                // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
+                // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
+    
+                // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+                // Mail::to($value->parent_email)->send(new mailSend($name));
+            }
+        }elseif($data->school_type == "University/College/TVET"){
+            $total = 10000;
+            $query = DB::select("SELECT * FROM parents WHERE student_fullname ='".$data->student_fullname."'");
+            foreach($query as $value){
+                $total_amount = 0;
+                
+                // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
+                // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
+    
+                // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+                // Mail::to($value->parent_email)->send(new mailSend($name));
+            }
+        }
+        $query = DB::select("SELECT * FROM parents WHERE student_fullname ='".$data->student_fullname."'");
         foreach($query as $value){
-            $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
-            Mail::to($value->parent_email)->send(new mailSend($name));
+            
+            // DB::insert("INSERT INTO reports (report_id,student_name,parent,school_level,school_name,location,Amount_awarded,total_amount_awarded)
+            // VALUES('$rad','$data->student_fullname','$value->parent_guardian_name','$data->school_type','$data->school_name','$data->location','5000','$total')");
+
+            // $name = "Congratulations!!!!. You have been selected for the bursary award.\n Kindly visit our offices for the bursary cheques allocation.";
+            // Mail::to($value->parent_email)->send(new mailSend($name));
         }
     }
+    $rad ='REP'. random_int(100,999);
+            $total_amount +=$total;
+            $reports = new Report();
+            $reports->report_id = $rad;
+            $reports->student_name = $data->student_fullname;
+            $reports->parent = $value->parent_guardian_name;
+            $reports->school_level = $data->school_type;
+            $reports->school_name = $data->school_name;
+            $reports->location = $data->location;
+            $reports->Amount_awarded = $total;
+            $reports->total_amount_awarded = $total_amount;
+            $reports->save();
     return back()->with('message','The application status approved successfuly and email has been sent to parent');
 }}
   }
@@ -464,7 +508,7 @@ $pdf->setFont('Arial','B',8);
 $pdf->cell(1, 4,"", 0,0, '');
 $pdf->cell(7, 6,"S/N", 1,0, '');
 $pdf->cell(35, 6,"Student Name", 1,0, '');
-$pdf->cell(28, 6,"School Name", 1,0, '');
+$pdf->cell(30, 6,"School Name", 1,0, '');
 $pdf->cell(32, 6,"School Level", 1,0, '');
 $pdf->cell(30, 6,"Date Updated", 1,1, '');
 // $pdf->cell(40, 6,"Month Updated", 1,1, '');
@@ -478,8 +522,8 @@ foreach($query as $val){
     $pdf->cell(1, 4,"", 0,0, '');
     $pdf->cell(7, 6,$counter, 1,0, '');
     $pdf->cell(35, 6,$val->student_fullname, 1,0, '');
-    $pdf->cell(28, 6,$val->school_name, 1,0, '');
-    $pdf->cell(32, 6,$val->school_type, 1,0, '');
+    $pdf->Cell(30, 6,$val->school_name, 1,0, '');
+    $pdf->Cell(32, 6,$val->school_type, 1,0, '');
     $pdf->cell(30, 6,$val->updated_at, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
                 // Check if we have printed 10 rows, then start a new page
    
@@ -501,15 +545,125 @@ $pdf->AddPage();
 }
 public function scrab(){
     // Make a request to the webpage.
-$response = Http::get('https://newsblaze.co.ke/full-list-of-all-county-secondary-schools-in-kenya-school-code-name-location-and-other-details/');
+// $response = Http::get('https://newsblaze.co.ke/full-list-of-all-county-secondary-schools-in-kenya-school-code-name-location-and-other-details/');
 
-// Extract the data from the table column.
-$schoolNames = [];
-preg_match_all('/<td class="school_name">(.*?)<\/td>/i', $response->body(), $schoolNames);
+// // Extract the data from the table column.
+// $schoolNames = [];
+// preg_match_all('/<td class="school_name">(.*?)<\/td>/i', $response->body(), $schoolNames);
 
-// Display the school names.
-foreach ($schoolNames[1] as $schoolName) {
-    echo $schoolName . PHP_EOL;
+// // Display the school names.
+// foreach ($schoolNames[1] as $schoolName) {
+//     echo $schoolName . PHP_EOL;
+// }
+
+
+// 
+$httpClient = new \GuzzleHttp\Client();
+
+$response = $httpClient->get('https://newsblaze.co.ke/full-list-of-all-county-secondary-schools-in-kenya-school-code-name-location-and-other-details/');
+
+$htmlString = (string) $response->getBody();
+
+// HTML is often wonky, this suppresses a lot of warnings
+libxml_use_internal_errors(true);
+
+$doc = new DOMDocument();
+$doc->loadHTML($htmlString);
+
+$xpath = new DOMXPath($doc);
+$links = $xpath->evaluate('//div[@class="table-responsive"][1]//h3/a');
+
+foreach ($links as $link) {
+    echo $link->textContent.PHP_EOL;
 }
+}
+public function amount_report(){
+    $total = 0;
+    $total_amount = DB::select("SELECT SUM(amount_awarded)AS total FROM reports")[0]->total;
+
+    function formatCurrency($number) {
+        $formattedCurrency = number_format($number, 0, '.', ',');
+        return str_replace('.', ',', $formattedCurrency);
+      }
+      
+      $number = $total_amount;
+      $formattedNumber = formatCurrency($number);
+      
+    $data = Report::all();
+    return view('amount_reports',compact('data','formattedNumber'));
+}
+public function print_reports(){
+    $total = 0;
+    $total_amount = DB::select("SELECT SUM(amount_awarded)AS total FROM reports")[0]->total;
+
+    function Currency($number) {
+        $formattedCurrency = number_format($number, 0, '.', ',');
+        return str_replace('.', ',', $formattedCurrency);
+      }
+      
+      $number = $total_amount;
+      $formattedNumber = Currency($number);
+      $data = Report::all();
+
+
+      $counter = 0; 
+      $pdf = new \FPDF('P','mm',array(150,250));
+      $pdf->AddPage();
+  
+      // Set font and text color
+      $imagePath = public_path('images/logo.png'); // Replace with the actual image path
+      $pdf->Image($imagePath, 65,10,-300); 
+      // $pdf->Image("{{asset('images/logo.png')}}",65,10,-300);
+  
+  $pdf->cell(50, 20,"", 0,1, '');
+  $pdf->setFont('Arial','B',12);
+  $pdf->cell(120, 6,"COUNTY GOVERNMENT OF NANDI", 0,1, 'C');
+  $pdf->setFont('Arial','B',10);
+  $pdf->cell(120, 6, "P.O BOX 40-30100", 0, 1, 'C');
+  $pdf->cell(120, 6, "info@nandicounty.go.ke", 0, 1, 'C');
+  
+  $pdf->setFont('Arial','B',9);
+  
+  $pdf->cell(50, 3,"", 0,1, '');
+  
+  $pdf->cell(35, 6,"County: Nandi County", 0,0, 'C');
+  
+  $pdf->cell(60, 6,"Year : " .date('Y'), 0,0, 'C');
+  
+  $pdf->cell(30, 6,"Total Amount: ".$formattedNumber, 0,1, 'C');
+  
+  $pdf->cell(50, 1,"", 0,1, '');
+  
+  $pdf->setFont('Arial','B',8);
+  $pdf->cell(1, 4,"", 0,0, '');
+  $pdf->cell(7, 6,"S/N", 1,0, '');
+  $pdf->cell(35, 6,"Student Name", 1,0, '');
+  $pdf->cell(30, 6,"School Name", 1,0, '');
+  $pdf->cell(32, 6,"School Level", 1,0, '');
+  $pdf->cell(30, 6,"Amount", 1,1, '');
+  // $pdf->cell(40, 6,"Month Updated", 1,1, '');
+  $pdf->setFont('Arial','',11);
+  
+  
+  $pdf->setFont('Arial','',8);
+  foreach($data as $val){
+      // Add content to the PDF
+      $counter++;
+      $pdf->cell(1, 4,"", 0,0, '');
+      $pdf->cell(7, 6,$counter, 1,0, '');
+      $pdf->cell(35, 6,$val->student_name, 1,0, '');
+      $pdf->Cell(30, 6,$val->school_name, 1,0, '');
+      $pdf->Cell(32, 6,$val->school_level, 1,0, '');
+      $pdf->cell(30, 6,$val->Amount_awarded, 1,1, ''); //Output each record, 0 indicates no border, 1 indicates new line
+                  // Check if we have printed 10 rows, then start a new page
+     
+  }
+  if ($pdf->GetY() >= 200) {
+  $pdf->AddPage();
+  }
+      // Output the PDF (you can choose to save it to a file or send it as a response)
+      $pdf->Output();
+        
+
 }
 }

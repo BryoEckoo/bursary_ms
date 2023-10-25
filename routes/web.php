@@ -81,3 +81,5 @@ Route::post('edit/{reference_number}',[UsersController::class, 'edit']);
 Route::post('print_beneficiary',[AdminController::class, 'print_beneficiary']);
 Route::get('scrab',[AdminController::class, 'scrab']);
 Route::post('reset_pass',[UsersController::class,'reset']);
+Route::get('amount_reports',[AdminController::class, 'amount_report']);
+Route::get('print_reports',[AdminController::class,'print_reports']);

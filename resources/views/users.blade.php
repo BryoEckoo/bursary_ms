@@ -34,7 +34,9 @@
                             <li> 
 								<a href="{{url('beneficiaries')}}"><i class="fa fa-users"></i> <span>Beneficiaries</span></a>
 							</li>
-						
+                            <li> 
+								<a href="{{url('amount_reports')}}"><i class="fa fa-money-bill"></i> <span>Amount Reports</span></a>
+							</li>
 							<li > 
 								<a href="{{url('reports')}}"><i class="fa fa-shopping-cart"></i> <span>Bursary Reports</span></a>
 							</li>

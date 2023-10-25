@@ -48,7 +48,7 @@
                 <form method="POST" action="{{url('students/login_req')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Parent Email address :</label>
-                <input type="text" name="email" class="form-control" id="" placeholder="example@admin.com" value="{{old('email')}}">
+                <input type="email" name="email" class="form-control" id="" placeholder="example@admin.com" value="{{old('email')}}">
                 @if($errors->has('email'))
                 <span class="text-danger">{{$errors->first('email')}}</span><br>
                 @endif
