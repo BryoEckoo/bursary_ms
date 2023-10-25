@@ -122,7 +122,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <label class="font-weight-bold">Enter Students Full Name :</label>
-                                                        <input type="text" name="fullname" class="form-control <?php echo ($errors->first('fullname')) ? 'border border-danger' : '';?> font-weight-bold" placeholder="Enter your first name" value="{{old('first_name')}}">
+                                                        <input type="text" name="fullname" class="form-control <?php echo ($errors->first('fullname')) ? 'border border-danger' : '';?> font-weight-bold" placeholder="Enter your first name" value="{{old('fullname')}}" autocomplete="on">
                                                         @if($errors->has('fullname'))
                                                         <span class="text-danger">{{$errors->first('fullname')}}</span>
                                                         @endif
