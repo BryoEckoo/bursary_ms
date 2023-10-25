@@ -458,12 +458,20 @@ class UsersController extends Controller
     public function student_index(){
         if(session('res')){
         foreach(session('res') as $data)
-        $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
-        foreach($vals as $data){
-            $value = DB::select("SELECT * FROM applications WHERE student_fullname ='".$data->student_fullname."' ORDER BY id DESC LIMIT 1");
-        // print_r($value);
+        // changes made regarding the empty index page hen loggedin.
+        $val = Parents::where('parent_email',$data->email)->count();
+        if($val >0){
+            $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$data->email."'");
+            foreach($vals as $data){
+                $value = DB::select("SELECT * FROM applications WHERE student_fullname ='".$data->student_fullname."' ORDER BY id DESC LIMIT 1");
+            // print_r($value);
+                return view('students.dashboard',compact('value'));
+            }
+        }else{
+            $value = [];
             return view('students.dashboard',compact('value'));
         }
+       
     }else{
         return redirect('/');
     }
@@ -499,8 +507,8 @@ class UsersController extends Controller
             "fee_structure"=>'required',
         ]);
         // $counts = DB::table('applications')->where('student_fullname', $request->fullname)->where('year', '!=', $request->year)->count();
-        // $counts = Application::where('student_fullname', $request->fullname)->where('year', '==', $request->year)->count();
- $count =DB::select("SELECT * FROM applications WHERE student_fullname = '".$request->fullname."' AND year = '".$request->year."'");
+        $count = Application::where('student_fullname', $request->fullname)->where('year', '==', $request->year)->count();
+//  $count = DB::select("SELECT * FROM applications WHERE student_fullname = '".$request->fullname."' AND year = '".$request->year."'");
          // $counts = Application::where('student_fullname',$request->fullname)->andWhere('year','!=',$request->year)->count();
         if($count > 0){
             return back()->with('message','You Already made an application. You can only make one application per year.');
@@ -594,13 +602,19 @@ class UsersController extends Controller
         if(!session('res')){
             return redirect('/');
         }else{
-            foreach(session('res') as $datas)
+            foreach(session('res') as $datas){
+                $val = Parents::where('parent_email',$datas->email)->count();
+        if($val >0){
             $vals = DB::select("SELECT * FROM parents WHERE parent_email ='".$datas->email."'");
             foreach($vals as $dat){
                 $data = DB::select("SELECT * FROM applications WHERE student_fullname ='".$dat->student_fullname."'");
-           
                 return view('students.my_applications',compact('data'));
             }
+        }else{
+            $data =[];
+            return view('students.my_applications',compact('data'));
+        }
+        }
         }
     }
     public function stu_login(){
@@ -618,7 +632,7 @@ class UsersController extends Controller
         $password = ($request->password);
         $req = User::where('email',$request->email)->count();
         if($req <=0){
-         return redirect('students/login')->with('message','Email address not registered!');
+         return redirect('/')->with('message','Email address not registered!');
         }else{
             $users = DB::table('users')->select('password')->where('email', $request->email)->get();
             foreach($users as $ad){
@@ -631,12 +645,31 @@ class UsersController extends Controller
                     return redirect('students/index'); 
                     
                 }else{
-                   return redirect('students/login')->with('message','Wrong password!!.');
+                   return redirect('/')->with('message','Wrong password!!.');
                 }
                 
             }
            
         }
+    }
+    public function reset(Request $request){
+        $ses = session()->get('ses',[]);
+        $token = bin2hex(random_bytes(32)); 
+    
+        $ses = [
+            "token"=>$token,
+        ];
+     $c = User::where('email',$request->email)->count();
+     if($c <=0){
+        return redirect('/')->with('message','Email address not found.Please enter a valid email address');
+     }else{
+        $reset ='reset password';
+        $url = 'https://bursary-ms.vercel.app/reset/'.$request->email.'/'.$token;
+        $name = 'Kindly use the link privided below to reset your password \n\n'  .$url;
+        Mail::to($request->email)->send(new mailSend($name));
+        session()->put('ses',$ses);
+        return redirect('/')->with('success','reset email sent successfully');
+     }
     }
     public function stu_register(){
         // if(!session('res')){
@@ -661,7 +694,7 @@ class UsersController extends Controller
                 $user->email = $request->email;
                 $user->password = $request->password;
                 $user->save();
-                return redirect('students/login');
+                return redirect('/')->with('success','You have successfully registered. Login in Now');
             }else{
             return back()->with('message','Something went wrong please try again.');
             }

@@ -76,7 +76,7 @@
                 <h4 class="text-center">Reset Password</h4>
              </div>
              <div class="modal-body">
-                <form method="post" action="{{url('reset_password')}}">
+                <form method="post" action="{{url('reset_pass')}}">
                     @csrf
                 <label class="font-weight-bold">Enter Email :</label>
                  <input type="email" name="email" class="form-control" id="" required>

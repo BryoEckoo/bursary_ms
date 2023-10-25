@@ -11,11 +11,13 @@
             <div class="header">
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="{{url('index')}}" class="logo">
-						<img src="{{asset('images/logo.png')}}" alt="Logo">
+                    <a href="{{url('students/index')}}" class="logo text-dark font-weight-bold">
+						<img src="{{asset('images/logo.png')}}" alt="Logo" style="margin-right: 20px">
+                        NANDI COUNTY
 					</a>
-					<a href="{{url('index')}}" class="logo logo-small">
-						<img src="{{asset('images/logo.png')}}" alt="Logo" width="30" height="30">
+					<a href="{{url('students/index')}}" class="logo logo-small text-dark font-weight-bold">
+						<img src="{{asset('images/logo.png')}}" alt="Logo" width="30" height="30" style="margin-right: 20px">
+                        NANDI COUNTY
 					</a>
                 </div>
 				<!-- /Logo -->

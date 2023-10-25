@@ -427,9 +427,11 @@ $res = Application::where("year",$request->year)->get();
     
 if(count($res) <=0){
         return back()->with('message','The year is not available in the records.');
-    }else{
+    }elseif(count($res) > 0){
         foreach($res as $value){
+            // unfinnished
     $query = DB::select("SELECT * FROM applications WHERE year = '".$request->year."' AND location = '".$request->location."' AND status= 'Approved'");
+    if(count($query) > 0){
     $counter = 0; 
     $pdf = new \FPDF('P','mm',array(150,250));
     $pdf->AddPage();
@@ -488,7 +490,13 @@ $pdf->AddPage();
     // Output the PDF (you can choose to save it to a file or send it as a response)
     $pdf->Output();
             break;
+}else{
+    return back()->with('message','Applications are still pending.');
 }
+        }
+}else{
+    // $query = DB::select("SELECT * FROM applications WHERE year = '".$request->year."' AND location = '".$request->location."' AND status= 'Pending...'");
+    // return back()->with('message','Applications are still pending.');
 }
 }
 public function scrab(){
