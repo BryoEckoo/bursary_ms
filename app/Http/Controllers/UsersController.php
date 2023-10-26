@@ -74,7 +74,7 @@ class UsersController extends Controller
         return view('students.index');
     }
     public function index(){
-        if(!session('res')){
+        if(!session('res_admin')){
             return redirect('login');
         }
         $today = date('Y/m/d');
@@ -450,7 +450,7 @@ class UsersController extends Controller
         }
     }
     public function logout(){
-        session()->forget('res');
+        session()->forget('res_admin');
         return redirect('login');
     }
 

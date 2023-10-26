@@ -58,6 +58,14 @@ return [
             // 'database' =>'bursary',
             // 'username' => 'root',
             // 'password' => '',
+
+            //  'url' => env('DATABASE_URL'),
+            // 'host' => 'sql307.infinityfree.com',
+            // 'port' => '3306',
+            // 'database' =>'if0_34411164_bursary_db',
+            // 'username' => 'if0_34411164',
+            // 'password' => 'EdGQCyOQTbIGZz',
+
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

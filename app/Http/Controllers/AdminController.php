@@ -51,10 +51,10 @@ class AdminController extends Controller
             $admins = DB::table('admins')->select('password')->where('email', $request->email)->get();
             foreach($admins as $ad){
                 if($password === $ad->password){
-                    $res = session()->get('res',[]);
-                    $res = DB::table('admins')->where('email', $request->email)->get();
+                    $res_admin = session()->get('res_admin',[]);
+                    $res_admin = DB::table('admins')->where('email', $request->email)->get();
                     
-                    session()->put('res',$res);
+                    session()->put('res_admin',$res_admin);
                     // print_r(session('res')); 
                     return redirect('index'); 
                     
@@ -75,7 +75,7 @@ class AdminController extends Controller
 // curl -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $AUTH_TOKEN" -d "{\"input\": [{\"name\": \"dan\"}]}" https://carrier.cplane.cloud/apps/hello-world/latest/hello
 
 public function applications(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
         $data = DB::table('applications')->orderBy('id','DESC')->get();
@@ -83,7 +83,7 @@ public function applications(){
     }
 }
 public function applicants(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
         $data = DB::table('students')->orderBy('id','DESC')->get();
@@ -160,7 +160,7 @@ public function approve_application(Request $request,$id){
 }}
   }
   public function reports(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
         // $data = DB::select("SELECT created_at FROM stude")
@@ -244,7 +244,7 @@ foreach($res as $data){
     }
   }
   public function location_report(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
         // $data = DB::select("SELECT created_at FROM stude")
@@ -328,7 +328,7 @@ foreach($res as $data){
     }
   }
   public function users(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
     $value = Admins::all();
@@ -425,7 +425,7 @@ public function update_user(Request $request, $id){
     return back()->with('success','Student details for id : "'.$id.'" updated successfully');
 }
 public function beneficiary(){
-    if(!session('res')){
+    if(!session('res_admin')){
         return redirect('login');
     }else{
     $value = DB::select("SELECT * FROM beneficiary_upload");
@@ -438,8 +438,8 @@ public function upload_doc(Request $request){
         'document'=>'required'
     ]);
     // if($request->hasFile(document))
-    if(session('res'))
-    foreach(session('res') as $value)
+    if(session('res_admin'))
+    foreach(session('res_admin') as $value)
     $file = $request->file('document');
     $fileName = $file->getClientOriginalName();
     $file-> move(storage_path('/beneficiary_document/'), $fileName);
